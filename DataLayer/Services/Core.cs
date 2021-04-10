@@ -8,9 +8,9 @@ using DataLayer.Repositories;
 
 namespace DataLayer.Services
 {
-    public class Core : IDisposable
+    public class Core
     {
-        private readonly IntakeSystemEntities _db = new IntakeSystemEntities();
+        private readonly IntakeSystemEntities2 _db = new IntakeSystemEntities2();
 
         private MainRepo<TblLocation> _location;
         private MainRepo<TblRole> _role;
@@ -37,10 +37,6 @@ namespace DataLayer.Services
         public MainRepo<TblImage> Image => _image ?? (_image = new MainRepo<TblImage>(_db));
         public MainRepo<TblConfig> Config => _config ?? (_config = new MainRepo<TblConfig>(_db));
         public MainRepo<TblOrder> Order => _order ?? (_order = new MainRepo<TblOrder>(_db));
-
-        public void Dispose()
-        {
-            _db.Dispose();
-        }
+        public void Save() => _db.SaveChanges();
     }
 }

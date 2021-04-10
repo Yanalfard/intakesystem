@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using DataLayer.Models;
@@ -21,7 +20,5 @@ namespace DataLayer.Repositories
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includes = null);
 
         TEntity GetById(object id);
-
-        void Save();
     }
 }

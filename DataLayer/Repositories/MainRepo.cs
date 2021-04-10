@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using DataLayer.Models;
@@ -10,10 +10,10 @@ namespace DataLayer.Repositories
 {
     public class MainRepo<TEntity> : IMainRepo<TEntity> where TEntity : class
     {
-        private IntakeSystemEntities _db;
+        private IntakeSystemEntities2 _db;
         private DbSet<TEntity> _dbSet;
 
-        public MainRepo(IntakeSystemEntities db)
+        public MainRepo(IntakeSystemEntities2 db)
         {
             _db = db;
             _dbSet = _db.Set<TEntity>();
@@ -87,11 +87,6 @@ namespace DataLayer.Repositories
         public virtual TEntity GetById(object id)
         {
             return _dbSet.Find(id);
-        }
-
-        public virtual void Save()
-        {
-            _db.SaveChanges();
         }
     }
 }

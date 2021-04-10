@@ -15,10 +15,10 @@ namespace DataLayer.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class IntakeSystemEntities : DbContext
+    public partial class IntakeSystemEntities2 : DbContext
     {
-        public IntakeSystemEntities()
-            : base("name=IntakeSystemEntities")
+        public IntakeSystemEntities2()
+            : base("name=IntakeSystemEntities2")
         {
         }
     

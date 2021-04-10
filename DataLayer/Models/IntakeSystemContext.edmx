@@ -820,7 +820,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="IntakeSystemEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IntakeSystemEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TblCatagory" EntityType="Self.TblCatagory" />
           <EntitySet Name="TblConfig" EntityType="Self.TblConfig" />
@@ -930,7 +930,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IntakeSystemModelStoreContainer" CdmEntityContainer="IntakeSystemEntities">
+        <EntityContainerMapping StorageEntityContainer="IntakeSystemModelStoreContainer" CdmEntityContainer="IntakeSystemEntities2">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="IntakeSystemModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
