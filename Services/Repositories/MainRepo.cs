@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using DataLayer.Models;
 
-namespace DataLayer.Repositories
+namespace Services.Repositories
 {
     public class MainRepo<TEntity> : IMainRepo<TEntity> where TEntity : class
     {
-        private IntakeSystemEntities2 _db;
-        private DbSet<TEntity> _dbSet;
+        private readonly IntakeSystemEntities _db;
+        private readonly DbSet<TEntity> _dbSet;
 
-        public MainRepo(IntakeSystemEntities2 db)
+        public MainRepo(IntakeSystemEntities db)
         {
             _db = db;
             _dbSet = _db.Set<TEntity>();
@@ -79,9 +78,16 @@ namespace DataLayer.Repositories
 
             if (includes != null)
                 foreach (string i in includes.Split(','))
-                    query = query.Include(i);
+                    query = query.Include(i.Trim());
 
             return query.ToList();
+        }
+
+        public virtual bool Any(Expression<Func<TEntity, bool>> where = null)
+        {
+            if (where != null)
+                return _dbSet.Any(where);
+            return false;
         }
 
         public virtual TEntity GetById(object id)

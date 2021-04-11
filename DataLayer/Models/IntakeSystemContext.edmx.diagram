@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bb79e1fc8da949b59b323b0c71ef0397" Name="Diagram1">
+      <Diagram DiagramId="ae39e57ece9346cb811589cd1fa45df1" Name="Diagram1">
         <EntityTypeShape EntityType="IntakeSystemModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IntakeSystemModel.TblCatagory" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntakeSystemModel.TblConfig" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="IntakeSystemModel.TblRole" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IntakeSystemModel.TblSpeciality" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IntakeSystemModel.TblTicket" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblUser" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblUser" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospital_TblCatagory" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospitalSpecialityRel_TblDay" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospital_TblUser" ManuallyRouted="false" />

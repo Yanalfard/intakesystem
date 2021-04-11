@@ -23,7 +23,7 @@ namespace DataLayer.Models
         public System.DateTime DateCreated { get; set; }
         public long DoctorsPart { get; set; }
         public long HospitalsPart { get; set; }
-        public bool IsSettled { get; set; }
+        public int SettlementStatus { get; set; }
     
         public virtual TblHospitalSpecialityRel TblHospitalSpecialityRel { get; set; }
         public virtual TblUser TblUser { get; set; }

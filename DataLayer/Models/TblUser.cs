@@ -38,6 +38,7 @@ namespace DataLayer.Models
         public Nullable<int> LocationId { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string DoctorDescription { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblHospital> TblHospital { get; set; }

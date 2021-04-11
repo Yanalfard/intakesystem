@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using DataLayer.Models;
 
-namespace DataLayer.Repositories
+namespace Services.Repositories
 {
     public interface IMainRepo<TEntity> where TEntity : class
     {

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataLayer.Models;
-using DataLayer.Repositories;
+﻿using DataLayer.Models;
+using Services.Repositories;
 
-namespace DataLayer.Services
+namespace Services.Services
 {
     public class Core
     {
-        private readonly IntakeSystemEntities2 _db = new IntakeSystemEntities2();
+        private readonly IntakeSystemEntities _db = new IntakeSystemEntities();
 
         private MainRepo<TblLocation> _location;
         private MainRepo<TblRole> _role;

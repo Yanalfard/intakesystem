@@ -43,7 +43,7 @@
           <Key>
             <PropertyRef Name="HospitalId" />
           </Key>
-          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="HospitalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -82,7 +82,7 @@
           <Key>
             <PropertyRef Name="LocationId" />
           </Key>
-          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LocationParentId" Type="int" />
         </EntityType>
@@ -99,7 +99,7 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DoctorsPart" Type="bigint" Nullable="false" />
           <Property Name="HospitalsPart" Type="bigint" Nullable="false" />
-          <Property Name="IsSettled" Type="bit" Nullable="false" />
+          <Property Name="SettlementStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TblRole">
           <Key>
@@ -149,6 +149,7 @@
           <Property Name="LocationId" Type="int" />
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="DoctorDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_TblHospital_TblCatagory">
           <End Role="TblCatagory" Type="Self.TblCatagory" Multiplicity="1" />
@@ -493,7 +494,7 @@
           <Key>
             <PropertyRef Name="HospitalId" />
           </Key>
-          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
@@ -543,7 +544,7 @@
           <Key>
             <PropertyRef Name="LocationId" />
           </Key>
-          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LocationParentId" Type="Int32" />
           <NavigationProperty Name="TblLocation1" Relationship="Self.FK_TblLocation_TblLocation" FromRole="TblLocation" ToRole="TblLocation1" />
@@ -563,7 +564,7 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DoctorsPart" Type="Int64" Nullable="false" />
           <Property Name="HospitalsPart" Type="Int64" Nullable="false" />
-          <Property Name="IsSettled" Type="Boolean" Nullable="false" />
+          <Property Name="SettlementStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblOrder_TblHospitalSpecialityRel" FromRole="TblOrder" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblOrder_TblUser" FromRole="TblOrder" ToRole="TblUser" />
         </EntityType>
@@ -621,6 +622,7 @@
           <Property Name="LocationId" Type="Int32" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="DoctorDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblHospital" Relationship="Self.FK_TblHospital_TblUser" FromRole="TblUser" ToRole="TblHospital" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblUser" FromRole="TblUser" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblUser_TblLocation" FromRole="TblUser" ToRole="TblLocation" />
@@ -820,7 +822,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="IntakeSystemEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IntakeSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TblCatagory" EntityType="Self.TblCatagory" />
           <EntitySet Name="TblConfig" EntityType="Self.TblConfig" />
@@ -930,7 +932,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IntakeSystemModelStoreContainer" CdmEntityContainer="IntakeSystemEntities2">
+        <EntityContainerMapping StorageEntityContainer="IntakeSystemModelStoreContainer" CdmEntityContainer="IntakeSystemEntities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="IntakeSystemModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1032,7 +1034,7 @@
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="DoctorsPart" ColumnName="DoctorsPart" />
                 <ScalarProperty Name="HospitalsPart" ColumnName="HospitalsPart" />
-                <ScalarProperty Name="IsSettled" ColumnName="IsSettled" />
+                <ScalarProperty Name="SettlementStatus" ColumnName="SettlementStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1086,6 +1088,7 @@
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="DoctorDescription" ColumnName="DoctorDescription" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
