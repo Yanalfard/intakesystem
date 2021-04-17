@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "مراکز درمانی";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row flex-div">
+    <div class="col-md-12 flex-div pb-3 pt-3">
+        <div class="card flex-div border-0 main-shadow">
+            <div class="card-header bg-white">
+                <div class="pr-1 pt-2">
+                    <div class="card-form form-row">
+                        <div class="form-input">
+                                <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
+                                    <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="نام بیمارستان" value="">
+                                </div>
+                        </div>
+                        <div class="form-toolbar mr-md-3 mr-1">
+                            <button onclick="BtnSearch()" type="button" class="btn btn-primary btn-sm">جستجو<span class="icon-holder uk-margin-small-right" uk-icon="search-outline"></span></button>
+                            <button id="Create" data-toggle="modal" data-target="#modalSave" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--list region-->
+            <div id="card-table" class="card-body flex-div">
+                <div class="table-responsive flex">
+                    <table class="table fixed">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">نام مرکز درمانی</th>
+                                <th scope="col">شماره تماس</th>
+                                <th scope="col">دسته بندی</th>
+                                <th scope="col">جزئیات</th>
+                                <th scope="col">حسابرسی</th>
+                                <th scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>امام رضا</td>
+                                <td>04154654-0416546</td>
+                                <td>بیمارستان</td>
+                                <td>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حسابرسی">
+                                        <a href="" class="text-info" uk-icon="wallet"></a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                                        <a id="Edit" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="create-outline"></a>
+                                    </span>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="فعال">
+                                        <a onclick="ChangeStatus()"><span class="text-success" uk-icon="toggle"></span></a>
+                                    </span>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="غیر فعال">
+                                        <a onclick="ChangeStatus()"><span class="text-secondary gly-rotate-180" uk-icon="toggle"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--end list region-->
+            @*<div class="card-footer bg-white">
+                    <nav aria-label="Page navigation example">
+                        @await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+                    </nav>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+@section Script{
+
+    <script>
+        $("#Create").click(function () {
+            $.get("/Admin/Hospital/Create", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
+
+        $("#Edit").click(function () {
+            $.get("/Admin/Hospital/Edit", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
+
+        $("#Information").click(function () {
+            $.get("/Admin/Hospital/Info", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
+    </script>
+}
+
+
+

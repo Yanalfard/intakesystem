@@ -16,11 +16,27 @@ namespace IntakeSystem.Areas.Admin.Controllers
             _core = core;
         }
 
-        // GET: Admin/Hospital
+        public HospitalController()
+        {
+
+        }
+
         public ActionResult Index()
         {
             
-            return View("List");
+            return View();
+        }
+        public ActionResult Create()
+        {
+            return PartialView();
+        }
+        public ActionResult Edit()
+        {
+            return PartialView();
+        }
+        public ActionResult Info()
+        {
+            return PartialView();
         }
     }
 }

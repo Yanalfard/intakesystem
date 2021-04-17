@@ -862,7 +862,10 @@
     <Content Include="Areas\Admin\Resource\css\_colors.scss" />
     <Content Include="Areas\Admin\Resource\css\_layout.scss" />
     <Content Include="Areas\Admin\Resource\css\_starRating.scss" />
-    <Content Include="Areas\Admin\Views\Hospital\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Hospital\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Hospital\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Hospital\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Hospital\Info.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -913,7 +916,6 @@
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
-  
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
