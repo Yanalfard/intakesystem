@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,6 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Resource\BjaxLib.js" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-grid.css" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-reboot.css" />
@@ -860,6 +862,7 @@
     <Content Include="Areas\Admin\Resource\css\_colors.scss" />
     <Content Include="Areas\Admin\Resource\css\_layout.scss" />
     <Content Include="Areas\Admin\Resource\css\_starRating.scss" />
+    <Content Include="Areas\Admin\Views\Hospital\List.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
