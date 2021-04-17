@@ -1,0 +1,239 @@
+﻿@import '../_colors.scss';
+@import '../_layout.scss';
+
+.categories {
+    @include mat;
+    @include border-def-radius;
+    @include shadow-mild;
+    @include mat-padding;
+
+    li {
+        @include column;
+
+        a {
+            padding: 12px 0;
+            border-bottom: 1px dashed $Text-4;
+        }
+    }
+
+    li:last-child a {
+        border: 0;
+    }
+}
+
+.main-slideshow {
+    overflow: hidden;
+    @include border-def-radius;
+    @include shadow-mild;
+
+    .uk-dotnav {
+        height: 16px;
+    }
+}
+
+// Gallery section in Index
+.gallery-grid {
+    .grid {
+        @include grid-gap(224px,8px);
+        margin-bottom: 16px;
+
+        a {
+            display: flex;
+            width: 100%;
+
+            img {
+                max-height: 200px;
+                @include obj;
+                @include border-def-radius;
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .gallery-grid {
+        .grid {
+            @include grid-gap(150px,8px);
+
+            a {
+
+                img {
+                    max-height: 164px;
+                }
+            }
+
+            a:nth-child(n+5) {
+                display: none;
+
+                img {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.service {
+    .body {
+        display: grid;
+    }
+}
+
+.questions {
+    h3 {
+        font-size: 20px;
+        padding: 12px;
+        margin-top: 0 !important;
+    }
+
+    ul {
+        li {
+            @include mat-padding;
+            margin-top: 0 !important;
+            border-bottom: solid $mat-border-color 1px;
+
+            .uk-accordion-title {
+                font-size: 16px !important;
+            }
+
+            .uk-accordion-content {
+                margin-top: 10px !important;
+                font-size: 13px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .questions {
+        ul {
+            li {
+                @include mat-padding;
+                margin-top: 0 !important;
+                border-bottom: solid $mat-border-color 1px;
+
+                .uk-accordion-title {
+                    font-size: 17px !important;
+                }
+
+                .uk-accordion-content {
+                    margin-top: 8px !important;
+                    font-size: 13px !important;
+                }
+            }
+        }
+    }
+}
+
+.main-contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+
+    .left {
+        @include column;
+        grid-gap: 12px;
+    }
+
+    .right {
+        @include column;
+        grid-gap: 12px;
+    }
+
+    .sellers {
+        ul {
+            display: grid;
+            @include grid-gap(132px,12px);
+            direction: rtl;
+
+            li {
+                direction: ltr;
+                padding: 8px;
+                background-color: #f8f8f8;
+                @include border-def-radius;
+                @include column;
+                grid-gap: 4px;
+
+                label {
+                    font-size: 13px;
+                    color: $Text-2;
+                }
+
+                span {
+                    color: $Text;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .telegram, .instagram {
+        @include border-def-radius;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .bottom {
+        border: 3px $mat-border-color dashed;
+        @include border-radius(6px,6px,6px,6px);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column-start: span 2;
+
+        a {
+            display: flex;
+
+            img {
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 724px) {
+
+    .main-contact {
+        grid-template-columns: 1fr;
+    }
+}
+
+$album-height: 180px;
+$album-width: 290px;
+
+// Gallery Page
+.gallery-main {
+    @include grid-gap(256px,12px);
+    margin-bottom: auto !important;
+
+    .albumBlock {
+        max-height: 220px;
+        max-width: 300px;
+
+        a {
+            background-color: #fff;
+            @include column;
+            -ms-align-content: center;
+            -webkit-align-content: center;
+            align-content: center;
+
+            img {
+                margin: auto;
+                width: 100%;
+                height: 100%;
+                max-height: 173px;
+                min-height: 168px;
+                @include obj;
+            }
+        }
+    }
+}
+
+.map-card {
+    height: 360px;
+    @include border-def-radius;
+}
