@@ -1,12 +1,7 @@
 @font-face {
-    font-family: "Sahel";
-    src: url('/fonts/fontsite/Sahel.woff');
-    src: url('/fonts/fontsite/Sahel.woff') format("woff");
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Sahel';
+    src: url('/Fonts/Sahel.woff') format('woff');
 }
-
-
 /* width */
 
 ::-webkit-scrollbar {
