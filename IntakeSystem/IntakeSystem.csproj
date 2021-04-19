@@ -136,9 +136,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ExtentionMethdos.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Resource\BjaxLib.js" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-grid.css" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Areas\Admin\Resource\Bootstrap\css\bootstrap-reboot.css" />

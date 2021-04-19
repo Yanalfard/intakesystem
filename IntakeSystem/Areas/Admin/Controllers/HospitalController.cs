@@ -3,28 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataLayer.Models;
 using Services.Services;
 
 namespace IntakeSystem.Areas.Admin.Controllers
 {
     public class HospitalController : Controller
     {
-        private Core _core;
+        private Core _core = new Core();
 
-        public HospitalController(Core core)
+        public ActionResult Index(int PageId = 1, string Result = "", int InPageCount = 20)
         {
-            _core = core;
-        }
-
-        public HospitalController()
-        {
-
-        }
-
-        public ActionResult Index()
-        {
-            
-            return View();
+            List<TblHospital> hospitals = _core.Hospital.Get().ToList();
+            return View(hospitals);
         }
         public ActionResult Create()
         {
@@ -34,9 +25,20 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             return PartialView();
         }
-        public ActionResult Info()
+        public ActionResult Info(int id)
         {
-            return PartialView();
+            TblHospital hospital = _core.Hospital.GetById(id);
+            return PartialView(hospital);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(int id)
+         {
+            TblHospital hospital = _core.Hospital.GetById(id);
+            hospital.IsActive = !hospital.IsActive;
+            _core.Hospital.Update(hospital);
+            _core.Save();
+            return Json(true);
         }
     }
 }

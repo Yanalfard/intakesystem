@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -57,6 +57,7 @@
           <Property Name="CatagoryId" Type="int" Nullable="false" />
           <Property Name="AboutUs" Type="nvarchar" MaxLength="800" />
           <Property Name="Fee" Type="smallint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblHospitalSpecialityRel">
           <Key>
@@ -150,6 +151,7 @@
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="DoctorDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_TblHospital_TblCatagory">
           <End Role="TblCatagory" Type="Self.TblCatagory" Multiplicity="1" />
@@ -449,8 +451,7 @@
             <End Role="TblUser" EntitySet="TblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IntakeSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -513,6 +514,7 @@
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblHospital" FromRole="TblHospital" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblImage" Relationship="Self.FK_TblImage_TblHospital" FromRole="TblHospital" ToRole="TblImage" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblHospital" FromRole="TblHospital" ToRole="TblTicket" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TblHospitalSpecialityRel">
           <Key>
@@ -623,6 +625,7 @@
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="DoctorDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblHospital" Relationship="Self.FK_TblHospital_TblUser" FromRole="TblUser" ToRole="TblHospital" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblUser" FromRole="TblUser" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblUser_TblLocation" FromRole="TblUser" ToRole="TblLocation" />
@@ -974,6 +977,7 @@
           <EntitySetMapping Name="TblHospital">
             <EntityTypeMapping TypeName="IntakeSystemModel.TblHospital">
               <MappingFragment StoreEntitySet="TblHospital">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
@@ -1089,6 +1093,7 @@
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="DoctorDescription" ColumnName="DoctorDescription" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

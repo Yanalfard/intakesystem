@@ -36,6 +36,7 @@ namespace DataLayer.Models
         public int CatagoryId { get; set; }
         public string AboutUs { get; set; }
         public short Fee { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual TblCatagory TblCatagory { get; set; }
         public virtual TblUser TblUser { get; set; }

@@ -1,4 +1,5 @@
-﻿
+﻿@using DataLayer.Models
+@model IEnumerable<DataLayer.Models.TblHospital>
 @{
     ViewBag.Title = "مراکز درمانی";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -11,9 +12,9 @@
                 <div class="pr-1 pt-2">
                     <div class="card-form form-row">
                         <div class="form-input">
-                                <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
-                                    <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="نام بیمارستان" value="">
-                                </div>
+                            <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
+                                <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="نام بیمارستان" value="">
+                            </div>
                         </div>
                         <div class="form-toolbar mr-md-3 mr-1">
                             <button onclick="BtnSearch()" type="button" class="btn btn-primary btn-sm">جستجو<span class="icon-holder uk-margin-small-right" uk-icon="search-outline"></span></button>
@@ -23,12 +24,14 @@
                 </div>
             </div>
             <!--list region-->
+
+
             <div id="card-table" class="card-body flex-div">
                 <div class="table-responsive flex">
                     <table class="table fixed">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">نام مرکز درمانی</th>
+                                <th scope="col">نام مرکز</th>
                                 <th scope="col">شماره تماس</th>
                                 <th scope="col">دسته بندی</th>
                                 <th scope="col">جزئیات</th>
@@ -37,43 +40,130 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>امام رضا</td>
-                                <td>04154654-0416546</td>
-                                <td>بیمارستان</td>
-                                <td>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
-                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حسابرسی">
-                                        <a href="" class="text-info" uk-icon="wallet"></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
-                                        <a id="Edit" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="create-outline"></a>
-                                    </span>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="فعال">
-                                        <a onclick="ChangeStatus()"><span class="text-success" uk-icon="toggle"></span></a>
-                                    </span>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="غیر فعال">
-                                        <a onclick="ChangeStatus()"><span class="text-secondary gly-rotate-180" uk-icon="toggle"></span></a>
-                                    </span>
-                                </td>
-                            </tr>
-
+                            @foreach (TblHospital i in Model)
+                            {
+                                <tr>
+                                    <td>@i.Name</td>
+                                    <td>@i.TellNo</td>
+                                    <td>@i.TblCatagory.Name</td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                            <a onclick="PartialInfo(@i.HospitalId)" id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حسابرسی">
+                                            <a href="" class="text-info" uk-icon="wallet"></a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                                            <a id="Edit" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="create-outline"></a>
+                                        </span>
+                                        @if (i.IsActive)
+                                        {
+                                            <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="فعال">
+                                                <a onclick="ChangeStatus(@i.HospitalId)">
+                                                    <span class="text-success" uk-icon="toggle"></span>
+                                                </a>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="غیر فعال">
+                                                <a onclick="ChangeStatus(@i.HospitalId)">
+                                                    <span class="text-secondary gly-rotate-180" uk-icon="toggle"></span>
+                                                </a>
+                                            </span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
             <!--end list region-->
-            @*<div class="card-footer bg-white">
-                    <nav aria-label="Page navigation example">
-                        @await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
-                    </nav>
-                </div>*@
+            <div class="card-footer bg-white">
+                @*<nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+
+                            @if (ViewBag.PageId == 1)
+                            {
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
+                                </li>
+
+                            }
+
+                            <li class="page-item">
+                                <select id="pageNumber" class="custom-select custom-select-sm">
+                                    @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
+                                    {
+                                        <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
+                                    }
+                                </select>
+                            </li>
+
+
+                            @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
+                            {
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
+                                </li>
+                            }
+                            else
+
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
+                                </li>
+
+                            }
+                            <li>
+                                <select id="InPageCount" class="custom-select custom-select-sm">
+                                    @if (ViewBag.InPageCount == 0)
+                                    {
+                                        <option value="0" selected>18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+
+                                    }
+
+                                    @if (ViewBag.InPageCount == 20)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20" selected>20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 30)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30" selected>30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 40)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40" selected>40 در هر صفحه</option>
+                                    }
+
+                                </select>
+                            </li>
+                        </ul>
+                    </nav>*@
+            </div>
         </div>
     </div>
 </div>
@@ -93,11 +183,19 @@
             });
         });
 
-        $("#Information").click(function () {
-            $.get("/Admin/Hospital/Info", function (result) {
+        function PartialInfo(id) {
+            $.get("/Admin/Hospital/Info?id=" + id, function (result) {
                 $(".modal-content").html(result);
             });
-        });
+        }
+
+        function ChangeStatus(id) {
+            var result = Bjax('/Admin/Hospital/ChangeStatus?id=', id, 'SP');
+            if (result == true) {
+                //code here
+            }
+            //console.log(result);
+        }
     </script>
 }
 
