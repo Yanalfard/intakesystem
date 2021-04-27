@@ -13,10 +13,10 @@ namespace IntakeSystem.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Core core = new Core();
-            var cats = core.Catagory.Get();
-            bool catss = core.Catagory.Any(i => i.Name == "آزمایشگاه");
-            bool catsss = core.Catagory.Any(i => i.Name == "آزمایشگا");
+            //Core core = new Core();
+            //var cats = core.Catagory.Get();
+            //bool catss = core.Catagory.Any(i => i.Name == "آزمایشگاه");
+            //bool catsss = core.Catagory.Any(i => i.Name == "آزمایشگا");
 
 
             return View();

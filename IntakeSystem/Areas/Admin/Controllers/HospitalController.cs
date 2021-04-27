@@ -17,20 +17,28 @@ namespace IntakeSystem.Areas.Admin.Controllers
             List<TblHospital> hospitals = _core.Hospital.Get().ToList();
             return View(hospitals);
         }
-        public ActionResult Create()
+        public ActionResult PtCreate()
         {
             return PartialView();
         }
-        public ActionResult Edit()
+        public ActionResult PtEdit()
         {
             return PartialView();
         }
-        public ActionResult Info(int id)
+        public ActionResult PtHospitalInfo(int id)
         {
             TblHospital hospital = _core.Hospital.GetById(id);
             return PartialView(hospital);
         }
+        public ActionResult Fiat()
+        {
 
+            return View();
+        }
+        public ActionResult PtFiatInfo()
+        {
+            return PartialView();
+        }
         [HttpPost]
         public ActionResult ChangeStatus(int id)
          {

@@ -1,8 +1,7 @@
-﻿@using DataLayer.Models
-@model IEnumerable<DataLayer.Models.TblHospital>
+﻿
 @{
-    ViewBag.Title = "مراکز درمانی";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "پزشک";
+    Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row flex-div">
@@ -12,8 +11,16 @@
                 <div class="pr-1 pt-2">
                     <div class="card-form form-row">
                         <div class="form-input">
-                            <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
-                                <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="نام بیمارستان" value="">
+                            <div class="form-inline">
+                                <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
+                                    <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="نام پزشک" value="">
+                                </div>
+                                <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
+                                    <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="شماره تماس" value="">
+                                </div>
+                                <div class="form-group mx-sm-1 mb-2 mr-1 mr-md-0">
+                                    <input id="SearchInput" class="form-control uk-text-small" type="text" placeholder="کد ملی" value="">
+                                </div>
                             </div>
                         </div>
                         <div class="form-toolbar mr-md-3 mr-1">
@@ -24,65 +31,46 @@
                 </div>
             </div>
             <!--list region-->
-
-
             <div id="card-table" class="card-body flex-div">
                 <div class="table-responsive flex">
                     <table class="table fixed">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">نام مرکز</th>
+                                <th scope="col">نام پزشک</th>
                                 <th scope="col">شماره تماس</th>
-                                <th scope="col">دسته بندی</th>
+                                <th scope="col">تخصص</th>
+                                <th scope="col">وضعیت</th>
+                                <th scope="col">تنظیمات نوبت دهی</th>
                                 <th scope="col">جزئیات</th>
-                                <th scope="col">حسابرسی</th>
-                                <th scope="col">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (TblHospital i in Model)
-                            {
-                                <tr>
-                                    <td>@i.Name</td>
-                                    <td>@i.TellNo</td>
-                                    <td>@i.TblCatagory.Name</td>
-                                    <td>
-                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
-                                            <a onclick="PartialInfo(@i.HospitalId)" id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حسابرسی">
-                                            <a href="/Admin/Hospital/Fiat" class="text-info" uk-icon="wallet"></a>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
-                                            <a id="Edit" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="create-outline"></a>
-                                        </span>
-                                        @if (i.IsActive)
-                                        {
-                                            <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="فعال">
-                                                <a onclick="ChangeStatus(@i.HospitalId)">
-                                                    <span class="text-success" uk-icon="toggle"></span>
-                                                </a>
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="غیر فعال">
-                                                <a onclick="ChangeStatus(@i.HospitalId)">
-                                                    <span class="text-secondary gly-rotate-180" uk-icon="toggle"></span>
-                                                </a>
-                                            </span>
-                                        }
-                                    </td>
-                                </tr>
-                            }
+                            <tr>
+                                <td>علی علیزاده</td>
+                                <td>0952556</td>
+                                <td>قلب</td>
+                                <td>
+                                    <span class="text-success">فعال</span>
+                                    <span class="text-danger">غیرفعال</span>
+                                </td>
+                                <td>
+                                    <a id="Visit" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="file-tray-full"></a>
+                                </td>
+                                <td>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                    </span>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                                        <a id="Edit" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="create-outline"></a>
+                                    </span>
+
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
             <!--end list region-->
             <div class="card-footer bg-white">
                 @*<nav aria-label="Page navigation example">
@@ -172,30 +160,25 @@
 
     <script>
         $("#Create").click(function () {
-            $.get("/Admin/Hospital/PtCreate", function (result) {
+            $.get("/Hospital/Doctor/PtCreate", function (result) {
                 $(".modal-content").html(result);
             });
         });
-
+        $("#Information").click(function () {
+            $.get("/Hospital/Doctor/PtInfo", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
         $("#Edit").click(function () {
-            $.get("/Admin/Hospital/PtEdit", function (result) {
+            $.get("/Hospital/Doctor/PtEdit", function (result) {
                 $(".modal-content").html(result);
             });
         });
-
-        function PartialInfo(id) {
-            $.get("/Admin/Hospital/PtHospitalInfo?id=" + id, function (result) {
+        $("#Visit").click(function () {
+            $.get("/Hospital/Doctor/PtVisit", function (result) {
                 $(".modal-content").html(result);
             });
-        }
-
-        function ChangeStatus(id) {
-            var result = Bjax('/Admin/Hospital/ChangeStatus?id=', id, 'SP');
-            if (result == true) {
-                //code here
-            }
-            //console.log(result);
-        }
+        });
     </script>
 }
 

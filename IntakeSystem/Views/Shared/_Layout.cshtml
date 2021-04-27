@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Admin/Resource/css/uikit.min.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Controls.min.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+</head>
+<body>
+    <!--Header-Section-->
+    <div class="uk-position-relative">
+        <img class="header-bg" src="~/img/LayoutStatic/HeaderBg.svg" />
+        <div class="uk-position-top">
+            <nav class="uk-margin-medium-top navbar-section" uk-navbar>
+                <div class="uk-navbar-left" dir="rtl">
+                    <ul class="uk-navbar-nav desktop-header">
+                        <li>
+                            <a href="#">
+                                <span class="bg-orange-circle" uk-icon="icon: log-in"></span>
+                                ورود
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="bg-orange-circle" uk-icon="icon: person-add"></span>
+                                ثبت نام
+                            </a>
+                        </li>
+                    </ul>
+                    <!--mobile version-->
+                    <ul class="uk-navbar-nav display-none mobile-header">
+                        <li>
+                            <a href="#">
+                                <span class="" uk-icon="icon:funnel;"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="" uk-icon="icon: person;"></span>
+                            </a>
+                            <div class="uk-navbar-dropdown uk-border-rounded">
+                                <ul class="uk-nav uk-navbar-dropdown-nav uk-text-right">
+                                    <li><a class="uk-padding-remove" href="#"><span class="uk-margin-small-left" uk-icon="icon: log-in"></span>ورود</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a class="uk-padding-remove" href="#"><span class="uk-margin-small-left" uk-icon="icon: person-add"></span>ثبت نام</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--end of mobile version-->
+                </div>
+                <div class="uk-navbar-right" dir="rtl">
+                    <!--mobile version hamburger button and menu-->
+                    <a class="display-none mobile-header" uk-toggle="target: #offcanvas-flip">
+                        <span class="bg-orange-circle" uk-icon="icon: menu;"></span>
+                    </a>
+                    <div class="hidden mobile-header-menu" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                        <div class="uk-offcanvas-bar">
+                            <button class="uk-offcanvas-close " type="button" uk-close></button>
+                            <ul>
+                                <li class="">
+                                    <a href="#">
+                                        <span class="bg-orange-circle" uk-icon="icon: home"></span>
+                                        خانه
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="bg-orange-circle" uk-icon="icon:business"></span>
+                                        مراکز درمانی
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="bg-orange-circle" uk-icon="icon:person"></span>
+                                        پزشکان
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="bg-orange-circle" uk-icon="icon: pulse"></span>
+                                        تخصص ها
+                                    </a>
+                                </li>
+                                <li class="without-line">
+
+                                    <a href="#">
+                                        <span class="bg-orange-circle" uk-icon="icon: flask"></span>
+                                        آزمایشگاه ها
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of mobile version-->
+                    <ul class="uk-navbar-nav desktop-header">
+                        <li class="uk-active without-line ">
+                            <a href="#" class="orange-background ">
+                                <span class="" uk-icon="icon: home"></span>
+                                خانه
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="" uk-icon="icon: business"></span>
+                                مراکز درمانی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="" uk-icon="icon: person"></span>
+                                پزشکان
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="" uk-icon="icon: pulse"></span>
+                                تخصص ها
+                            </a>
+                        </li>
+                        <li class="without-line">
+
+                            <a href="#">
+                                <span class="" uk-icon="icon: flask"></span>
+                                آزمایشگاه ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--End Header-Section-->
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <!--footer section-->
+            <div class="uk-position-bottom footer">
+                <img class="footer-bg footer-background-mobile" src="~/img/LayoutStatic/FooterBg.svg" alt="">
+                <div class="uk-position-top uk-margin-top mobile-footer">
+                    <nav class="uk-navbar" uk-navbar>
+                        <div class="uk-navbar-left" dir="rtl">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#">
+                                        <span class="mytext-white" uk-icon="icon: logo-linkedin"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="mytext-white" uk-icon="icon: logo-instagram"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="mytext-white" uk-icon="icon: logo-twitter"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="uk-navbar-right" dir="rtl">
+                            <ul class="uk-navbar-nav">
+                                <li class="uk-active without-line uk-margin-left">
+                                    <a href="#" class="orange-background">
+                                        تماس با ما
+                                    </a>
+
+                                </li>
+                                <li class="uk-active without-line ">
+                                    <a href="#" class="orange-background">
+                                        درباره ما
+                                    </a>
+                                </li>
+                                <li class="without-line">
+                                    <a class="mytext-white uk-margin-small-right" href="#">
+                                        قوانین
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="uk-text-center mytext-white Signature uk-margin-small-top"> طراحی و توسعه توسط ایده پرداز آروین تاو</div>
+                </div>
+            </div>
+            <!--end footer section-->
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Resource/js/uikit.min.js"></script>
+    <script src="~/Areas/Admin/Resource/js/uikit-icons.js"></script>
+
+</body>
+</html>
