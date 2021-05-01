@@ -1,0 +1,98 @@
+﻿.light-blue-button {
+  width: 250px;
+  padding: 10px 0;
+  background: linear-gradient(93.09deg, #F4F1BB -51.43%, #67B7D1 62.2%, #67B7D1 103.36%, #67B7D1 115.36%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  outline: none !important;
+  border: 1px solid #67B7D1;
+  cursor: pointer;
+  color: white !important; }
+
+.light-blue-button:hover {
+  background: #11698E;
+  border: 1px solid #11698E;
+  /*
+    a {
+        color: #666 !important;
+    }*/ }
+
+.card-with-border {
+  height: 50px;
+  width: 250px; }
+
+.uk-input:focus {
+  border-color: #FFAB31; }
+
+.my-flex-card {
+  display: flex; }
+  .my-flex-card div {
+    flex: 1; }
+  .my-flex-card .MobileSize {
+    display: none;
+    height: 250px;
+    width: 250px; }
+  .my-flex-card img {
+    flex: 1;
+    height: 360px;
+    width: 360px; }
+  .my-flex-card .uk-legend {
+    padding-left: 220px;
+    margin-bottom: 40px;
+    color: #666;
+    font-size: 16px; }
+    .my-flex-card .uk-legend span {
+      padding-bottom: 3px;
+      border-bottom: 1px solid #666; }
+
+.register-section .uk-legend {
+  padding-left: 202px; }
+
+.forget-password-section .uk-legend {
+  padding-left: 140px; }
+
+.forget-password-section .DesktopSize {
+  margin-top: -60px; }
+
+.Reset-password-section .code-label {
+  padding-left: 105px; }
+
+.Reset-password-section .new-pass-label {
+  padding-left: 70px; }
+
+.result-section .DesktopSize {
+  width: 260px;
+  height: 260px;
+  margin-bottom: 20px; }
+
+.result-section img {
+  width: 260px;
+  height: 260px; }
+
+@media only screen and (max-width: 767px) {
+  .my-flex-card {
+    display: contents !important; }
+    .my-flex-card .MobileSize {
+      display: flex !important; }
+    .my-flex-card .DesktopSize {
+      display: none; }
+  .uk-legend {
+    padding-left: 0 !important;
+    margin-bottom: 0px !important; }
+  .my-flex-card-content {
+    margin-top: 30px;
+    margin-bottom: 30px; }
+  .register-section .uk-legend {
+    margin-bottom: 30px !important; }
+  .card-with-border {
+    width: 80vw !important; }
+  .light-blue-button {
+    width: 80vw !important; }
+  .Reset-password-section .new-pass-label {
+    margin-bottom: 22px !important; }
+  .result-section .light-blue-button {
+    margin-bottom: 30px !important; }
+  .result-section .MobileSize {
+    width: 180px !important;
+    height: 180px !important;
+    margin-bottom: 20px !important; } }

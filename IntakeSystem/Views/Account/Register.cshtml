@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/LoginRegister.min.css" rel="stylesheet" />
+<section class="register-section">
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column">
+            <label class="uk-legend uk-text-bold">
+                <span>ثبت نام</span>
+            </label>
+            <img class="my-center MobileSize" src="~/img/formStatic/Register.svg" width="250" alt="picture" />
+            <form class="my-flex-card-content">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
+                            <input class="uk-input card-with-border" type="text" placeholder="نام و نام خانوادگی">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
+                            <input class="uk-input card-with-border" type="text" placeholder="شماره تماس">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:key"></span>
+                            <input class="uk-input card-with-border" type="text" placeholder="رمز عبور">
+                        </div>
+                    </div>
+                    <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
+                        ثبت نام
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/formStatic/Register.svg" width="360" alt="picture" />
+        </div>
+    </content>
+</section>
+

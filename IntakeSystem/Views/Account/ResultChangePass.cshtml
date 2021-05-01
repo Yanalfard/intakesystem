@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ResultChangePass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/LoginRegister.min.css" rel="stylesheet" />
+<section class="result-section">
+
+    <!--success msg-->
+
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+            <div class="my-column uk-margin-auto-vertical">
+                <img class="my-center MobileSize" src="~/img/formStatic/success.svg" width="180" alt="picture" />
+                <label class="result-msg"><span class="text-success" uk-icon="icon:checkmark-circle"></span> رمز عبور شما با موفقیت به روز رسانی شد.</label>
+                <button onclick="location.href='/Account/Login'" class="light-blue-button my-center uk-margin-top">
+                    ورود به حساب
+                </button>
+            </div>
+            <div class="DesktopSize">
+                <img src="~/img/formStatic/success.svg" width="260" alt="picture" />
+            </div>
+        </content>
+
+    <!--fail msg-->
+
+    @*<content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-auto-vertical">
+            <img class="my-center MobileSize" src="~/img/formStatic/fail.svg" width="250" alt="picture" />
+            <label class="result-msg"><span class="text-danger" uk-icon="icon:close-circle"></span> تغییر رمز با خطا مواجه شده است.</label>
+            <button onclick="location.href='/Account/ForgetPassword'" class="light-blue-button my-center uk-margin-top">
+                برگشت
+            </button>
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/formStatic/fail.svg" width="250" alt="picture" />
+        </div>
+    </content>*@
+
+
+</section>
+

@@ -1,0 +1,132 @@
+﻿body {
+}
+
+.my-flex-card {
+    display: flex;
+    div {
+        flex: 1;
+    }
+    .MobileSize {
+        display: none;
+        .card-with-border {
+            width: 180px !important;
+            height: 180px !important;
+        }
+        img {
+            max-height: 153px!important;
+            max-width: 153px!important;
+        }
+    }
+    img {
+        flex: 1;
+    }
+
+    .uk-legend {
+        // margin-bottom: 20px;
+        color: #666;
+        font-size: 15px;
+
+        span {
+            padding-bottom: 3px;
+            border-bottom: 1px solid #666;
+        }
+    }
+.card-with-border {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    padding: 12px;
+
+    img {
+        max-width: 195px;
+        max-height: 195px;
+        border-radius: 50%;
+    }
+}
+}
+
+///////////////////////
+////mobile size////////
+@media only screen and (max-width: 768px) {
+    .filter-section, .uk-divider-vertical {
+        display: none !important;
+    }
+
+    .my-flex-card {
+        display: contents !important;
+
+        .MobileSize {
+            display: flex !important;
+        }
+
+        .DesktopSize {
+            display: none;
+        }
+
+        .uk-legend, ul {
+            text-align: center !important;
+            margin-right: 0 !important;
+            align-content: center;
+            align-self: center;
+            /// margin: 0 auto;
+        }
+
+        ul {
+            padding: 0 15px;
+
+            p {
+                padding: 0 0 0 25px;
+            }
+        }
+    }
+    .uk-legend {
+        padding-left: 0 !important;
+        margin-bottom: 26px !important;
+    }
+    .my-flex-card-content {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+//////////////////////////////////////
+.filter-section {
+    .filter-header {
+        //height: 40px;
+        padding: 10px 0;
+        margin: auto;
+        background: #67B7D1;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        color: white !important;
+    }
+
+    .card-with-border, .filter-header {
+        width: 90% !important;
+    }
+
+    .uk-checkbox {
+        border-radius: 50%;
+    }
+
+    .uk-checkbox:checked {
+        background-color: #FFAB31;
+    }
+
+    input:focus, .uk-select:focus {
+        border-color: #FFAB31 !important;
+    }
+}
+.uk-divider-vertical {
+    border-right: 1px solid #e0e0e0;
+    height:100vh;
+   border-left:none;
+
+}
+.uk-modal-dialog{
+
+    img{
+        max-width:250px;
+        padding:15px;
+        margin:auto;
+    }
+}

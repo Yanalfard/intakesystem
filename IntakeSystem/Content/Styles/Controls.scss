@@ -16,8 +16,8 @@
 }
 
 body {
-    // background: #FAFAFA !important;
-    // min-height: 100vh;
+   /* background: #FAFAFA !important*/;
+    /* min-height: 100vh;*/
 }
 //////////////////////////////
 .visible {
@@ -122,7 +122,7 @@ body {
 .my-clipped {
     margin-left: auto;
     margin-right: auto;
-    width: 84vw;
+    width: 86vw;
 }
 
 @mixin my-clipped() {
@@ -135,7 +135,7 @@ body {
     background: #FFAB31;
     color: white !important;
     border-radius: 50px;
-    padding: 8px;
+    padding: 7px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-left: 5px;
 }
@@ -177,12 +177,36 @@ ul {
     border-radius: 5px;
 }
 
+.my-borderless-card {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.filter-card {
+    background: #FFF7F1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
 .mytext-white {
     color: white !important;
 }
 
 .mytext-gray {
     color: #666 !important;
+}
+.gly-rotate-180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.gly-rotate-270{
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
 /////////////////////////////////
 
@@ -206,9 +230,9 @@ ul {
 
 .uk-navbar-item, .uk-navbar-nav > li > a, .uk-navbar-toggle {
     min-height: 10px !important;
-    padding: 5px 8px !important;
+    padding: 3px 8px !important;
     color: #666;
-    font-size:16px;
+    //font-size:14px;
 }
 
 .uk-navbar-item:hover, .uk-navbar-nav > li > a:hover, .uk-navbar-toggle:hover {
@@ -272,6 +296,13 @@ ul {
             }
         }
     }
+    .mobile-menu:hover {
+        .bg-orange-circle {
+            background: #fefde8 !important;
+            color: #11698E !important;
+            opacity: 0.6;
+        }
+    }
 }
 ///////////////////////
 ////tablet size////////
@@ -293,6 +324,11 @@ ul {
 }
 ////////////////////////
 ////footer-style////
+.footer {
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important
+}
 .footer-bg {
     width: 100%;
     height: 100px !important;
@@ -321,7 +357,7 @@ ul {
         }
         .Signature {
             margin-top: 20px!important;
-            font-size:12px;
+           // font-size:12px;
         }
     }
     .footer-background-mobile {
@@ -330,3 +366,32 @@ ul {
     }
 }
 ///////////////////////
+.filter-modal {
+    .filter-card {
+        .filter-header {
+            //height: 40px;
+            padding: 10px 0;
+            margin: auto;
+            background: #67B7D1;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            color: white !important;
+        }
+
+        .card-with-border, .filter-header {
+            width: 90% !important;
+        }
+
+        .uk-checkbox {
+            border-radius: 50%;
+        }
+
+        .uk-checkbox:checked {
+            background-color: #FFAB31;
+        }
+
+        input:focus, .uk-select:focus {
+            border-color: #FFAB31 !important;
+        }
+    }
+}

@@ -1,0 +1,84 @@
+﻿.my-flex-card {
+  display: flex; }
+  .my-flex-card div {
+    flex: 1; }
+  .my-flex-card .MobileSize {
+    display: none; }
+    .my-flex-card .MobileSize .card-with-border {
+      width: 180px !important;
+      height: 180px !important; }
+    .my-flex-card .MobileSize img {
+      max-height: 153px !important;
+      max-width: 153px !important; }
+  .my-flex-card img {
+    flex: 1; }
+  .my-flex-card .uk-legend {
+    color: #666;
+    font-size: 15px; }
+    .my-flex-card .uk-legend span {
+      padding-bottom: 3px;
+      border-bottom: 1px solid #666; }
+  .my-flex-card .card-with-border {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    padding: 12px; }
+    .my-flex-card .card-with-border img {
+      max-width: 195px;
+      max-height: 195px;
+      border-radius: 50%; }
+
+@media only screen and (max-width: 768px) {
+  .filter-section, .uk-divider-vertical {
+    display: none !important; }
+  .my-flex-card {
+    display: contents !important; }
+    .my-flex-card .MobileSize {
+      display: flex !important; }
+    .my-flex-card .DesktopSize {
+      display: none; }
+    .my-flex-card .uk-legend, .my-flex-card ul {
+      text-align: center !important;
+      margin-right: 0 !important;
+      align-content: center;
+      align-self: center; }
+    .my-flex-card ul {
+      padding: 0 15px; }
+      .my-flex-card ul p {
+        padding: 0 0 0 25px; }
+  .uk-legend {
+    padding-left: 0 !important;
+    margin-bottom: 26px !important; }
+  .my-flex-card-content {
+    margin-top: 30px;
+    margin-bottom: 30px; } }
+
+.filter-section .filter-header {
+  padding: 10px 0;
+  margin: auto;
+  background: #67B7D1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  color: white !important; }
+
+.filter-section .card-with-border, .filter-section .filter-header {
+  width: 90% !important; }
+
+.filter-section .uk-checkbox {
+  border-radius: 50%; }
+
+.filter-section .uk-checkbox:checked {
+  background-color: #FFAB31; }
+
+.filter-section input:focus, .filter-section .uk-select:focus {
+  border-color: #FFAB31 !important; }
+
+.uk-divider-vertical {
+  border-right: 1px solid #e0e0e0;
+  height: 100vh;
+  border-left: none; }
+
+.uk-modal-dialog img {
+  max-width: 250px;
+  padding: 15px;
+  margin: auto; }

@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
+<section class="hospital-section my-clipped uk-margin-medium-bottom">
+    <div class="uk-text-center" uk-grid dir="rtl">
+        <div class="uk-width-1-4 filter-section">
+            <div class="filter-card my-column">
+                <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
+                <form>
+                    <div class="">
+                        <select class="uk-select card-with-border city">
+                            <option>انتخاب شهر</option>
+                            <option>تبریز</option>
+                            <option>تهران</option>
+                        </select>
+                    </div>
+                    <hr class="uk-divider-icon" />
+                    <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr class="uk-divider-vertical text-danger uk-margin-remove">
+        <div class="uk-width-expand">
+            <div class="my-borderless-card uk-margin-medium-bottom">
+                <content class="my-flex-card my-row my-center" dir="rtl">
+                    <div class="my-column">
+                        <label class="uk-legend uk-text-bold uk-margin-top uk-text-right uk-margin-right">
+                            <span>نام مرکز درمانی</span>
+                        </label>
+                        <div class="my-center MobileSize">
+                            <div class="card-with-border my-center">
+                                <img src="~/img/TestSample/hospitalSample.jpg" alt="picture" />
+                            </div>
+                        </div>
+                        <ul class="uk-text-right uk-margin-right">
+                            <li class="my-row">
+                                <span class="text-primary uk-margin-small-left" uk-icon="icon: information-circle"></span>
+                                <p class="uk-margin-remove-top">
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                                </p>
+
+                            </li>
+
+                            <li class="uk-margin-top">
+                                <hr class="uk-divider-icon" />
+                                <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
+                                <span>152454135 - 165115165</span>
+                            </li>
+                            <li class="uk-margin-small-top">
+                                <span class="text-danger uk-margin-small-left" uk-icon="icon: location"></span>
+                                <span>تبریز- آبرسان-13 ابان</span>
+                            </li>
+                            <li class="uk-margin-small-top uk-margin-bottom">
+                                <a href="#modal-media-image" uk-toggle class="text-info"><span class="text-info uk-margin-small-left" uk-icon="icon:images"></span>گالری تصاویر</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="DesktopSize uk-margin-auto-vertical my-center">
+                        <div class="card-with-border my-center">
+                            <img src="~/img/TestSample/hospitalSample.jpg" alt="picture" />
+                        </div>
+                    </div>
+                </content>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<div id="modal-media-image" class="uk-flex-top uk-padding" uk-modal>
+    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical uk-padding uk-border-rounded">
+        <button class="uk-modal-close-outside bg-orange-circle" type="button" uk-close></button>
+        <img src="~/img/TestSample/hospitalSample.jpg" />
+        <img src="~/img/TestSample/hospitalSample.jpg" />
+        <img src="~/img/formStatic/fail.svg" />
+        <img src="~/img/formStatic/Register.svg" />
+        <img src="~/img/formStatic/success.svg" />
+
+    </div>
+</div>

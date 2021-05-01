@@ -3,4 +3,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<link href="~/Content/Styles/Home.min.css" rel="stylesheet" />
+<!--Search-Section-->
+
+<section class="search-section" dir="rtl">
+    <hr />
+    <div class="Search-info uk-flex uk-flex-center">
+        <div class="">
+            <select class="uk-select card-with-border city ">
+                <option>تبریز</option>
+                <option>تهران</option>
+            </select>
+        </div>
+        <div class="">
+            <input class="uk-input card-with-border search-box " type="text" placeholder="متن جستجو">
+        </div>
+        <div class="">
+            <span class="serach-icon" uk-icon="icon:search"></span>
+        </div>
+    </div>
+</section>
+<!--End Search-Section-->
