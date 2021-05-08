@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "گردش حساب";
+    Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row flex-div">
+    <div class="col-md-12 flex-div pb-3 pt-3">
+        <div class="card flex-div border-0 main-shadow">
+            <div class="card-header bg-white">
+                <div class="pr-1 pt-2">
+                    <div class="card-form form-row">
+                        <button id="Settle" data-toggle="modal" data-target="#modalSave" class="btn btn-success btn-sm">تسویه<span class="icon-holder uk-margin-small-right" uk-icon="checkmark-circle-outline"></span></button>
+                    </div>
+                </div>
+            </div>
+            <!--list region-->
+            <div id="card-table" class="card-body flex-div">
+                <div class="table-responsive flex">
+                    <table class="table fixed">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">کد</th>
+                                <th scope="col">نام کاربر</th>
+                                <th scope="col">نام پزشک</th>
+                                <th scope="col">تاریخ مراجعه</th>
+                                <th scope="col">هزینه پرداختی(تومان)</th>
+                                <th scope="col">درصد برداشت مرکز درمانی</th>
+                                <th scope="col">جزئیات</th>
+                                <th scope="col">وضعیت تسویه</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>زهرا رضایی</td>
+                                <td>ژاله منصوری</td>
+                                <td>
+                                    فلان تاریخ
+                                </td>
+                                <td>
+                                    200000
+                                </td>
+                                <td>
+                                    10
+                                </td>
+                                <td>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-success">تسویه شده است</span>
+                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="تسویه شده است">
+                                        <a onclick="ChangeStatus(this)" class="AskStatus"><span class="text-success" uk-icon="checkmark-circle">؟</span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--end list region-->
+            <div class="card-footer bg-white">
+                @*<nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+
+                            @if (ViewBag.PageId == 1)
+                            {
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
+                                </li>
+
+                            }
+
+                            <li class="page-item">
+                                <select id="pageNumber" class="custom-select custom-select-sm">
+                                    @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
+                                    {
+                                        <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
+                                    }
+                                </select>
+                            </li>
+
+
+                            @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
+                            {
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
+                                </li>
+                            }
+                            else
+
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
+                                </li>
+
+                            }
+                            <li>
+                                <select id="InPageCount" class="custom-select custom-select-sm">
+                                    @if (ViewBag.InPageCount == 0)
+                                    {
+                                        <option value="0" selected>18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+
+                                    }
+
+                                    @if (ViewBag.InPageCount == 20)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20" selected>20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 30)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30" selected>30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 40)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40" selected>40 در هر صفحه</option>
+                                    }
+
+                                </select>
+                            </li>
+                        </ul>
+                    </nav>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+
+    <script>
+
+        $("#Settle").click(function () {
+            $.get("/Hospital/Order/PtSettle", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
+
+        $("#Information").click(function () {
+            $.get("/Hospital/Order/PtInfo", function (result) {
+                $(".modal-content").html(result);
+            });
+        });
+
+        function ChangeStatus(i) {
+            i.classList.toggle('d-none');
+        }
+    </script>
+}

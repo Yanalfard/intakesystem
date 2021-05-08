@@ -1,50 +1,57 @@
 ﻿body {
 }
 
-.my-flex-card {
-    display: flex;
-    div {
-        flex: 1;
-    }
-    .MobileSize {
-        display: none;
-        .card-with-border {
-            width: 180px !important;
-            height: 180px !important;
+.hospital-section {
+    .my-flex-card {
+        display: flex;
+
+        div {
+            flex: 1;
         }
+
+        .MobileSize {
+            display: none;
+
+            .card-with-border {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            img {
+                max-height: 153px !important;
+                max-width: 153px !important;
+            }
+        }
+
         img {
-            max-height: 153px!important;
-            max-width: 153px!important;
+            flex: 1;
+        }
+
+        .uk-legend {
+            // margin-bottom: 20px;
+            color: #666;
+            font-size: 15px;
+
+            span {
+                padding-bottom: 3px;
+                border-bottom: 1px solid #666;
+            }
+        }
+
+        .card-with-border {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            padding: 12px;
+
+            img {
+                max-width: 165px;
+                max-height: 165px;
+                border-radius: 50%;
+            }
         }
     }
-    img {
-        flex: 1;
-    }
-
-    .uk-legend {
-        // margin-bottom: 20px;
-        color: #666;
-        font-size: 15px;
-
-        span {
-            padding-bottom: 3px;
-            border-bottom: 1px solid #666;
-        }
-    }
-.card-with-border {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    padding: 12px;
-
-    img {
-        max-width: 195px;
-        max-height: 195px;
-        border-radius: 50%;
-    }
 }
-}
-
 ///////////////////////
 ////mobile size////////
 @media only screen and (max-width: 768px) {
@@ -79,10 +86,12 @@
             }
         }
     }
+
     .uk-legend {
         padding-left: 0 !important;
-        margin-bottom: 26px !important;
+        margin-bottom: 26px;
     }
+
     .my-flex-card-content {
         margin-top: 30px;
         margin-bottom: 30px;
@@ -116,17 +125,191 @@
         border-color: #FFAB31 !important;
     }
 }
+
 .uk-divider-vertical {
     border-right: 1px solid #e0e0e0;
-    height:100vh;
-   border-left:none;
-
+    height: 100vh;
+    border-left: none;
 }
-.uk-modal-dialog{
 
-    img{
-        max-width:250px;
-        padding:15px;
-        margin:auto;
+.uk-modal-dialog {
+
+    img {
+        max-width: 250px;
+        padding: 15px;
+        margin: auto;
+    }
+}
+//////////////////////////////
+////doctor section////////
+.doctor-section {
+    .my-borderless-card {
+        width: 90% !important;
+    }
+
+    .my-flex-card {
+        display: flex;
+
+        div {
+            flex: auto;
+        }
+
+        .MobileSize {
+            display: none;
+
+            .card-with-border {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            img {
+                max-height: 153px !important;
+                max-width: 153px !important;
+            }
+        }
+
+        img {
+            flex: 1;
+        }
+
+        .uk-legend {
+            // margin-bottom: 20px;
+            color: #666;
+            font-size: 15px;
+
+            span {
+                padding-bottom: 3px;
+                border-bottom: 1px solid #666;
+            }
+        }
+
+        .card-with-border {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 12px;
+
+            img {
+                max-width: 155px;
+                max-height: 155px;
+                border-radius: 50%;
+            }
+
+            margin-left: -92px;
+        }
+    }
+
+    .take-intake {
+        color: white !important;
+        border-radius: 5px;
+        padding: 7px;
+        cursor: pointer;
+        width: 140px;
+        background: linear-gradient(263.9deg, #1FB95C 23.91%, rgba(31, 185, 92, 0.77) 132.95%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .take-intake:hover {
+        background: #fefde8 !important;
+        color: #11698E !important;
+        opacity: 0.6;
+    }
+}
+//////mobile size////////
+@media only screen and (max-width: 768px) {
+    .doctor-section {
+        .my-borderless-card {
+            width: 100% !important;
+            margin-top: 100px;
+           // margin-bottom: 100px !important;
+        }
+
+        .my-flex-card {
+
+            .card-with-border {
+                margin-left: 0px !important;
+                margin-top: -145px;
+            }
+        }
+
+        .desktop-intake-button {
+            display: none !important;
+        }
+
+        .mobile-intake-button {
+            display: block !important;
+        }
+    }
+}
+//////////////////////////////
+
+.map-bg-border {
+    //  border: 1px solid #11698E;
+    position: absolute;
+    width: 100vw;
+    margin-top: 94px;
+    border-color: #11698E;
+    opacity: 0.8;
+}
+
+.hospitan-in-doctor {
+    .card-with-border {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        padding: 12px;
+
+        img {
+            max-width: 155px;
+            max-height: 155px;
+            border-radius: 50%;
+        }
+    }
+
+    .uk-legend {
+        // margin-bottom: 20px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .map {
+        height: 240px;
+        background: url(map.png);
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border-radius: 10px;
+    }
+}
+
+.HinD-section {
+    z-index: 10;
+}
+
+.map-in-doctor {
+    width: 90%;
+}
+//////mobile size////////
+@media only screen and (max-width: 768px) {
+    .HinD-section {
+        display: none !important;
+    }
+
+    .map-in-doctor {
+        width: 100%;
+
+        .map {
+            height: 170px;
+        }
+    }
+
+    .uk-legend-mobile {
+        display: block !important;
+        color: #666;
+        font-size: 14px;
+       
+
+        span {
+            padding-bottom: 3px;
+            border-bottom: 1px solid #666;
+        }
     }
 }

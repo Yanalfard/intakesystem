@@ -132,10 +132,15 @@
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Hospital\Controllers\DoctorController.cs" />
+    <Compile Include="Areas\Hospital\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Hospital\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Hospital\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Hospital\Controllers\SettingController.cs" />
     <Compile Include="Areas\Hospital\Controllers\SpecialityController.cs" />
+    <Compile Include="Areas\Hospital\Controllers\TicketController.cs" />
     <Compile Include="Areas\Hospital\HospitalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -705,6 +710,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\marker.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Styles\Controls.css">
       <DependentUpon>Controls.scss</DependentUpon>
@@ -736,9 +742,23 @@
     <Content Include="img\formStatic\Register.svg" />
     <Content Include="img\formStatic\Login.svg" />
     <Content Include="img\formStatic\success.svg" />
+    <Content Include="img\HomeStatic\pager.svg" />
+    <Content Include="img\HomeStatic\filepic.svg" />
+    <Content Include="img\HomeStatic\USSDpic.svg" />
+    <Content Include="img\HomeStatic\Ussdback.svg" />
+    <Content Include="img\HomeStatic\Doctor.svg" />
+    <Content Include="img\HomeStatic\Hospital.svg" />
+    <Content Include="img\HomeStatic\Speciality.svg" />
+    <Content Include="img\HomeStatic\Laboratory.svg" />
     <Content Include="img\LayoutStatic\FooterBg.svg" />
+    <Content Include="img\LayoutStatic\Grey-Background.jpg" />
+    <Content Include="img\LayoutStatic\header.svg" />
     <Content Include="img\LayoutStatic\HeaderBg.svg" />
+    <Content Include="img\leaflet\marker.png" />
+    <Content Include="img\marker.png" />
     <Content Include="img\TestSample\hospitalSample.jpg" />
+    <Content Include="img\TestSample\doctor1.jpg" />
+    <Content Include="marker.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -759,6 +779,13 @@
     <Content Include="Areas\Hospital\Views\Speciality\Index.cshtml" />
     <Content Include="Areas\Hospital\Views\Speciality\PtCreate.cshtml" />
     <Content Include="Areas\Hospital\Views\Speciality\PtEdit.cshtml" />
+    <Content Include="Areas\Hospital\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Hospital\Views\Ticket\Index.cshtml" />
+    <Content Include="Areas\Hospital\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\Hospital\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Hospital\Views\Ticket\InnerTicket.cshtml" />
+    <Content Include="Areas\Hospital\Views\Order\PtSettle.cshtml" />
+    <Content Include="Areas\Hospital\Views\Order\PtInfo.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -865,6 +892,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResultChangePass.cshtml" />
     <Content Include="Views\Hospitals\Index.cshtml" />
+    <Content Include="Views\Doctor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

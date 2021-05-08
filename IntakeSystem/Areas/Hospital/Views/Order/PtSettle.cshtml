@@ -1,0 +1,36 @@
+﻿<div class="modal-header">
+    <h6 class="modal-title" id="modalCenterTitle">
+        تسویه حساب
+    </h6>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>از تاریخ: </label>
+                <input class="form-control" type="date" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+                <label>تا تاریخ: </label>
+                <input class="form-control" type="date" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="DoctorName">نام پزشک</label>
+                <select class="form-control" id="DoctorName">
+                    <option>همه پزشکان</option>
+                    <option>پزشک 1 </option>
+                    <option>پزشک 2</option>
+                    <option>پزشک 3</option>
+                    <option>پزشک 4</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer justify-content-end">
+        <button type="submit" class="btn btn-success btn-sm text-white">ثبت<span class="icon-holder uk-margin-small-right" uk-icon="checkmark-circle-outline"></span></button>
+    </div>
+</form>

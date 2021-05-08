@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "خانه";
 }
 
 <link href="~/Content/Styles/Home.min.css" rel="stylesheet" />
@@ -24,3 +24,158 @@
     </div>
 </section>
 <!--End Search-Section-->
+<!--menu grid section-->
+
+<section class="menu-grid-section ">
+    <div class="grid" dir="rtl">
+        <content class="card-with-border my-column my-center">
+            <a href="/hospitals">
+                <img class="my-center" src="~/img/HomeStatic/Hospital.svg" width="140" />
+                <label>مراکز درمانی</label>
+            </a>
+        </content>
+        <content class="card-with-border my-column my-center">
+            <a href="/Doctor">
+                <img class="my-center" src="~/img/HomeStatic/Doctor.svg" width="140" />
+                <label>پزشکان</label>
+            </a>
+        </content>
+        <content class="card-with-border my-column my-center">
+            <a onclick="showSpeciality()">
+                <img class="my-center" src="~/img/HomeStatic/Speciality.svg" width="140" />
+                <label>تخصص ها</label>
+            </a>
+        </content>
+        <content class="card-with-border my-column my-center">
+            <a href="#">
+                <img class="my-center" src="~/img/HomeStatic/Laboratory.svg" width="140" />
+                <label>آزمایشگاه ها</label>
+            </a>
+        </content>
+    </div>
+</section>
+<!--end menu grid section-->
+<!--speciality section-->
+<section id="speciality" class="speciality-section my-center d-none">
+    <div class="flex-container " dir="rtl">
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+        <div class="Speciality">
+            <span>نام تخصص</span>
+        </div>
+    </div>
+</section>
+<!--end speciality section-->
+<!--USSD section-->
+<section class="USSD-section">
+    <label class="uk-legend uk-text-bold uk-text-center mytext-darkBlue" dir="rtl">
+        <span>کدهای USSD</span>
+    </label>
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-auto-vertical">
+
+            <img class="my-center MobileSize" src="~/img/HomeStatic/USSDpic.svg" width="180" alt="picture" />
+            <p class="uk-padding">اگر شما یک طراح هستین و یا با طراحی های گرافیکی سروکار دارید به متن های برخورده اید که با نام لورم ایپسوم شناخته می‌شوند. لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) متنی ساختگی و بدون معنی است که برای امتحان فونت و یا پر کردن فضا در یک طراحی گرافیکی و یا صنعت چاپ استفاده میشود. طراحان وب و گرافیک از این متن برای پرکردن صفحه و ارائه شکل کلی طرح استفاده می‌کنند.</p>
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/HomeStatic/USSDpic.svg" width="260" alt="picture" />
+        </div>
+    </content>
+</section>
+<!--end USSD section-->
+<!--files section-->
+<section class="file-section">
+    <label class="uk-legend uk-text-bold uk-text-center mytext-darkBlue" dir="rtl">
+        <span>پرونده های الکترونیکی</span>
+    </label>
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="DesktopSize">
+            <img src="~/img/HomeStatic/filepic.svg" width="260" alt="picture" />
+        </div>
+        <div class="my-column uk-margin-auto-vertical">
+            <img class="my-center MobileSize" src="~/img/HomeStatic/filepic.svg" width="180" alt="picture" />
+            <p class="uk-padding">اگر شما یک طراح هستین و یا با طراحی های گرافیکی سروکار دارید به متن های برخورده اید که با نام لورم ایپسوم شناخته می‌شوند. لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) متنی ساختگی و بدون معنی است که برای امتحان فونت و یا پر کردن فضا در یک طراحی گرافیکی و یا صنعت چاپ استفاده میشود. طراحان وب و گرافیک از این متن برای پرکردن صفحه و ارائه شکل کلی طرح استفاده می‌کنند.</p>
+        </div>
+    </content>
+</section>
+<!--end files section-->
+<!--pager section-->
+<section class="pager-section">
+    <label class="uk-legend uk-text-bold uk-text-center mytext-darkBlue" dir="rtl">
+        <span>سیستم فراخوان صوتی</span>
+    </label>
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-auto-vertical">
+            <img class="my-center MobileSize" src="~/img/HomeStatic/pager.svg" width="180" alt="picture" />
+            <p class="uk-padding">اگر شما یک طراح هستین و یا با طراحی های گرافیکی سروکار دارید به متن های برخورده اید که با نام لورم ایپسوم شناخته می‌شوند. لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) متنی ساختگی و بدون معنی است که برای امتحان فونت و یا پر کردن فضا در یک طراحی گرافیکی و یا صنعت چاپ استفاده میشود. طراحان وب و گرافیک از این متن برای پرکردن صفحه و ارائه شکل کلی طرح استفاده می‌کنند.</p>
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/HomeStatic/pager.svg" width="260" alt="picture" />
+        </div>
+    </content>
+</section>
+<!--end pager section-->
+
+
+
+
+
+
+
+
+
+
+<script>
+    function showSpeciality() {
+        document.getElementById('speciality').classList.toggle('d-none');
+    }
+</script>

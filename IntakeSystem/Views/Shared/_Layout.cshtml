@@ -32,7 +32,7 @@
                             </a>
                         </li>
                     </ul>
-                    <!--mobile version-->
+                    <!--left header in mobile version-->
                     <ul class="uk-navbar-nav display-none mobile-header">
                         <li>
                             <a href="#modal-center" uk-toggle>
@@ -55,36 +55,33 @@
 
                     <!--filter modal-->
                     <div id="modal-center" class="uk-flex-top filter-modal" uk-modal>
-                        @*<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical filter-modal">*@
-                            <div class="filter-card my-column">
-                                <button class="uk-modal-close-default uk-margin-top uk-margin-right bg-orange-circle" type="button" uk-close></button>
-                                <div class="filter-header uk-margin-xlarge-top uk-margin-bottom my-center">محدود کردن نتایج جستجو</div>
-                                <form>
-                                    <div class="my-center">
-                                        <select class="uk-select card-with-border city" dir="rtl">
-                                            <option>انتخاب شهر</option>
-                                            <option>تبریز</option>
-                                            <option>تهران</option>
-                                        </select>
-                                    </div>
-                                    <hr class="uk-divider-icon" />
-                                    <div class="uk-text-right my-column uk-margin-right uk-margin-bottom" dir="rtl">
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
-                                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
-                                    </div>
-                                </form>
-                            </div>
-
-                        @*</div>*@
+                        <div class="filter-card my-column">
+                            <button class="uk-modal-close-default uk-margin-top uk-margin-right bg-orange-circle" type="button" uk-close></button>
+                            <div class="filter-header uk-margin-xlarge-top uk-margin-bottom my-center">محدود کردن نتایج جستجو</div>
+                            <form>
+                                <div class="my-center">
+                                    <select class="uk-select card-with-border city" dir="rtl">
+                                        <option>انتخاب شهر</option>
+                                        <option>تبریز</option>
+                                        <option>تهران</option>
+                                    </select>
+                                </div>
+                                <hr class="uk-divider-icon" />
+                                <div class="uk-text-right my-column uk-margin-right uk-margin-bottom" dir="rtl">
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
+                                    <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <!--end of mobile version-->
+                    <!--end left header in mobile version-->
                 </div>
                 <div class="uk-navbar-right" dir="rtl">
-                    <!--mobile version hamburger button and menu-->
+                    <!--mobile version hamburger button and menu (right header)-->
                     <a class="display-none mobile-header" uk-toggle="target: #offcanvas-flip">
                         <span class="bg-orange-circle" uk-icon="icon: menu;"></span>
                     </a>
@@ -106,7 +103,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="mobile-menu" href="#">
+                                    <a class="mobile-menu" href="/Doctor">
                                         <span class="bg-orange-circle" uk-icon="icon:person"></span>
                                         پزشکان
                                     </a>
@@ -126,7 +123,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!--end of mobile version-->
+                    <!--end menu section in mobile version (right header)-->
                     <ul class="uk-navbar-nav desktop-header">
                         <li class="uk-active without-line ">
                             <a href="/Home" class="orange-background ">
@@ -134,14 +131,14 @@
                                 خانه
                             </a>
                         </li>
-                        <li>
+                        <li class="uk-margin-small-right">
                             <a href="/Hospitals">
                                 <span class="" uk-icon="icon: business"></span>
                                 مراکز درمانی
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Doctor">
                                 <span class="" uk-icon="icon: person"></span>
                                 پزشکان
                             </a>

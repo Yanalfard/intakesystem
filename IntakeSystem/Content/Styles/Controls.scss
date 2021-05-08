@@ -16,8 +16,11 @@
 }
 
 body {
-   /* background: #FAFAFA !important*/;
+    /* background: #FAFAFA !important*/;
     /* min-height: 100vh;*/
+/*    background-image: url('../../img/LayoutStatic/Grey-Background.jpg') !important;
+    background-size:cover;
+    background-repeat:no-repeat;*/
 }
 //////////////////////////////
 .visible {
@@ -193,6 +196,12 @@ ul {
 
 .mytext-gray {
     color: #666 !important;
+}
+.mytext-darkBlue {
+    color: #11698E !important;
+}
+.mytext-orange {
+    color:#FFBC5A;
 }
 .gly-rotate-180 {
     -webkit-transform: rotate(180deg);
