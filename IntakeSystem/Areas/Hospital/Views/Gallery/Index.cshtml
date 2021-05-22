@@ -3,3 +3,79 @@
     ViewBag.Title = "گالری";
     Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
 }
+
+<div class="row flex-div">
+    <div class="col-md-12 flex-div pb-3 pt-3">
+        <div class="card flex-div border-0 main-shadow">
+            <div class="card-header bg-white">
+                <h4>گالری تصاویر</h4>
+            </div>
+
+            <div id="card-table" class="card-body flex-div">
+                <div class="table-responsive flex">
+                    <div class="">
+                        <fieldset class="form-group">
+                            <a class="btn btn-info p-2" href="javascript:void(0)" onclick="$('#pro-image').click()">انتخاب فایل<span class="icon-holder uk-margin-small-right" uk-icon="download-outline"></span></a>
+                            <input type="file" id="pro-image" name="pro-image" class="form-control d-none" multiple>
+                        </fieldset>
+                        <div class="preview-images-zone form-row col-10">
+                            <div class="preview-image preview-show-1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="submit" class="btn btn-success btn-sm text-white">ثبت<span class="icon-holder uk-margin-small-right" uk-icon="checkmark-circle-outline"></span></button>
+                <button  class="btn btn-danger btn-sm text-white">انصراف<span class="icon-holder uk-margin-small-right" uk-icon="close-circle-outline"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script>
+        $(document).ready(function () {
+            document.getElementById('pro-image').addEventListener('change', readImage, false);
+            $(".preview-images-zone").sortable();
+
+            $(document).on('click', '.image-cancel', function () {
+                let no = $(this).data('no');
+                $(".preview-image.preview-show-" + no).remove();
+            });
+        });
+        var num = 4;
+        function readImage() {
+            if (window.File && window.FileList && window.FileReader) {
+                var files = event.target.files; //FileList object
+                var output = $(".preview-images-zone");
+
+                for (let i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (!file.type.match('image')) continue;
+
+                    var picReader = new FileReader();
+
+                    picReader.addEventListener('load', function (event) {
+                        var picFile = event.target;
+                        var html = '<div class="preview-image preview-show-' + num + '">' +
+                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                            '<div class="image-zone"><img class="m-1 p-1" id="pro-img-' + num + '" src="' + picFile.result + '" width="200"></div>' +
+                            '</div>';
+
+                        output.append(html);
+                        num = num + 1;
+                    });
+
+                    picReader.readAsDataURL(file);
+                }
+                $("#pro-image").val('');
+            } else {
+                console.log('Browser not support');
+            }
+        }
+    </script>
+   
+    <script src="~/Scripts/jQuery UI 1.12.0.js"></script>
+
+}

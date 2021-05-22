@@ -1877,3 +1877,19 @@ table.hot-download td {
     top: 1vh;
     border-radius: 50% !important;
 }
+
+.image-cancel {
+    font-size: 18px;
+    position: relative;
+    margin-bottom: -41px;
+    padding-right:6px!important;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    /*z-index: 1000;*/
+    width: 27px;
+    /*  background: #e63328;*/
+    border-radius: 100%;
+    border: 2px solid #d93b3b;
+    color: #d93b3b;
+}

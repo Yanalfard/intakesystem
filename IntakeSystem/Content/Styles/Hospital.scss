@@ -221,7 +221,7 @@
         .my-borderless-card {
             width: 100% !important;
             margin-top: 100px;
-           // margin-bottom: 100px !important;
+            // margin-bottom: 100px !important;
         }
 
         .my-flex-card {
@@ -305,11 +305,39 @@
         display: block !important;
         color: #666;
         font-size: 14px;
-       
+
 
         span {
             padding-bottom: 3px;
             border-bottom: 1px solid #666;
         }
     }
+}
+///////////////////////////////////
+.intakeDay-section {
+    .intake-day-header {
+        .card-with-border {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            padding: 12px;
+
+            img {
+                max-width: 165px;
+                max-height: 165px;
+                border-radius: 50%;
+            }
+        }
+
+        .uk-legend {
+            color: #666;
+            font-size: 16px;
+
+            span {
+                padding-bottom: 3px;
+                border-bottom: 1px solid #666;
+            }
+        }
+    }
+
 }

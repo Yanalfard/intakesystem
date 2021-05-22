@@ -710,7 +710,12 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\marker.png" />
+    <Content Include="Content\DataPicker\jquery.md.bootstrap.datetimepicker.style.css" />
+    <Content Include="Content\datePersion\persianDatepicker-default.css" />
+    <Content Include="Content\datePersion\persianDatepicker.js" />
+    <Content Include="Content\datePersion\persianDatepicker.min.js" />
+    <Content Include="Content\datePersion\prism.js" />
+    <Content Include="Content\datePersion\prism.min.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Styles\Controls.css">
       <DependentUpon>Controls.scss</DependentUpon>
@@ -736,9 +741,18 @@
     <Content Include="Content\Styles\LoginRegister.min.css">
       <DependentUpon>LoginRegister.css</DependentUpon>
     </Content>
+    <Content Include="Content\Styles\Profile.css">
+      <DependentUpon>Profile.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Profile.min.css">
+      <DependentUpon>Profile.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
+    <Content Include="img\formStatic\doctorprofile.svg" />
     <Content Include="img\formStatic\fail.svg" />
     <Content Include="img\formStatic\ForgetPassword.svg" />
+    <Content Include="img\formStatic\UserProfile.svg" />
+    <Content Include="img\formStatic\Question.svg" />
     <Content Include="img\formStatic\Register.svg" />
     <Content Include="img\formStatic\Login.svg" />
     <Content Include="img\formStatic\success.svg" />
@@ -793,7 +807,9 @@
     <Content Include="Content\Styles\LoginRegister.scss" />
     <Content Include="Content\Styles\Home.scss" />
     <Content Include="Content\Styles\Hospital.scss" />
+    <Content Include="Content\Styles\Profile.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jQuery UI 1.12.0.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
@@ -893,6 +909,9 @@
     <Content Include="Views\Account\ResultChangePass.cshtml" />
     <Content Include="Views\Hospitals\Index.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
+    <Content Include="Views\Doctor\Profile.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home\IntakeDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

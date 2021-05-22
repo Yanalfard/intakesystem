@@ -1,0 +1,254 @@
+﻿///doctor profile section////
+///my-flex card///
+.my-flex-card {
+    display: flex;
+
+    div {
+        flex: 1;
+    }
+
+    .MobileSize {
+        display: none;
+    }
+
+    img {
+        flex: 1;
+    }
+
+    .uk-legend {
+        // margin-bottom: 20px;
+        color: #666;
+        font-size: 15px;
+
+        span {
+            padding-bottom: 3px;
+            border-bottom: 1px solid #666;
+        }
+    }
+}
+////mobile///
+@media only screen and (max-width :767px) {
+    .my-flex-card {
+        //  display: contents !important;
+
+        .MobileSize {
+            display: flex !important;
+        }
+
+        .DesktopSize {
+            display: none;
+        }
+    }
+}
+///end mobile////
+//end flex card///
+.profile-section {
+
+    .my-flex-card-doctor {
+        width: 75vw !important;
+    }
+
+    .profile-info {
+
+        ul {
+            li {
+                margin-top: 12px;
+            }
+        }
+
+        .uk-legend {
+            margin-bottom: 10px !important;
+        }
+    }
+
+    .new-intake-section {
+        margin-top: 40px;
+        background: white;
+        padding: 40px 0;
+    }
+
+    .new-intake-section {
+        .my-flex-card {
+            width: 90vw !important;
+        }
+
+        .my-flex-card-content {
+            .bg-orange-circle {
+                /* flex:0!important;*/
+                padding: 8px !important;
+                width: 35px !important;
+                height: 35px !important;
+            }
+
+            .card-with-border {
+                padding: 7px !important;
+
+                span {
+                    margin-left: 10px !important;
+                }
+            }
+        }
+
+        .bg-orange-circle:hover {
+            background: #FFAB31 !important;
+            color: white !important;
+            opacity: 1 !important;
+        }
+    }
+
+    .previous-intake-section {
+        margin-top: 40px;
+
+        .uk-legend {
+            // margin-bottom: 20px;
+            color: #666;
+            font-size: 15px;
+
+            span {
+                padding-bottom: 3px;
+                border-bottom: 1px solid #666;
+            }
+        }
+
+        overflow-x: scroll;
+
+        table {
+
+            th {
+                text-align: right;
+                background: #FFBC5A !important;
+                color: #666 !important;
+                font-weight: 600;
+            }
+        }
+    }
+}
+//////mobile version///////
+@media only screen and (max-width :767px) {
+    .my-flex-card {
+        width: 85vw !important;
+
+        .uk-legend {
+            text-align: center !important;
+            margin-right: 0 !important;
+            margin-bottom: 28px !important;
+        }
+    }
+
+    .profile-info {
+    }
+}
+////////////////////////////
+/////user profile section////
+.light-blue-button {
+    width: 230px;
+    padding: 10px 0;
+    background: linear-gradient(93.09deg, #F4F1BB -51.43%, #67B7D1 62.2%, #67B7D1 103.36%, #67B7D1 115.36%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    outline: none !important;
+    border: 1px solid #67B7D1;
+    cursor: pointer;
+    color: white !important;
+}
+
+.light-blue-button:hover {
+    background: #11698E;
+    border: 1px solid #11698E;
+    /*
+    a {
+        color: #666 !important;
+    }*/
+}
+.uk-radio:focus {
+    border-color: #11698E !important;
+}
+.user-profile-info {
+    .uk-legend {
+        padding-left: 156px;
+    }
+
+    .my-flex-card-content {
+        margin-top: 26px;
+
+        .card-with-border {
+            //width: 20vw;
+        }
+
+        .card-with-border:focus {
+            border-color: #FFAB31;
+        }
+    }
+
+    .uk-radio:checked, .uk-checkbox:checked, .uk-checkbox:indeterminate {
+        background-color: #11698E !important;
+    }
+
+    .birthDay {
+        .card-with-border {
+            width: 5vw;
+            margin: 0 3px;
+        }
+
+        margin-left: 0;
+    }
+
+    .gender-label {
+        padding-left: 156px;
+    }
+}
+.new-message {
+    margin-top: 8px;
+    background: linear-gradient(284.48deg, #11698E 33.98%, #60C7E9 114.95%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    color: white;
+    padding: 8px 15px 8px 158px;
+    min-height: 1px;
+    max-height: 40px;
+    height: 40px;
+}
+.new-message:hover {
+        background: #fefde8 !important;
+        color: #11698E !important;
+        opacity: 0.6;
+    }
+.new-message-container {
+    .uk-badge {
+        margin-top: -15px;
+        margin-left: -8px;
+        z-index:100;
+    }
+}
+//////mobile version///////
+@media only screen and (max-width :767px) {
+    .uk-legend {
+        padding-left: 0 !important;
+    }
+
+    .my-flex-card-content {
+        .card-with-border {
+            width: 80vw !important;
+        }
+    }
+
+    .birthDay {
+        .card-with-border {
+            width: 25vw !important;
+        }
+    }
+    .new-message-container {
+        text-align: center;
+        align-content: center;
+        align-self: center;
+        margin-right: 0 !important;
+        float: unset !important;
+    }
+    .gender-label {
+        padding-left: 0!important;
+        float:right!important;
+    }
+    .light-blue-button {
+        width: 80vw;
+    }
+    }

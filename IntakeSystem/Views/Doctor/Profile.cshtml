@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "پروفایل پزشک";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/Profile.min.css" rel="stylesheet" />
+<section class="profile-section ">
+    <content class="profile-info my-flex-card my-flex-card-doctor my-row my-center" dir="rtl">
+        <div class="my-column my-borderless-card">
+            <label class="uk-legend uk-text-bold uk-margin-top uk-text-right uk-margin-right">
+                <span>پروفایل پزشک</span>
+            </label>
+            <div class="my-center MobileSize">
+                <img src="~/img/formStatic/doctorprofile.svg" width="180" alt="picture" />
+            </div>
+            <ul class="uk-text-right uk-margin-right">
+                <li class="uk-margin-small-top">
+                    <span class="mytext-darkBlue" uk-icon="icon: person"></span>
+                    <span class="mytext-darkBlue">نام و نام خانوادگی: </span>
+                    <span>علی رضایی</span>
+                </li>
+                <li>
+                    @* <hr class="uk-divider-icon" />*@
+                    <span class="gly-rotate-270 mytext-darkBlue" uk-icon="icon: call"></span>
+                    <span class="mytext-darkBlue">شماره تماس: </span>
+                    <span>25962651</span>
+                </li>
+                <li class="uk-margin-small-top">
+                    <span class="mytext-darkBlue" uk-icon="icon: person-circle"></span>
+                    <span class="mytext-darkBlue">کد ملی: </span>
+                    <span>89565685412</span>
+                </li>
+                <li class="uk-margin-small-top">
+                    <span class="mytext-darkBlue" uk-icon="icon: male-female"></span>
+                    <span class="mytext-darkBlue">جنسیت: </span>
+                    <span>مرد</span>
+                </li>
+                <li class="uk-margin-small-top">
+                    <span class="text-danger" uk-icon="icon: location"></span>
+                    <span class="text-danger">آدرس: </span>
+                    <span>تبریز- آبرسان-13 ابان</span>
+                </li>
+            </ul>
+        </div>
+        <div class="DesktopSize uk-margin-auto-vertical my-center">
+            <img src="~/img/formStatic/doctorprofile.svg" width="360" alt="picture" />
+        </div>
+    </content>
+    <section class="new-intake-section">
+        <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+            <div class="my-column new-intake-content">
+                <label class="uk-legend uk-text-bold uk-margin-medium-bottom">
+                    <span>نوبت رزرو شده جدیدی دارید؟ </span>
+                </label>
+                <img class="my-center MobileSize" src="~/img/formStatic/Question.svg" width="250" alt="picture" />
+                <div class="my-flex-card-content">
+
+                    <!--each new intake section-->
+                    <div class="my-column uk-margin-top">
+                        <div class="my-row">
+                            <span class="bg-orange-circle">1</span>
+                            <div class="card-with-border uk-text-right">
+                                <span>بیمارستان امام رضا</span>
+                                <span>09145548456</span>
+                                <span>دوشنبه 24 اردیبهشت</span>
+                                <span>15-16</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end each new intake section-->
+
+                </div>
+            </div>
+            <div class="DesktopSize uk-margin-auto-vertical">
+                <img src="~/img/formStatic/Question.svg" width="300" alt="picture" />
+            </div>
+        </content>
+        <ul class="uk-pagination uk-flex-center uk-margin-top">
+            <li><a href="#"><span uk-pagination-previous></span></a></li>
+            <li class="uk-active"><span>1</span></li>
+            <li class="uk-disabled"><span>...</span></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#"><span uk-pagination-next></span></a></li>
+        </ul>
+    </section>
+    <section class="previous-intake-section my-clipped">
+        <label class="uk-legend uk-text-bold uk-margin-bottom uk-text-center">
+            <span>لیست ویزیت های قبلی </span>
+        </label>
+        <table class="uk-table uk-table-striped uk-text-right uk-border-rounded" dir="rtl">
+            <thead class="uk-border-rounded uk-text-bold">
+                <tr>
+                    <th>شماره تماس بیمار</th>
+                    <th>نام مرکز درمانی</th>
+                    <th>تاریخ ثبت نوبت</th>
+                    <th>زمان ویزیت</th>
+                    <th>مبلغ پرداختی</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>09145846953</td>
+                    <td>امام رضا</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>09145846953</td>
+                    <td>امام رضا</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>09145846953</td>
+                    <td>امام رضا</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>09145846953</td>
+                    <td>امام رضا</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>09145846953</td>
+                    <td>امام رضا</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="uk-pagination uk-flex-center uk-margin-top">
+            <li><a href="#"><span uk-pagination-previous></span></a></li>
+            <li class="uk-active"><span>1</span></li>
+            <li class="uk-disabled"><span>...</span></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#"><span uk-pagination-next></span></a></li>
+        </ul>
+    </section>
+</section>
+

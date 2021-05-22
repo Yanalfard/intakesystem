@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "دریافت نوبت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
+
+<section class="intakeDay-section my-clipped uk-margin-medium-bottom">
+    <div class="uk-text-center" uk-grid dir="rtl">
+        <div class="uk-width-1-4 filter-section">
+            <div class="filter-card my-column">
+                <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
+                <form>
+                    <div class="">
+                        <select class="uk-select card-with-border city">
+                            <option>انتخاب شهر</option>
+                            <option>تبریز</option>
+                            <option>تهران</option>
+                        </select>
+                    </div>
+                    <hr class="uk-divider-icon" />
+                    <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr class="uk-divider-vertical uk-margin-remove">
+        <div class="uk-width-expand">
+            <!--start tabel section-->
+            <div class="my-row intake-day-header">
+                <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right">
+                    <span>انتخاب روز ویزیت</span>
+                </label>
+                <div class="uk-margin-auto-vertical my-column">
+                    <div class="card-with-border my-center">
+                        <img src="~/img/TestSample/doctor1.jpg" alt="picture" />
+                    </div>
+                    <span class="uk-margin-small-top">نام پزشک</span>
+                </div>
+            </div>
+            <div class="my-borderless-card uk-margin-medium-bottom">
+
+            </div>
+            <!--end section-->
+            <input id="Date" class="form-control uk-text-small" type="text" placeholder="از تاریخ  " value="">
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+    $(function () {
+        //selectedBefor & selectedDate
+        $("#Date").persianDatepicker();
+        /*$("#endDate").persianDatepicker();*/
+    });
+</script>
+<link href="~/Content/datePersion/persianDatepicker-default.css" rel="stylesheet" />
+<script src="~/Content/datePersion/persianDatepicker.js"></script>
+<script src="~/Content/datePersion/persianDatepicker.min.js"></script>
+<script src="~/Content/datePersion/prism.js"></script>
+<script src="~/Content/datePersion/prism.min.js"></script>
+<link href="~/Content/DataPicker/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet" />

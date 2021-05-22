@@ -404,3 +404,25 @@ ul {
         }
     }
 }
+///////my-profile section//////////
+.my-profile {
+    padding: 0 0 0 20px;
+    border-radius: 40px;
+
+    .bg-orange-circle {
+        background: #11698E;
+    }
+}
+.my-profile:hover {
+    .bg-orange-circle {
+        background: #fefde8 !important;
+        color: #11698E !important;
+        opacity: 0.6;
+    }
+}
+////mobile size///
+@media only screen and (max-width :767px) {
+    .my-profile{
+        display:none;
+    }
+}

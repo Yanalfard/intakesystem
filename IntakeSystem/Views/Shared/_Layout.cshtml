@@ -18,6 +18,15 @@
         <div class="uk-position-top">
             <nav class="uk-margin-medium-top navbar-section" uk-navbar>
                 <div class="uk-navbar-left" dir="rtl">
+
+                    <!--my profile ( if loged in)-->
+                    @*<a class="uk-margin-left mytext-gray my-profile card-with-border bg-transparent" href="">
+                            <span class="bg-orange-circle" uk-icon="icon: person-circle"></span>
+                            پروفایل من
+                        </a>*@
+                    <!-- end my profile ( if loged in)-->
+
+
                     <ul class="uk-navbar-nav desktop-header">
                         <li>
                             <a href="/Account/Login">
@@ -36,12 +45,12 @@
                     <ul class="uk-navbar-nav display-none mobile-header">
                         <li>
                             <a href="#modal-center" uk-toggle>
-                                <span class="" uk-icon="icon:funnel;"></span>
+                                <span class="" uk-icon="icon:funnel"></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="" uk-icon="icon: person;"></span>
+                                <span class="" uk-icon="icon: person"></span>
                             </a>
                             <div class="uk-navbar-dropdown uk-border-rounded">
                                 <ul class="uk-nav uk-navbar-dropdown-nav uk-text-right">
@@ -83,7 +92,7 @@
                 <div class="uk-navbar-right" dir="rtl">
                     <!--mobile version hamburger button and menu (right header)-->
                     <a class="display-none mobile-header" uk-toggle="target: #offcanvas-flip">
-                        <span class="bg-orange-circle" uk-icon="icon: menu;"></span>
+                        <span class="bg-orange-circle" uk-icon="icon: menu"></span>
                     </a>
                     <div class="hidden mobile-header-menu" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
                         <div class="uk-offcanvas-bar">
@@ -109,13 +118,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="mobile-menu" href="#">
+                                    <a onclick="showSpecialityHead()" class="mobile-menu" href="/Home#SpecialitySection">
                                         <span class="bg-orange-circle" uk-icon="icon: pulse"></span>
                                         تخصص ها
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="mobile-menu" href="#">
+                                    <a class="mobile-menu" href="/Hospitals">
                                         <span class="bg-orange-circle" uk-icon="icon: flask"></span>
                                         آزمایشگاه ها
                                     </a>
@@ -144,14 +153,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a onclick="showSpecialityHead()" href="/Home#SpecialitySection">
                                 <span class="" uk-icon="icon: pulse"></span>
                                 تخصص ها
                             </a>
                         </li>
                         <li class="without-line">
 
-                            <a href="#">
+                            <a href="/Hospitals">
                                 <span class="" uk-icon="icon: flask"></span>
                                 آزمایشگاه ها
                             </a>
@@ -222,6 +231,11 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Areas/Admin/Resource/js/uikit.min.js"></script>
     <script src="~/Areas/Admin/Resource/js/uikit-icons.js"></script>
+    <script>
+        function showSpecialityHead() {
+            document.getElementById('speciality').classList.remove('d-none');
+        }
+    </script>
 
 </body>
 </html>

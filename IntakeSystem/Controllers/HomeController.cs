@@ -21,5 +21,14 @@ namespace IntakeSystem.Controllers
 
             return View();
         }
+        public ActionResult UserProfile()
+        {
+
+            return View();
+        }
+        public ActionResult IntakeDay()
+        {
+            return View();
+        }
     }
 }

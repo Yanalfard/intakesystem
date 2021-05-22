@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "پروفایل کاربر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/Profile.min.css" rel="stylesheet" />
+<section class="profile-section">
+    <content class="profile-info user-profile-info my-flex-card  my-center" dir="rtl">
+        <div class="my-column">
+            <label class="uk-legend uk-text-bold uk-margin-top ">
+                <span>پروفایل کاربر</span>
+            </label>
+            <div class="my-center MobileSize">
+                <img src="~/img/formStatic/UserProfile.svg" width="200" alt="picture" />
+            </div>
+            <form class="my-flex-card-content">
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
+                            <input class="uk-input card-with-border" type="text" placeholder="نام و نام خانوادگی">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
+                            <input class="uk-input card-with-border" type="tel" placeholder="شماره تماس">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person-circle"></span>
+                            <input class="uk-input card-with-border" type="number" placeholder="کد ملی">
+                        </div>
+                    </div>
+                    <label class="input-label uk-legend uk-margin-remove-bottom">جنسیت: </label>
+                    <div class="gender-label">
+                        <div class="uk-flex-inline">
+                            <input class="uk-radio" type="radio" name="gender">
+                            <label class="pl-1">زن</label>
+                        </div>
+                        <br />
+                        <div class="uk-flex-inline">
+                            <input class="uk-radio" type="radio" name="gender">
+                            <label>مرد</label>
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="input-label uk-legend">تاریخ تولد: </label>
+                        <br />
+                        <div class="uk-inline uk-grid birthDay">
+                            <input class="uk-input card-with-border" type="number" placeholder="1352">
+                            <input class="uk-input card-with-border" type="number" placeholder="02">
+                            <input class="uk-input card-with-border" type="number" placeholder="05">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:location"></span>
+                            <input class="uk-input card-with-border" type="text" placeholder="تبریز- آبرسان-خیابان فلان">
+                        </div>
+                    </div>
+                    <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
+                        ویرایش اطلاعات
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="DesktopSize uk-margin-auto-vertical my-center">
+            <img src="~/img/formStatic/UserProfile.svg" width="420" alt="picture" />
+        </div>
+    </content>
+    <section class="new-intake-section">
+        <content class="my-flex-card  my-clipped my-center" dir="rtl">
+            <div class="DesktopSize uk-margin-auto-vertical">
+                <img src="~/img/formStatic/Question.svg" width="300" alt="picture" />
+            </div>
+            <div class="my-column new-intake-content">
+                <label class="uk-legend uk-text-bold uk-margin-medium-bottom uk-text-right uk-margin-right">
+                    <span>نوبت رزرو شده جدیدی دارید؟ </span>
+                </label>
+                <img class="my-center MobileSize" src="~/img/formStatic/Question.svg" width="250" alt="picture" />
+                <!--each new intake section-->
+                <div class="my-flex-card-content my-column uk-text-right  uk-margin-bottom filter-card uk-padding-small">
+                    <label>
+                        <span></span>
+                        <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                        <span>
+                            نام مرکز درمانی:
+                        </span>
+                        <span>
+                            بیمارستان امام رضا
+                        </span>
+                    </label>
+                    <label>
+                        <span></span>
+                        <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                        <span>
+                            نام دکتر:
+                        </span>
+                        <span>
+                            رضا رضایی
+                        </span>
+                    </label>
+                    <label>
+                        <span></span>
+                        <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                        <span>
+                            تاریخ ثبت نوبت:
+                        </span>
+                        <span>
+                            25 فروردین
+                        </span>
+                    </label>
+                    <label>
+                        <span></span>
+                        <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                        <span>
+                            زمان ویزیت:
+                        </span>
+                        <span>
+                            14-15
+                        </span>
+                    </label>
+                </div>
+                <!--end each new intake section-->
+            </div>
+        </content>
+        <hr />
+        <div class="new-message-container uk-float-right uk-margin-right">
+            <span class="uk-badge bg-danger absolute">1</span>
+            <a class="new-message uk-margin-bottom">پیام جدید <span uk-icon="mail"></span></a>
+
+        </div>
+    </section>
+    <section class="previous-intake-section my-clipped">
+        <label class="uk-legend uk-text-bold uk-margin-bottom uk-text-center">
+            <span>لیست ویزیت های قبلی </span>
+        </label>
+        <table class="uk-table uk-table-striped uk-text-right uk-border-rounded" dir="rtl">
+            <thead class="uk-border-rounded uk-text-bold">
+                <tr>
+                    <th>نام مرکز درمانی</th>
+                    <th>نام پزشک</th>
+                    <th>تاریخ ثبت نوبت</th>
+                    <th>زمان ویزیت</th>
+                    <th>مبلغ پرداختی</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>امام رضا</td>
+                    <td>رضا رضایی</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>امام رضا</td>
+                    <td>رضا رضایی</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+                <tr>
+                    <td>امام رضا</td>
+                    <td>رضا رضایی</td>
+                    <td>فلان تاریخ</td>
+                    <td>25اردیبهشت</td>
+                    <td>255555</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <ul class="uk-pagination uk-flex-center uk-margin-top">
+            <li><a href="#"><span uk-pagination-previous></span></a></li>
+            <li class="uk-active"><span>1</span></li>
+            <li class="uk-disabled"><span>...</span></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#"><span uk-pagination-next></span></a></li>
+        </ul>
+    </section>
+</section>
+
+
