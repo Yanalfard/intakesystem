@@ -30,5 +30,30 @@ namespace IntakeSystem.Controllers
         {
             return View();
         }
+        public ActionResult ConfirmInformation()
+        {
+            return View();
+        }
+        public ActionResult OrderResult()
+        {
+            return View();
+        }
+        public ActionResult NewMessage()
+        {
+            return View();
+        }
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+        public ActionResult ContactUs()
+        {
+            return View();
+        }
+        public ActionResult Rules()
+        {
+            return View();
+        }
+        
     }
 }

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "تایید اطلاعات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<link href="~/Content/Styles/Information.min.css" rel="stylesheet" />
+<section class="confirm-information-section">
+    <label class="uk-legend uk-text-bold uk-text-right">
+        <span>تایید اطلاعات و ثبت نوبت</span>
+    </label>
+    <div class="my-borderless-card uk-margin-medium-bottom">
+        <content class="my-flex-card my-row my-center" dir="rtl">
+            <div class="my-column">
+                <div class="my-center MobileSize">
+                    <div class="my-center">
+                        <img src="~/img/formStatic/ConfirmInfo.svg" alt="picture"/>
+                    </div>
+                </div>
+                <div class="my-center information">
+                    <ul class="uk-text-right uk-margin-large-right uk-margin-medium-top">
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: person-outline"></span>
+                            <span class="mytext-darkBlue uk-text-bold">نام و نام خانوادگی: </span>
+                            <span>علی رضایی</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="gly-rotate-270 mytext-darkBlue" uk-icon="icon: call"></span>
+                            <span class="mytext-darkBlue uk-text-bold">شماره تماس: </span>
+                            <span>25962651</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: male-female"></span>
+                            <span class="mytext-darkBlue uk-text-bold">جنسیت: </span>
+                            <span>مرد</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: business"></span>
+                            <span class="mytext-darkBlue uk-text-bold">نام بیمارستان: </span>
+                            <span>امام رضا</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: person"></span>
+                            <span class="mytext-darkBlue uk-text-bold">نام دکتر: </span>
+                            <span>رضا صادقی</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: calendar-outline"></span>
+                            <span class="mytext-darkBlue uk-text-bold">تاریخ ثبت نوبت: </span>
+                            <span>25 فروردین</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: time-outline"></span>
+                            <span class="mytext-darkBlue uk-text-bold">زمان ویزیت: </span>
+                            <span>13-14</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue" uk-icon="icon: card-outline"></span>
+                            <span class="mytext-darkBlue uk-text-bold">مبلغ قابل پرداخت: </span>
+                            <span class="text-success">20000</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="DesktopSize uk-margin-auto-vertical my-center">
+                <div class="my-center">
+                    <img src="~/img/formStatic/ConfirmInfo.svg" alt="picture" />
+                </div>
+            </div>
+        </content>
+        @*<div class="uk-margin-bottom">*@
+            <div class="my-row info-buttons my-center" dir="rtl">
+                <a class="confirm-darkBlue">تایید و پرداخت</a>
+                <a class="reject-orange">انصراف</a>
+            </div>
+       @*  *@ <!--</div>-->
+    </div>
+
+</section>

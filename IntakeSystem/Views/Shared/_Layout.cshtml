@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
+
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Areas/Admin/Resource/css/uikit.min.css" rel="stylesheet" />
     <link href="~/Content/Styles/Controls.min.css" rel="stylesheet" />
@@ -202,18 +203,18 @@
                         <div class="uk-navbar-right" dir="rtl">
                             <ul class="uk-navbar-nav">
                                 <li class="uk-active without-line uk-margin-left">
-                                    <a href="#" class="orange-background">
+                                    <a href="/Home/ContactUs" class="orange-background">
                                         تماس با ما
                                     </a>
 
                                 </li>
                                 <li class="uk-active without-line ">
-                                    <a href="#" class="orange-background">
+                                    <a href="/Home/AboutUs" class="orange-background">
                                         درباره ما
                                     </a>
                                 </li>
                                 <li class="without-line">
-                                    <a class="mytext-white uk-margin-small-right" href="#">
+                                    <a class="mytext-white uk-margin-small-right" href="/home/Rules">
                                         قوانین
                                     </a>
                                 </li>
@@ -226,11 +227,15 @@
             <!--end footer section-->
         </footer>
     </div>
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+  @*  <script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Areas/Admin/Resource/Jquery/modal.js"></script>
+<script src="~/Areas/Admin/Resource/Jquery/popper.min.js"></script>
+    <link href="~/Content/datePersion/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Areas/Admin/Resource/js/uikit.min.js"></script>
     <script src="~/Areas/Admin/Resource/js/uikit-icons.js"></script>
+    
     <script>
         function showSpecialityHead() {
             document.getElementById('speciality').classList.remove('d-none');

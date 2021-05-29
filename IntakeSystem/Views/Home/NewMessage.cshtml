@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "پیام جدید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/Styles/Information.min.css" rel="stylesheet" />
+<section class="confirm-information-section">
+    <label class="uk-legend uk-text-bold uk-text-right">
+        <span>پیام جدید</span>
+    </label>
+    <div class="my-borderless-card uk-margin-medium-bottom">
+        <content class=" my-column my-center" dir="rtl">
+            <div class="my-column">
+                <div class="my-center">
+                    <div class="my-center uk-margin-medium-top">
+                        <img src="~/img/formStatic/NewMessage.svg" width="220" alt="picture" />
+                    </div>
+                </div>
+                <div class="my-center information pb-5">
+                    <ul class="uk-text-right uk-margin-medium-top uk-margin-medium-bottom">
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue uk-text-bold">عنوان پیام: </span>
+                            <span>نسخه بیمار</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue uk-text-bold">نام بیمارستان: </span>
+                            <span>امام رضا</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue uk-text-bold">نام دکتر: </span>
+                            <span>رضا رضایی</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue uk-text-bold">تاریخ ویزیت: </span>
+                            <span>12 خرداد</span>
+                        </li>
+                        <li class="uk-margin-small-top">
+                            <span class="mytext-darkBlue uk-text-bold">زمان ویزیت: </span>
+                            <span>10-12</span>
+                        </li>
+                    </ul>
+                    <a class="confirm-darkBlue confirm-darkBlue-msg"><span class="" uk-icon="icon: download-outline"></span> دانلود فایل دریافتی </a>
+                </div>
+            </div>
+        </content>
+      
+    </div>
+
+</section>

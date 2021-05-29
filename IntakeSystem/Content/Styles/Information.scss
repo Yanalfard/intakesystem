@@ -1,0 +1,132 @@
+﻿.confirm-information-section {
+    .uk-legend {
+        //   padding-left: 790px;
+        margin-bottom: 40px;
+        color: #666;
+        font-size: 16px;
+        width: 84vw;
+
+        span {
+            padding-bottom: 3px;
+            border-bottom: 1px solid #666;
+        }
+    }
+
+    .my-borderless-card {
+        margin-left: auto;
+        margin-right: auto;
+        width: 70vw;
+    }
+
+    .my-flex-card {
+        display: flex;
+
+        .my-flex-card-content {
+            flex: 1;
+        }
+
+        .MobileSize {
+            display: none;
+            height: 250px;
+            width: 250px;
+        }
+
+        .DesktopSize {
+            flex: 1;
+            height: 360px;
+            width: 360px;
+        }
+    }
+
+    .confirm-darkBlue {
+        /*  margin: 20px;
+        margin-right:auto;*/
+        margin: 0 auto 26px 5px;
+        background: linear-gradient(284.48deg, #11698E 33.98%, #60C7E9 114.95%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+        color: white;
+        padding: 8px 0px;
+        width: 120px !important;
+        text-align: center !important;
+        min-height: 1px;
+        max-height: 40px;
+        height: 40px;
+    }
+
+    .confirm-darkBlue-msg {
+        padding: 8px 30px;
+    }
+
+    .confirm-darkBlue:hover, .reject-orange:hover {
+        background: #fefde8 !important;
+        color: #11698E !important;
+        opacity: 0.6;
+    }
+
+    .reject-orange {
+        margin: 0 5px 26px 150px;
+        background: linear-gradient(268.52deg, #ED6A5A -1.76%, #F2A365 29.84%, #FFBC5A 110.8%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 3px;
+        color: white;
+        padding: 8px 0px;
+        width: 120px !important;
+        text-align: center !important;
+        min-height: 1px;
+        max-height: 40px;
+        height: 40px;
+    }
+}
+////mobile size////////
+@media only screen and (max-width: 767px) {
+
+    .my-flex-card {
+        display: contents !important;
+
+        .MobileSize {
+            display: flex !important;
+        }
+
+        .DesktopSize {
+            display: none;
+        }
+    }
+
+    .confirm-information-section {
+        .my-borderless-card {
+            width: 85vw;
+        }
+
+        .information {
+            ul {
+                margin-right: 0 !important;
+                margin-top: 0 !important;
+            }
+        }
+
+        .uk-legend {
+            padding-left: 0 !important;
+            text-align: center !important;
+            width: 100vw;
+        }
+
+        .info-buttons {
+            display: flex;
+            -ms-flex-direction: column;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -ms-align-content: center;
+            -webkit-align-content: center;
+            align-content: center;
+            text-align: center;
+            align-self: center;
+            margin: 0 auto !important;
+
+            .confirm-darkBlue, .reject-orange {
+                margin-right: auto !important;
+                margin-left: auto !important;
+            }
+        }
+    }
+}

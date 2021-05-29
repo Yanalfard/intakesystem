@@ -18,5 +18,13 @@
   {
     "outputFile": "Content/Styles/Profile.css",
     "inputFile": "Content/Styles/Profile.scss"
+  },
+  {
+    "outputFile": "Content/Styles/IntakeDay.css",
+    "inputFile": "Content/Styles/IntakeDay.scss"
+  },
+  {
+    "outputFile": "Content/Styles/Information.css",
+    "inputFile": "Content/Styles/Information.scss"
   }
 ]

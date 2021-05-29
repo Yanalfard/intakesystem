@@ -5,8 +5,41 @@
 }
 
 <link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
+<link href="~/Content/jalalidatepicker.css" rel="stylesheet" />
+<script src="~/Content/jalalidatepicker.js"></script>
+@*<link href="~/Content/Styles/IntakeDay.min.css" rel="stylesheet" />*@
+
 
 <section class="intakeDay-section my-clipped uk-margin-medium-bottom">
+    <!--doctor name in intake day section-->
+    <div class="uk-text-center" uk-grid dir="rtl">
+        <!--<div class="uk-width-1-4 d-none">-->
+            <!--empty-->
+        <!--</div>-->
+        <div class="uk-width-expand intake-header-section">
+            <!--doctor name-->
+            <div class="my-row intake-day-header" dir="ltr">
+                <div class="uk-margin-auto-vertical my-column">
+                    <div class="card-with-border my-center">
+                        <img src="~/img/TestSample/doctor1.jpg" alt="picture" />
+                    </div>
+                    <span class="uk-margin-small-top">نام پزشک</span>
+                </div>
+                <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right cursor-pointer" dir="rtl">
+                    <span class="mytext-orange" uk-icon="icon: calendar"></span>
+                    <span>انتخاب روز ویزیت</span>
+                    <input  id="VisitDay" @*onchange="VisitTime()"*@ class="uk-input card-with-border uk-text-success intake-day-input" type="text" placeholder="مشاهده تقویم زمانی" data-jdp>
+                   
+                </label>
+                @*<div class="uk-inline">
+                        <a class="uk-form-icon uk-form-icon-flip mytext-orange" uk-icon="icon: calendar"></a>
+                    </div>*@
+            </div>
+            @*  *@
+            <!--end section-->
+        </div>
+    </div>
+    <!--end doctor name in intake day section-->
     <div class="uk-text-center" uk-grid dir="rtl">
         <div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
@@ -26,47 +59,113 @@
                         <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
                         <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
                         <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
                     </div>
                 </form>
             </div>
         </div>
         <hr class="uk-divider-vertical uk-margin-remove">
         <div class="uk-width-expand">
-            <!--start tabel section-->
-            <div class="my-row intake-day-header">
-                <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right">
-                    <span>انتخاب روز ویزیت</span>
-                </label>
-                <div class="uk-margin-auto-vertical my-column">
-                    <div class="card-with-border my-center">
-                        <img src="~/img/TestSample/doctor1.jpg" alt="picture" />
+
+            <div class="my-borderless-card uk-margin-medium-bottom">
+                <calendar></calendar>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="intake-modal-section">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <!--visit time-->
+            <div class="my-column my-center">
+                <div class="visit-time-header uk-text-center mytext-gray">تعیین زمان ویزیت برای دکتر <span>نام دکتر</span></div>
+                <div class="my-row intake-day-header uk-margin-top" dir="ltr">
+                    <div class="uk-margin-auto-vertical my-column">
+                        <div class="card-with-border my-center">
+                            <img src="~/img/TestSample/doctor1.jpg" alt="picture" />
+                        </div>
+                        <span class="uk-margin-small-top">نام پزشک</span>
                     </div>
-                    <span class="uk-margin-small-top">نام پزشک</span>
+                    <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right" dir="rtl">
+                        <span>تخصص دکتر</span>
+                        <br />
+                        <br />
+                        <span>روز ویزیت</span>
+                    </label>
+                </div>
+                <div class="flex-container my-center" dir="rtl">
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>10-11</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>11-12</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>12-13</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>13-14</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>14-15</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>15-16</span>
+                    </a>
+                    <a href="/Home/ConfirmInformation" class="VisitTime">
+                        <span>16-17</span>
+                    </a>
                 </div>
             </div>
-            <div class="my-borderless-card uk-margin-medium-bottom">
 
-            </div>
-            <!--end section-->
-            <input id="Date" class="form-control uk-text-small" type="text" placeholder="از تاریخ  " value="">
         </div>
 
     </div>
-
 </section>
 
-
 <script>
-    $(function () {
-        //selectedBefor & selectedDate
-        $("#Date").persianDatepicker();
-        /*$("#endDate").persianDatepicker();*/
+    jalaliDatepicker.startWatch({
+        //minDate: "attr",//میتوان استفاده نکرد
+        //maxDate: "attr" //میتوان استفاده نکرد
+        /*  autoShow: "false",*/
+        /*autoHide: "false",*/
+        //container: "section",
+        days: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"],
+        showTodayBtn: "false",
+        showEmptyBtn: "false",
+        /* selector: "div[data-jdp]",*/
+        container: "calendar",
+        //container:"jdp-container",
     });
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var input = document.getElementById("VisitDay");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    input.onchange = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
 </script>
-<link href="~/Content/datePersion/persianDatepicker-default.css" rel="stylesheet" />
-<script src="~/Content/datePersion/persianDatepicker.js"></script>
-<script src="~/Content/datePersion/persianDatepicker.min.js"></script>
-<script src="~/Content/datePersion/prism.js"></script>
-<script src="~/Content/datePersion/prism.min.js"></script>
-<link href="~/Content/DataPicker/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet" />

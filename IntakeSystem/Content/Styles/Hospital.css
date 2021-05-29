@@ -192,13 +192,13 @@
       border-bottom: 1px solid #666; } }
 
 .intakeDay-section .intake-day-header .card-with-border {
-  width: 190px;
-  height: 190px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   padding: 12px; }
   .intakeDay-section .intake-day-header .card-with-border img {
-    max-width: 165px;
-    max-height: 165px;
+    max-width: 125px;
+    max-height: 125px;
     border-radius: 50%; }
 
 .intakeDay-section .intake-day-header .uk-legend {
@@ -207,3 +207,103 @@
   .intakeDay-section .intake-day-header .uk-legend span {
     padding-bottom: 3px;
     border-bottom: 1px solid #666; }
+
+.intakeDay-section .intake-day-header .intake-day-input {
+  border-radius: 20px !important;
+  height: 5px !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  margin-top: 7px !important;
+  cursor: pointer; }
+
+.intake-modal-section {
+  /* The Modal (background) */
+  /* Modal Content */
+  /* The Close Button */ }
+  .intake-modal-section .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: black;
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */ }
+  .intake-modal-section .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    width: 80%; }
+    .intake-modal-section .modal-content .card-with-border {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      padding: 12px; }
+      .intake-modal-section .modal-content .card-with-border img {
+        max-width: 125px;
+        max-height: 125px;
+        border-radius: 50%; }
+    .intake-modal-section .modal-content .uk-legend {
+      color: #666;
+      font-size: 16px; }
+    .intake-modal-section .modal-content .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 64vw; }
+      .intake-modal-section .modal-content .flex-container .VisitTime {
+        margin: 10px;
+        background: #67B7D1;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        color: white;
+        padding: 8px 32px;
+        min-height: 1px;
+        max-height: 40px;
+        height: 40px; }
+      .intake-modal-section .modal-content .flex-container .VisitTime:hover {
+        background: #fefde8 !important;
+        color: #11698E !important;
+        opacity: 0.6; }
+  .intake-modal-section .visit-time-header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70vw;
+    background: #FFBC5A;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 14px 0;
+    border-radius: 5px; }
+  .intake-modal-section .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold; }
+  .intake-modal-section .close:hover,
+  .intake-modal-section .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer; }
+
+@media only screen and (max-width: 768px) {
+  .intakeDay-section .intake-day-header, .intake-modal-section .intake-day-header {
+    display: flex !important;
+    -ms-flex-direction: column !important;
+    -webkit-flex-direction: column !important;
+    flex-direction: column !important;
+    -ms-align-content: center !important;
+    -webkit-align-content: center !important;
+    align-content: center !important; }
+    .intakeDay-section .intake-day-header .uk-legend, .intake-modal-section .intake-day-header .uk-legend {
+      text-align: center !important; } }

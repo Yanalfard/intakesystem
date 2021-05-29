@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "OrderResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Styles/LoginRegister.min.css" rel="stylesheet" />
+<section class="result-section">
+
+    <!--success msg-->
+
+    @*<content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-auto-vertical">
+            <img class="my-center MobileSize" src="~/img/formStatic/success.svg" width="180" alt="picture" />
+            <label class="result-msg"><span class="text-success" uk-icon="icon:checkmark-circle"></span> تایید پرداخت و ثبت نوبت برای شما </label>
+            <label class="result-msg uk-margin-top"><span class="text-success" uk-icon="icon:checkmark-circle"></span> کد پیگیری شما: <span>87456846</span> </label>
+            <button onclick="location.href='/Home'" class="light-blue-button my-center uk-margin-top">
+                برگشت به خانه
+            </button>
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/formStatic/success.svg" width="260" alt="picture" />
+        </div>
+    </content>*@
+
+    <!--fail msg-->
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-auto-vertical">
+            <img class="my-center MobileSize" src="~/img/formStatic/fail.svg" width="250" alt="picture" />
+            <label class="result-msg"><span class="text-danger" uk-icon="icon:close-circle"></span> خطا رخ داده است.</label>
+            <button onclick="location.href='/Doctor'" class="light-blue-button my-center uk-margin-top">
+                برگشت به صفحه پزشک
+            </button>
+        </div>
+            <div class="DesktopSize">
+                <img src="~/img/formStatic/fail.svg" width="250" alt="picture" />
+            </div>
+        </content>
+
+
+</section>
+
+
