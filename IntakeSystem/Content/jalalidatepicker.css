@@ -10,7 +10,7 @@ jdp-container {
     /*position:static!important;*/
     /*max-width: 307.875px;*/
     position: page !important;
-    /*background: #fff;*/
+    background: #fff;
     display: block;
     direction: rtl;
     padding: 1rem 1.5rem;
@@ -47,11 +47,29 @@ jdp-container {
             border-radius: 4px;
         }
 
-            jdp-container .jdp-icon-plus svg, jdp-container .jdp-icon-minus svg {
-                width: 1.5rem;
-                height: 1.5rem;
-                padding: 0.375rem;
-            }
+.intake-day-input {
+    border-radius: 2px !important;
+    height: 30px !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    margin-top: 7px !important;
+    cursor: pointer;
+}
+
+    .intake-day-input:focus {
+        border-color: #FFAB31;
+    }
+.calendar-icon {
+    padding-top: 0.8rem !important;
+    padding-right: 1rem !important;
+}
+
+jdp-container .jdp-icon-plus svg, jdp-container .jdp-icon-minus svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.375rem;
+}
 
             jdp-container .jdp-icon-plus.not-in-range, jdp-container .jdp-icon-minus.not-in-range {
                 cursor: not-allowed;

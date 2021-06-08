@@ -769,6 +769,7 @@
     <Content Include="img\formStatic\doctorprofile.svg" />
     <Content Include="img\formStatic\fail.svg" />
     <Content Include="img\formStatic\ForgetPassword.svg" />
+    <Content Include="img\formStatic\Heart.svg" />
     <Content Include="img\formStatic\NewMessage.svg" />
     <Content Include="img\formStatic\Rules.svg" />
     <Content Include="img\formStatic\UserProfile.svg" />

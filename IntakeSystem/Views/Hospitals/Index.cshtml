@@ -7,6 +7,7 @@
 <link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
 <section class="hospital-section my-clipped uk-margin-medium-bottom">
     <div class="uk-text-center" uk-grid dir="rtl">
+        <!--search filter section-->
         <div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
                 <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
@@ -52,9 +53,16 @@
                                 </p>
 
                             </li>
-
                             <li class="uk-margin-top">
                                 <hr class="uk-divider-icon" />
+                                @*<span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>*@
+                                <span class="">
+                                    <img src="~/img/formStatic/Heart.svg" width="30" />
+                                </span>
+                                <a href="/Doctor" class="mytext-gray">لیست پزشکان</a>
+                            </li>
+                            <li class="uk-margin-small-top">
+                              @*  <hr class="uk-divider-icon" />*@
                                 <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
                                 <span>152454135 - 165115165</span>
                             </li>

@@ -209,13 +209,16 @@
     border-bottom: 1px solid #666; }
 
 .intakeDay-section .intake-day-header .intake-day-input {
-  border-radius: 20px !important;
+  border-radius: 3px 3px 0 0 !important;
   height: 5px !important;
   border: none !important;
   background: none !important;
   box-shadow: none !important;
   margin-top: 7px !important;
   cursor: pointer; }
+
+.intakeDay-section .intake-day-header .intake-day-input:focus {
+  border-color: #FFAB31; }
 
 .intake-modal-section {
   /* The Modal (background) */

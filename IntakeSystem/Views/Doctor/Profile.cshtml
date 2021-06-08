@@ -6,6 +6,7 @@
 
 <link href="~/Content/Styles/Profile.min.css" rel="stylesheet" />
 <section class="profile-section ">
+    <!--doctor information section-->
     <content class="profile-info my-flex-card my-flex-card-doctor my-row my-center" dir="rtl">
         <div class="my-column my-borderless-card">
             <label class="uk-legend uk-text-bold uk-margin-top uk-text-right uk-margin-right">
@@ -21,7 +22,6 @@
                     <span>علی رضایی</span>
                 </li>
                 <li>
-                    @* <hr class="uk-divider-icon" />*@
                     <span class="gly-rotate-270 mytext-darkBlue" uk-icon="icon: call"></span>
                     <span class="mytext-darkBlue">شماره تماس: </span>
                     <span>25962651</span>
@@ -47,6 +47,7 @@
             <img src="~/img/formStatic/doctorprofile.svg" width="360" alt="picture" />
         </div>
     </content>
+    <!--end doctor information section-->
     <section class="new-intake-section">
         <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
             <div class="my-column new-intake-content">
@@ -76,6 +77,7 @@
                 <img src="~/img/formStatic/Question.svg" width="300" alt="picture" />
             </div>
         </content>
+        <!--paging for new intake-->
         <ul class="uk-pagination uk-flex-center uk-margin-top">
             <li><a href="#"><span uk-pagination-previous></span></a></li>
             <li class="uk-active"><span>1</span></li>
@@ -86,6 +88,7 @@
             <li><a href="#"><span uk-pagination-next></span></a></li>
         </ul>
     </section>
+    <!--previous intakes section-->
     <section class="previous-intake-section my-clipped">
         <label class="uk-legend uk-text-bold uk-margin-bottom uk-text-center">
             <span>لیست ویزیت های قبلی </span>
@@ -138,6 +141,7 @@
                 </tr>
             </tbody>
         </table>
+        <!--paging for previous intake-->
         <ul class="uk-pagination uk-flex-center uk-margin-top">
             <li><a href="#"><span uk-pagination-previous></span></a></li>
             <li class="uk-active"><span>1</span></li>

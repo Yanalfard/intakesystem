@@ -7,15 +7,10 @@
 <link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
 <link href="~/Content/jalalidatepicker.css" rel="stylesheet" />
 <script src="~/Content/jalalidatepicker.js"></script>
-@*<link href="~/Content/Styles/IntakeDay.min.css" rel="stylesheet" />*@
-
 
 <section class="intakeDay-section my-clipped uk-margin-medium-bottom">
     <!--doctor name in intake day section-->
     <div class="uk-text-center" uk-grid dir="rtl">
-        <!--<div class="uk-width-1-4 d-none">-->
-            <!--empty-->
-        <!--</div>-->
         <div class="uk-width-expand intake-header-section">
             <!--doctor name-->
             <div class="my-row intake-day-header" dir="ltr">
@@ -25,22 +20,16 @@
                     </div>
                     <span class="uk-margin-small-top">نام پزشک</span>
                 </div>
-                <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right cursor-pointer" dir="rtl">
-                    <span class="mytext-orange" uk-icon="icon: calendar"></span>
+                <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right" dir="rtl">
                     <span>انتخاب روز ویزیت</span>
-                    <input  id="VisitDay" @*onchange="VisitTime()"*@ class="uk-input card-with-border uk-text-success intake-day-input" type="text" placeholder="مشاهده تقویم زمانی" data-jdp>
-                   
                 </label>
-                @*<div class="uk-inline">
-                        <a class="uk-form-icon uk-form-icon-flip mytext-orange" uk-icon="icon: calendar"></a>
-                    </div>*@
             </div>
-            @*  *@
             <!--end section-->
         </div>
     </div>
     <!--end doctor name in intake day section-->
     <div class="uk-text-center" uk-grid dir="rtl">
+        <!--search filter section-->
         <div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
                 <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
@@ -67,7 +56,12 @@
         <div class="uk-width-expand">
 
             <div class="my-borderless-card uk-margin-medium-bottom">
-                <calendar></calendar>
+                <div class="my-row my-center pb-1">
+                    <span class="mytext-orange calendar-icon" uk-icon="icon: calendar"></span>
+                    <input id="VisitDay" class="uk-input mytext-darkBlue intake-day-input pr-1" type="text" placeholder="مشاهده تقویم زمانی" data-jdp>
+                </div>
+    <!--calender section-->
+                <calendar id="calendar"></calendar>
             </div>
         </div>
     </div>
@@ -76,7 +70,6 @@
 <section class="intake-modal-section">
     <!-- The Modal -->
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -121,23 +114,15 @@
                     </a>
                 </div>
             </div>
-
         </div>
-
     </div>
 </section>
-
 <script>
     jalaliDatepicker.startWatch({
-        //minDate: "attr",//میتوان استفاده نکرد
-        //maxDate: "attr" //میتوان استفاده نکرد
-        /*  autoShow: "false",*/
-        /*autoHide: "false",*/
-        //container: "section",
         days: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"],
         showTodayBtn: "false",
         showEmptyBtn: "false",
-        /* selector: "div[data-jdp]",*/
+        /*selector: "div[data-jdp]",*/
         container: "calendar",
         //container:"jdp-container",
     });
@@ -151,7 +136,7 @@
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal 
+    // When the user clicks the button, open the modal
     input.onchange = function () {
         modal.style.display = "block";
     }
@@ -167,5 +152,4 @@
             modal.style.display = "none";
         }
     }
-
 </script>

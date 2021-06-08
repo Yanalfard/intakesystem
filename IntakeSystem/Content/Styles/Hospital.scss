@@ -340,13 +340,17 @@
         }
 
         .intake-day-input {
-            border-radius: 20px !important;
+            border-radius: 3px 3px 0 0 !important;
             height: 5px !important;
             border: none !important;
             background: none !important;
             box-shadow: none !important;
             margin-top: 7px !important;
             cursor: pointer;
+        }
+
+        .intake-day-input:focus{
+            border-color: #FFAB31;
         }
     }
 }
