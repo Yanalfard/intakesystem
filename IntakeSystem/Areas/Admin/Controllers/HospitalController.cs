@@ -19,7 +19,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
         }
         public ActionResult PtCreate()
         {
-            return PartialView();
+            return View();
         }
         public ActionResult PtEdit()
         {

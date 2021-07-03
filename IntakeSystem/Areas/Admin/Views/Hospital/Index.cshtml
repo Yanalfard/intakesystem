@@ -18,7 +18,7 @@
                         </div>
                         <div class="form-toolbar mr-md-3 mr-1">
                             <button onclick="BtnSearch()" type="button" class="btn btn-primary btn-sm">جستجو<span class="icon-holder uk-margin-small-right" uk-icon="search-outline"></span></button>
-                            <button id="Create" data-toggle="modal" data-target="#modalSave" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+                            <a href="@Url.Action("PtCreate")"  class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></a>
                         </div>
                     </div>
                 </div>
@@ -171,11 +171,11 @@
 @section Script{
 
     <script>
-        $("#Create").click(function () {
-            $.get("/Admin/Hospital/PtCreate", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
+        //$("#Create").click(function () {
+        //    $.get("/Admin/Hospital/PtCreate", function (result) {
+        //        $(".modal-content").html(result);
+        //    });
+        //});
 
         $("#Edit").click(function () {
             $.get("/Admin/Hospital/PtEdit", function (result) {
