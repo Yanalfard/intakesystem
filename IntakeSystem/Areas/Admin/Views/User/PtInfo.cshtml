@@ -1,4 +1,5 @@
-﻿<div class="modal-header">
+﻿@model DataLayer.Models.TblUser
+<div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
         جزئیات کاربر
     </h6>
@@ -10,30 +11,41 @@
     <div class="form-row ">
         <div class="form-group col-md-3">
             <label>نام  کاربر: </label>
-            <span>علی رضایی</span>
+            <span>@Model.Name</span>
         </div>
         <div class="form-group col-md-3">
             <label>شماره تماس: </label>
-            <span>09585456</span>
+            <span>@Model.TellNo</span>
         </div>
         <div class="form-group col-md-3">
             <label>کد ملی: </label>
-            <span>856958</span>
+            <span>@Model.IdentificationNo</span>
         </div>
         <div class="form-group col-md-3">
             <label>جنسیت:</label>
-            <span>زن</span>
-            <span>مرد</span>
+            @if (Model.Gender)
+            {
+                <span>مرد</span>
+            }
+            else
+            {
+                <span>زن</span>
+            }
         </div>
         <div class="form-group col-md-3">
             <label>نقش: </label>
-            <span>ادمین اصلی</span>
-            <span>ادمین مرکز درمانی</span>
+            <span>@Model.TblRole.Title</span>
         </div>
         <div class="form-group col-md-3">
             <label>وضعیت: </label>
-            <span class="text-success">فعال</span>
-            <span class="text-danger">غیر فعال</span>
+            @if (Model.IsActive)
+            {
+                <span class="text-success">فعال</span>
+            }
+            else
+            {
+                <span class="text-danger">غیر فعال</span>
+            }
         </div>
     </div>
 </div>

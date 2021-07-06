@@ -152,6 +152,7 @@
           <Property Name="DoctorDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_TblHospital_TblCatagory">
           <End Role="TblCatagory" Type="Self.TblCatagory" Multiplicity="1" />
@@ -632,6 +633,7 @@
           <NavigationProperty Name="TblOrder" Relationship="Self.FK_TblOrder_TblUser" FromRole="TblUser" ToRole="TblOrder" />
           <NavigationProperty Name="TblRole" Relationship="Self.FK_TblUser_TblRole" FromRole="TblUser" ToRole="TblRole" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblUser" FromRole="TblUser" ToRole="TblTicket" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_TblHospital_TblCatagory">
           <End Role="TblCatagory" Type="Self.TblCatagory" Multiplicity="1" />
@@ -1077,6 +1079,7 @@
           <EntitySetMapping Name="TblUser">
             <EntityTypeMapping TypeName="IntakeSystemModel.TblUser">
               <MappingFragment StoreEntitySet="TblUser">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TellNo" ColumnName="TellNo" />

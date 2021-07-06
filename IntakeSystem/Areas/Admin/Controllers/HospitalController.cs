@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer.Models;
+using DataLayer.ViewModels;
 using Services.Services;
 
 namespace IntakeSystem.Areas.Admin.Controllers
@@ -19,7 +20,10 @@ namespace IntakeSystem.Areas.Admin.Controllers
         }
         public ActionResult PtCreate()
         {
-            return View();
+            return View(new HospitalVm()
+            {
+                TblCatagory=_core.Catagory.Get().ToList(),
+            });
         }
         public ActionResult PtEdit()
         {
@@ -41,7 +45,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         public ActionResult ChangeStatus(int id)
-         {
+        {
             TblHospital hospital = _core.Hospital.GetById(id);
             hospital.IsActive = !hospital.IsActive;
             _core.Hospital.Update(hospital);

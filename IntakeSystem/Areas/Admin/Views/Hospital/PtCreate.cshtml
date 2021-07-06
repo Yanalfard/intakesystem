@@ -1,31 +1,28 @@
-﻿
+﻿@model DataLayer.ViewModels.HospitalVm
 @{
     ViewBag.Title = "  افزودن مرکز درمانی";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div class="modal-header">
-    <h6 class="modal-title" id="modalCenterTitle">
-        افزودن مرکز درمانی
-    </h6>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<form>
+<link href="~/Content/datePersion/persianDatepicker-default.css" rel="stylesheet" />
+
+<form style="overflow:auto">
     <div class="modal-body">
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="">دسته بندی را انتخاب کنید</label>
-                <select class="form-control" id="">
-                    <option>بیمارستان</option>
-                    <option>آزمایشگاه</option>
+                <select class="form-control" id="CatagoryId">
+                    @foreach (var item in Model.TblCatagory)
+                    {
+                        <option value="@item.CatagoryId">@item.Name</option>
+                    }
                 </select>
             </div>
         </div>
         <div class="form-row mt-2 bg-light">
             <div class="form-group col-md-4">
                 <label class="mt-2">نام مرکز درمانی</label>
-                <input class="form-control " placeholder="مثال: امام رضا">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: امام رضا" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">
                 <label class="mt-2">شماره تماس اول</label>
@@ -40,17 +37,27 @@
         </div>
         <div class="form-row bg-light">
             <div class="form-group col-md-4">
-                <label>نام ادمین</label>
-                <input class="form-control" placeholder="مثال: علی علیزاده">
-            </div>
-            <div class="form-group col-md-4">
                 <label>تاریخ ثبت مرکز درمانی</label>
+                @*<input readonly class="entry" type="text" id="startDate" name="startDate" placeholder="از تاریخ  " value="@ViewBag.StartDate">*@
                 <input class="form-control" type="date" placeholder="">
                 <span class="text-danger"></span>
             </div>
             <div class="form-group col-md-4">
                 <label>درصد سود</label>
                 <input class="form-control" type="number" placeholder="">
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row bg-light">
+            <div class="form-group col-md-4">
+                <label>استان </label>
+                <input class="form-control" placeholder="مثال: علی علیزاده">
+                <span class="text-danger"></span>
+
+            </div>
+            <div class="form-group col-md-4">
+                <label>شهر</label>
+                <input class="form-control" placeholder="مثال: علی علیزاده">
                 <span class="text-danger"></span>
             </div>
         </div>
@@ -71,7 +78,8 @@
         <div class="form-row">
             <div class="form-group col-md-7">
                 <label>آدرس</label>
-                <input class="form-control" placeholder="مثال: تبریز...">
+                @Html.TextAreaFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: تبریز..." } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
         <label>لوکیشن مرکز درمانی</label>
@@ -83,6 +91,10 @@
 </form>
 <link href="~/Areas/Admin/Resource/css/leaflet.css" rel="stylesheet" />
 <script src="~/Areas/Admin/Resource/js/leaflet.js"></script>
+
+
+<script src="~/Content/datePersion/prism.js"></script>
+<script src="~/Content/datePersion/persianDatepicker.min.js"></script>
 <script>
     function inputChanged(sender) {
         var fileName = sender.files[0].name;
@@ -90,6 +102,11 @@
     }
 </script>
 <script>
+    $(function () {
+        $("#startDate").persianDatepicker();
+    });
+
+
     var map = L.map('map').setView([38.07674409597339, 46.29700302496191], 11);
 
     L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -40,6 +40,7 @@ namespace DataLayer.Models
         public string DoctorDescription { get; set; }
         public bool IsActive { get; set; }
         public bool IsPrivate { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblHospital> TblHospital { get; set; }

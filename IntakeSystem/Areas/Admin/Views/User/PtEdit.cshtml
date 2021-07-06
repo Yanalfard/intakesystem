@@ -1,10 +1,10 @@
-﻿@model DataLayer.ViewModels.RegisterVm
+﻿@model DataLayer.ViewModels.EditUserVm
 
-@using (Ajax.BeginForm("PtCreate", "User", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "RegisterForm" }, htmlAttributes: new { @id = "RegisterForm" }))
+@using (Ajax.BeginForm("PtEdit", "User", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "EditRegisterForm" }, htmlAttributes: new { @id = "EditRegisterForm" }))
 {
     <div class="modal-header">
         <h6 class="modal-title" id="modalCenterTitle">
-            افزودن کاربر
+            ویرایش کاربر
         </h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,6 +12,7 @@
     </div>
     <div class="modal-body">
         <div class="form-row">
+            @Html.HiddenFor(m => m.UserId)
             @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
             <div class="form-group col-md-3">
                 <label>نام کاریر</label>
@@ -29,17 +30,12 @@
                 @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "form-control", placeholder = "1234567890" } })
                 @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group col-md-3">
-                <label>رمز عبور</label>
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "****" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
         </div>
         <div class="form-row bg-light p-2">
             <div class="form-check col-md-3">
                 <label>جنسیت</label>
                 <div class="form-check">
-                    @Html.RadioButtonFor(model => model.Gender, "0", new { @checked = true, @class = "form-check-input" })
+                    @Html.RadioButtonFor(model => model.Gender, "0", new { @class = "form-check-input" })
                     <label class="form-check-label" for="Female">
                         زن
                     </label>
@@ -59,7 +55,7 @@
                 @foreach (var item in lisrRoles)
                 {
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoleId" id="RoleId" value="@item.RoleId" @(item.Name == "User" ? "checked" : "")>
+                        <input class="form-check-input" type="radio" name="RoleId" id="RoleId" value="@item.RoleId" @(Model.RoleId == item.RoleId ? "checked" : "")>
                         <label class="form-check-label" for="RoleId">
                             @item.Title
                         </label>
@@ -67,13 +63,13 @@
                 }
             </div>
             @*<div class="form-check col-md-3 mr-4">
-                <input type="checkbox" class="form-check-input " id="IsActive" value="1">
-                <label class="form-check-label" for="IsActive">فعال است</label>
-            </div>*@
+                    <input type="checkbox" class="form-check-input " id="IsActive" value="1">
+                    <label class="form-check-label" for="IsActive">فعال است</label>
+                </div>*@
         </div>
     </div>
     <div class="modal-footer justify-content-end">
-        <button type="submit" class="btn btn-success btn-sm text-white">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+        <button type="submit" class="btn btn-success btn-sm text-white">ویرایش<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
     </div>
 }
 

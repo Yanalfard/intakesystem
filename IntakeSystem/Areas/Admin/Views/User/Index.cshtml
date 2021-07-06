@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DataLayer.Models.TblUser>
 @{
     ViewBag.Title = "کاربران";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -41,23 +41,43 @@
                                 <th scope="col">نقش</th>
                                 <th scope="col">وضعیت</th>
                                 <th scope="col">جزئیات</th>
+                                <th scope="col">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>پیمان معادی</td>
-                                <td>091426556</td>
-                                <td>ادمین اصلی</td>
-                                <td>
-                                    <span class="text-success">فعال</span>
-                                    <span class="text-danger">غیر فعال</span>
-                                </td>
-                                <td>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
-                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
-                                    </span>
-                                </td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="userId_@item.UserId">
+                                    <td>@item.Name</td>
+                                    <td>@item.TellNo</td>
+                                    <td>@item.TblRole.Name</td>
+                                    <td>
+                                        @if (item.IsActive)
+                                        {
+                                            <a href="#" onclick="activeDisableUser(@item.UserId)" class="text-success badge-pill">فعال</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" onclick="activeDisableUser(@item.UserId)" class="text-danger  badge-pill">غیر فعال</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                            <a onclick="Information(@item.UserId)" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                                            <a href="#" data-toggle="modal" data-target="#modalSave" onclick="EditUser(@item.UserId)"><i class="btn fas fa-edit mr-2 text-primary">ویرایش</i></a>
+                                        </span>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حذف">
+                                            <a onclick="deleteUser(@item.UserId)"><i class="btn fas fa-trash mr-2 text-danger">حذف</i></a>
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            }
+
                         </tbody>
                     </table>
                 </div>
@@ -66,83 +86,83 @@
             <!--end list region-->
             <div class="card-footer bg-white">
                 @*<nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
+                        <ul class="pagination justify-content-end">
 
-                    @if (ViewBag.PageId == 1)
-                    {
-                        <li class="page-item d-none">
-                            <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
-                        </li>
-
-                    }
-
-                    <li class="page-item">
-                        <select id="pageNumber" class="custom-select custom-select-sm">
-                            @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
+                            @if (ViewBag.PageId == 1)
                             {
-                                <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
+                                </li>
                             }
-                        </select>
-                    </li>
-
-
-                    @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
-                    {
-                        <li class="page-item d-none">
-                            <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
-                        </li>
-                    }
-                    else
-
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
-                        </li>
-
-                    }
-                    <li>
-                        <select id="InPageCount" class="custom-select custom-select-sm">
-                            @if (ViewBag.InPageCount == 0)
+                            else
                             {
-                                <option value="0" selected>18 در هر صفحه</option>
-                                <option value="20">20 در هر صفحه</option>
-                                <option value="30">30 در هر صفحه</option>
-                                <option value="40">40 در هر صفحه</option>
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
+                                </li>
 
                             }
 
-                            @if (ViewBag.InPageCount == 20)
-                            {
-                                <option value="0">18 در هر صفحه</option>
-                                <option value="20" selected>20 در هر صفحه</option>
-                                <option value="30">30 در هر صفحه</option>
-                                <option value="40">40 در هر صفحه</option>
-                            }
-                            else if (ViewBag.InPageCount == 30)
-                            {
-                                <option value="0">18 در هر صفحه</option>
-                                <option value="20">20 در هر صفحه</option>
-                                <option value="30" selected>30 در هر صفحه</option>
-                                <option value="40">40 در هر صفحه</option>
-                            }
-                            else if (ViewBag.InPageCount == 40)
-                            {
-                                <option value="0">18 در هر صفحه</option>
-                                <option value="20">20 در هر صفحه</option>
-                                <option value="30">30 در هر صفحه</option>
-                                <option value="40" selected>40 در هر صفحه</option>
-                            }
+                            <li class="page-item">
+                                <select id="pageNumber" class="custom-select custom-select-sm">
+                                    @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
+                                    {
+                                        <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
+                                    }
+                                </select>
+                            </li>
 
-                        </select>
-                    </li>
-                </ul>
-            </nav>*@
+
+                            @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
+                            {
+                                <li class="page-item d-none">
+                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
+                                </li>
+                            }
+                            else
+
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
+                                </li>
+
+                            }
+                            <li>
+                                <select id="InPageCount" class="custom-select custom-select-sm">
+                                    @if (ViewBag.InPageCount == 0)
+                                    {
+                                        <option value="0" selected>18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+
+                                    }
+
+                                    @if (ViewBag.InPageCount == 20)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20" selected>20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 30)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30" selected>30 در هر صفحه</option>
+                                        <option value="40">40 در هر صفحه</option>
+                                    }
+                                    else if (ViewBag.InPageCount == 40)
+                                    {
+                                        <option value="0">18 در هر صفحه</option>
+                                        <option value="20">20 در هر صفحه</option>
+                                        <option value="30">30 در هر صفحه</option>
+                                        <option value="40" selected>40 در هر صفحه</option>
+                                    }
+
+                                </select>
+                            </li>
+                        </ul>
+                    </nav>*@
             </div>
         </div>
     </div>
@@ -150,17 +170,51 @@
 
 @section Script{
 
+
+
     <script>
+        function activeDisableUser(id) {
+            $("#overlay").fadeIn(300);
+            $.get("/Admin/User/ActiveDisableUser/" + id, function (result) {
+                //$('#listUser').html(result);
+                //$("#overlay").fadeOut(300);
+                location.reload();
+            });
+            $("#overlay").fadeOut(300);
+        }
         $("#Create").click(function () {
             $.get("/Admin/User/PtCreate", function (result) {
                 $(".modal-content").html(result);
             });
         });
-        $("#Information").click(function () {
-            $.get("/Admin/User/PtInfo", function (result) {
+        function Information(id) {
+
+            $.get("/Admin/User/PtInfo/" + id, function (result) {
                 $(".modal-content").html(result);
             });
-        });
+        }
+        function EditUser(id) {
+
+            $.get("/Admin/User/PtEdit/" + id, function (result) {
+                $(".modal-content").html(result);
+            });
+        }
+
+        function deleteUser(id) {
+            if (confirm('آیا از حذف کالای  مورد نظر مطمئن هستید؟')) {
+                $.post("/Admin/User/Delete/" + id, function (result) {
+                    if (result == "true") {
+                        $('#userId_' + id).addClass('text-danger');
+                        $("#userId_" + id).hide('slow');
+                    } else {
+                        alert("کاربر مورد نظر حذف نمی شود");
+                    }
+                });
+            } else {
+                // Do nothing!
+            }
+
+        }
     </script>
 }
 
