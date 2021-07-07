@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DataLayer.Models.TblLocation>
+<label>شهر </label>
+<select class="form-control LocationIdCity">
+    <option value="0">شهر....</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.LocationId" onclick="sssa()">@item.LocationName</option>
+
+    }
+</select>
+
+    <script>
+
+        $(".LocationIdCity").change(function () {
+            var id = $(".LocationIdCity option:selected").val();
+            $("#LocationId").val(id);
+        });
+    </script>
+
