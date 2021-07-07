@@ -62,8 +62,9 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     TblHospital addHospital = new TblHospital();
                     addHospital.AboutUs = hospitalVm.AboutUs;
                     addHospital.Address = hospitalVm.Address;
-                    addHospital.CatagoryId = hospitalVm.CatagoryId;
-                    addHospital.AdminId =SelectUser().UserId;
+                    addHospital.CatagoryId = (int)hospitalVm.CatagoryId;
+                    //addHospital.AdminId =SelectUser().UserId;
+                    addHospital.AdminId = 33082;
                     addHospital.DateCreated = DateTime.Now;
                     addHospital.Fee = hospitalVm.Fee;
                     addHospital.ImageUrl = hospitalVm.ImageUrl;
@@ -72,6 +73,8 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     addHospital.Lon = hospitalVm.Lon;
                     addHospital.LocationId = (int)hospitalVm.LocationId;
                     addHospital.Name = hospitalVm.Name;
+                    addHospital.TellNo = hospitalVm.TellNo;
+                    addHospital.TellNo2 = hospitalVm.TellNo2;
                     _core.Hospital.Add(addHospital);
                     _core.Save();
                     return RedirectToAction("Index");
@@ -90,9 +93,26 @@ namespace IntakeSystem.Areas.Admin.Controllers
             }
             return PartialView(list);
         }
-        public ActionResult PtEdit()
+        public ActionResult PtEdit(int id)
         {
-            return PartialView();
+
+            TblHospital selectedHospital = _core.Hospital.GetById(id);
+            HospitalVm editHospital = new HospitalVm();
+            editHospital.TblCatagory = _core.Catagory.Get().ToList();
+            editHospital.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
+            editHospital.AboutUs = selectedHospital.AboutUs;
+            editHospital.Address = selectedHospital.Address;
+            editHospital.CatagoryId = (int)selectedHospital.CatagoryId;
+            editHospital.Fee = selectedHospital.Fee;
+            editHospital.ImageUrl = selectedHospital.ImageUrl;
+            editHospital.Lat = selectedHospital.Lat;
+            editHospital.Lon = selectedHospital.Lon;
+            editHospital.LocationId = selectedHospital.LocationId;
+            editHospital.Name = selectedHospital.Name;
+            editHospital.TellNo = selectedHospital.TellNo;
+            editHospital.TellNo2 = selectedHospital.TellNo2;
+            editHospital.ostanIdSelect = (int)_core.Location.GetById(selectedHospital.LocationId).LocationParentId;
+            return View(editHospital);
         }
         public ActionResult PtHospitalInfo(int id)
         {

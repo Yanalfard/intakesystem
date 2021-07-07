@@ -11,7 +11,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="">دسته بندی را انتخاب کنید</label>
-                <select class="form-control" id="CatagoryId">
+                <select class="form-control categoryselect">
                     @foreach (var item in Model.TblCatagory)
                     {
                         <option value="@item.CatagoryId">@item.Name</option>
@@ -72,15 +72,15 @@
         <div class="form-row">
             <div class="form-group col-md-7">
                 <label class="mt-2">توضیحات کوتاه</label>
-                <textarea class="textarea-fix-height-120" name="AboutUs" id="AboutUs" placeholder=" متن توضیحات... "></textarea>
+                @Html.EditorFor(model => model.AboutUs, new { htmlAttributes = new { @class = "textarea-fix-height-120", placeholder = " متن توضیحات..." } })
             </div>
             @Html.ValidationMessageFor(model => model.AboutUs, "", new { @class = "text-danger" })
         </div>
         <div class="form-row">
             <div class="form-group col-md-7">
                 <label>آدرس</label>
-                <textarea class="textarea-fix-height-120" name="Address" id="Address" placeholder=" آدرس ... "></textarea>
-                @*@Html.TextAreaFor(model => model.Name, new { htmlAttributes = new { @class = "textarea-fix-height-120", placeholder = "مثال: تبریز..." } })*@
+                @*<textarea class="textarea-fix-height-120" name="Address" id="Address" placeholder=" آدرس ... "></textarea>*@
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "textarea-fix-height-120", placeholder = "مثال: تبریز..." } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -95,16 +95,15 @@
         </div>
     </div>
     <input type="hidden" name="LocationId" id="LocationId" />
+    <input type="hidden" name="CatagoryId" id="CatagoryId" />
 }
+
 
 @section Script{
 
     <link href="~/Areas/Admin/Resource/css/leaflet.css" rel="stylesheet" />
     <script src="~/Areas/Admin/Resource/js/leaflet.js"></script>
 
-
-    @*<script src="~/Content/datePersion/prism.js"></script>
-        <script src="~/Content/datePersion/persianDatepicker.min.js"></script>*@
     <script>
         function inputChanged(sender) {
             var fileName = sender.files[0].name;
@@ -112,10 +111,16 @@
         }
     </script>
     <script>
-
-        $(function () {
-            $("#startDate").persianDatepicker();
+        var ids = $(".categoryselect option:selected").val();
+        $("#CatagoryId").val(ids);
+        $(".categoryselect").change(function () {
+            var id = $(".categoryselect option:selected").val();
+            $("#CatagoryId").val(id);
         });
+    </script>
+
+    <script>
+
 
         $(".ostanId").change(function () {
             $("#overlay").fadeIn(300);
