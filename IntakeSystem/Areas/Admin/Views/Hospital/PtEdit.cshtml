@@ -8,6 +8,8 @@
 @using (Html.BeginForm("PtEdit", "Hospital", FormMethod.Post, new { enctype = "multipart/form-data", style = "overflow:auto" }))
 {
     <div class="modal-body">
+        @Html.HiddenFor(model => model.HospitalId)
+        @Html.HiddenFor(model => model.ImageUrl)
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="">دسته بندی را انتخاب کنید</label>
@@ -51,7 +53,7 @@
                     <option value="0">استان....</option>
                     @foreach (var item in Model.TblLocations)
                     {
-                        <option value="@item.LocationId"  @(item.LocationId == Model.ostanIdSelect ? "selected" : "")>@item.LocationName</option>
+                        <option value="@item.LocationId" @(item.LocationId == Model.ostanIdSelect ? "selected" : "")>@item.LocationName</option>
                     }
                 </select>
             </div>
@@ -60,7 +62,12 @@
                 @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @if (Model.ImageUrl != null)
+        {
+            <div class="form-row bg-light">
+                <img src="~/Resources/Images/Hospital/Thumb/@Model.ImageUrl" style="max-width:20%;display:block;margin:0 auto" alt="@Model.Name" />
+            </div>
+        }
         <label class="mt-2">افزودن تصویر</label>
         <br />
         <div class="custom-file col-md-7">
@@ -86,16 +93,16 @@
         </div>
         <label>لوکیشن مرکز درمانی</label>
         <div id="map" style="height:220px;"></div>
-        <input type="hidden" name="Lat" id="Lat" />
-        <input type="hidden" name="Lon" id="Lon" />
+        <input type="hidden" name="Lat" id="Lat" value="@Model.Lat" />
+        <input type="hidden" name="Lon" id="Lon" value="@Model.Lon" />
         @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
 
         <div class="modal-footer justify-content-end">
-            <button type="submit" class="btn btn-success btn-sm text-white">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+            <button type="submit" class="btn btn-success btn-sm text-white">ویرایش<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
         </div>
     </div>
-    <input type="hidden" name="LocationId" id="LocationId" />
-    <input type="hidden" name="CatagoryId" id="CatagoryId" />
+    <input type="hidden" name="LocationId" id="LocationId" value="@Model.LocationId" />
+    <input type="hidden" name="CatagoryId" id="CatagoryId" value="@Model.CatagoryId" />
 }
 
 
@@ -121,24 +128,41 @@
 
     <script>
 
-
+        ostanloadCity();
         $(".ostanId").change(function () {
+            ostanloadCity();
+        });
+        function ostanloadCity() {
             $("#overlay").fadeIn(300);
             var id = $(".ostanId").val();
             $.get('/Admin/Hospital/ShowCity/' + id, function (result) {
                 console.log(result);
                 $('.listCity').html(result);
-                $("#overlay").fadeOut(300)
+                $('.LocationIdCity').val($('#LocationId').val());
+                $("#overlay").fadeOut(300);
+
             });
-        });
+        }
+
+
 
         var map = L.map('map').setView([38.07674409597339, 46.29700302496191], 11);
 
         L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'BehbudTav'
+            attribution: 'Mr Tab'
         }).addTo(map);
 
-        var theMarker = {};
+        var iconSetting = L.Icon.extend({
+            options: {
+                iconSize: [20, 29],
+                iconAnchor: [10, 29]
+            }
+        });
+
+        var customIcon = new iconSetting({ iconUrl: '/location.png' });
+        var Lat = $("#Lat").val();
+        var Lon = $("#Lon").val();
+        L.marker([Lat, Lon], { icon: customIcon }).addTo(map).bindPopup($("#Name").val()).openPopup(); var theMarker = {};
 
         map.on('click', function (e) {
             lat = e.latlng.lat;
@@ -150,18 +174,11 @@
                 map.removeLayer(theMarker);
             };
 
-            var iconSetting = L.Icon.extend({
-                options: {
-                    iconSize: [32, 32],
-                    iconAnchor: [16, -8]
-                }
-            });
 
-            var customIcon = new iconSetting({ iconUrl: '/marker.svg' });
             //Add a marker to show where you clicked.
             $("#Lat").val(lat.toString());
             $("#Lon").val(lon.toString());
-            theMarker = L.marker([lat, lon], { icon: customIcon }).addTo(map).bindPopup('<h6 style="color:green">موقعیت شما ثبت شد</h6>').openPopup();
+            theMarker = L.marker([lat, lon], { icon: customIcon }).addTo(map).bindPopup('<h6 style="color:green">موقعیت جدید رستوران ویرایش شد</h6>').openPopup();
         });
 
     </script>

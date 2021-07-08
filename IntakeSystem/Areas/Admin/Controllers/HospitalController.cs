@@ -101,6 +101,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             editHospital.TblCatagory = _core.Catagory.Get().ToList();
             editHospital.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             editHospital.AboutUs = selectedHospital.AboutUs;
+            editHospital.HospitalId = selectedHospital.HospitalId;
             editHospital.Address = selectedHospital.Address;
             editHospital.CatagoryId = (int)selectedHospital.CatagoryId;
             editHospital.Fee = selectedHospital.Fee;
@@ -114,6 +115,55 @@ namespace IntakeSystem.Areas.Admin.Controllers
             editHospital.ostanIdSelect = (int)_core.Location.GetById(selectedHospital.LocationId).LocationParentId;
             return View(editHospital);
         }
+
+        [HttpPost]
+        public ActionResult PtEdit(HospitalVm hospitalVm, HttpPostedFileBase imgUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imgUrl != null)
+                {
+                    if (!imgUrl.IsImage())
+                    {
+                        ModelState.AddModelError("ImageUrl", "عکس مورد نظر مشکل دارد ");
+                    }
+                    else if (imgUrl.ContentLength > 10485760)
+                    {
+                        ModelState.AddModelError("ImageUrl", "سایز عکس بیشتر است");
+                    }
+                    else
+                    {
+                        #region Addimage
+                        hospitalVm.ImageUrl = Guid.NewGuid() + Path.GetExtension(imgUrl.FileName);
+                        imgUrl.SaveAs(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl));
+                        ImageResizer img = new ImageResizer();
+                        img.Resize(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl),
+                            Server.MapPath("/Resources/Images/Hospital/Thumb/" + hospitalVm.ImageUrl));
+                        #endregion
+                    }
+                }
+                TblHospital updateHospital = _core.Hospital.GetById(hospitalVm.HospitalId);
+                updateHospital.AboutUs = hospitalVm.AboutUs;
+                updateHospital.Address = hospitalVm.Address;
+                updateHospital.CatagoryId = (int)hospitalVm.CatagoryId;
+                //addHospital.AdminId =SelectUser().UserId;
+                updateHospital.AdminId = 33082;
+                updateHospital.Fee = hospitalVm.Fee;
+                updateHospital.ImageUrl = hospitalVm.ImageUrl;
+                updateHospital.Lat = hospitalVm.Lat;
+                updateHospital.Lon = hospitalVm.Lon;
+                updateHospital.LocationId = (int)hospitalVm.LocationId;
+                updateHospital.Name = hospitalVm.Name;
+                updateHospital.TellNo = hospitalVm.TellNo;
+                updateHospital.TellNo2 = hospitalVm.TellNo2;
+                _core.Hospital.Update(updateHospital);
+                _core.Save();
+                return RedirectToAction("Index");
+            }
+            hospitalVm.TblCatagory = _core.Catagory.Get().ToList();
+            hospitalVm.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
+            return View(hospitalVm);
+        }
         public ActionResult PtHospitalInfo(int id)
         {
             TblHospital hospital = _core.Hospital.GetById(id);
@@ -121,7 +171,6 @@ namespace IntakeSystem.Areas.Admin.Controllers
         }
         public ActionResult Fiat()
         {
-
             return View();
         }
         public ActionResult PtFiatInfo()
