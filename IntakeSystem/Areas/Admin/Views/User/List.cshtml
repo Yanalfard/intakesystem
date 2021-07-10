@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DataLayer.Models.TblUser>
+<div class="table-responsive flex">
+    <table class="table fixed">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">نام کاربر</th>
+                <th scope="col">شماره تماس</th>
+                <th scope="col">نقش</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">جزئیات</th>
+                <th scope="col">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr id="userId_@item.UserId">
+                    <td>@item.Name</td>
+                    <td>@item.TellNo</td>
+                    <td>@item.TblRole.Title</td>
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <a href="#" onclick="activeDisableUser(@item.UserId)" class="text-success badge-pill">فعال</a>
+                        }
+                        else
+                        {
+                            <a href="#" onclick="activeDisableUser(@item.UserId)" class="text-danger  badge-pill">غیر فعال</a>
+                        }
+                    </td>
+                    <td>
+                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                            <a onclick="Information(@item.UserId)" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش رمز ">
+                            <a href="#" data-toggle="modal" data-target="#modalSave" onclick="changePassword(@item.UserId)"><i class="btn fas fa-edit mr-2 text-success">ویرایش رمز</i></a>
+                        </span>
+                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                            <a href="#" data-toggle="modal" data-target="#modalSave" onclick="EditUser(@item.UserId)"><i class="btn fas fa-edit mr-2 text-primary">ویرایش</i></a>
+                        </span>
+                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حذف">
+                            <a onclick="deleteUser(@item.UserId)"><i class="btn fas fa-trash mr-2 text-danger">حذف</i></a>
+                        </span>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>

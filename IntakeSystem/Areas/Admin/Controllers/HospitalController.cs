@@ -177,14 +177,13 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             return PartialView();
         }
-        [HttpPost]
-        public ActionResult ChangeStatus(int id)
+        public string ChangeStatus(int id)
         {
             TblHospital hospital = _core.Hospital.GetById(id);
             hospital.IsActive = !hospital.IsActive;
             _core.Hospital.Update(hospital);
             _core.Save();
-            return Json(true);
+            return "true";
         }
     }
 }

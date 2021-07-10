@@ -1,0 +1,25 @@
+﻿@model DataLayer.Models.TblCatagory
+
+@using (Ajax.BeginForm("Edit", "Catagory", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "CreateCatagory" }, htmlAttributes: new { @id = "CreateCatagory" }))
+{
+    @Html.HiddenFor(model => model.CatagoryId)
+    <div class="modal-header">
+        <h6 class="modal-title" id="modalCenterTitle">
+            ویرایش دسته   @Model.Name
+        </h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-row">
+            <label>نام دسته </label>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: بیمارستان", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="modal-footer justify-content-end">
+        <button type="submit" class="btn btn-success btn-sm text-white">ویرایش <span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+    </div>
+}
+

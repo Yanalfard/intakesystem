@@ -177,11 +177,11 @@
         //    });
         //});
 
-        $("#Edit").click(function () {
-            $.get("/Admin/Hospital/PtEdit", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
+        //$("#Edit").click(function () {
+        //    $.get("/Admin/Hospital/PtEdit", function (result) {
+        //        $(".modal-content").html(result);
+        //    });
+        //});
 
         function PartialInfo(id) {
             $.get("/Admin/Hospital/PtHospitalInfo?id=" + id, function (result) {
@@ -190,12 +190,20 @@
         }
 
         function ChangeStatus(id) {
-            var result = Bjax('/Admin/Hospital/ChangeStatus?id=', id, 'SP');
-            if (result == true) {
-                //code here
-            }
-            //console.log(result);
+            $("#overlay").fadeIn(300);
+            $.get("/Admin/Hospital/ChangeStatus/" + id, function (result) {
+                if (result == "true") {
+                    location.reload();
+                }
+                else {
+                    $("#overlay").fadeOut(300);
+                }
+            });
+            //$("#overlay").fadeOut(300);
         }
+
+
+
     </script>
 }
 

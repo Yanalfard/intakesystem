@@ -32,7 +32,6 @@ namespace DataLayer.ViewModels
         public string IdentificationNo { get; set; }
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50)]
-        [DataType(DataType.Password)]
         [Display(Name = "کلمه عبور")]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
@@ -66,5 +65,14 @@ namespace DataLayer.ViewModels
         public string IdentificationNo { get; set; }
         public int RoleId { get; set; }
         public int Gender { get; set; }
+    }
+    public class VmChangePassword
+    {
+        public int Id { get; set; }
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50)]
+        [Display(Name = "کلمه عبور")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
+        public string Password { get; set; }
     }
 }

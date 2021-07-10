@@ -14,9 +14,30 @@ namespace IntakeSystem.Areas.Admin.Controllers
     {
         private Core _core = new Core();
         // GET: Admin/User
-        public ActionResult Index()
+        public ActionResult Index(string name = "", string tell = "", string identificationNo = "")
         {
-            return View(_core.User.Get(i => i.IsDeleted == false, orderBy: i => i.OrderByDescending(j => j.UserId)));
+            ViewBag.name = name;
+            ViewBag.tell = tell;
+            ViewBag.identificationNo = identificationNo;
+            return View();
+        }
+        public ActionResult List(string name = "", string tell = "", string identificationNo = "")
+        {
+            List<TblUser> list = new List<TblUser>();
+            list.AddRange(_core.User.Get(i => i.IsDeleted == false, orderBy: i => i.OrderByDescending(j => j.UserId)));
+            if (name != "")
+            {
+                list = list.Where(p => p.Name.Contains(name)).ToList();
+            }
+            if (tell != "")
+            {
+                list = list.Where(p => p.TellNo.Contains(tell)).ToList();
+            }
+            if (identificationNo != "")
+            {
+                list = list.Where(p => p.IdentificationNo.Contains(identificationNo)).ToList();
+            }
+            return PartialView(list.OrderByDescending(i => i.UserId));
         }
         public ActionResult PtCreate()
         {
@@ -28,7 +49,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_core.User.Any(i => i.TellNo == register.TellNo && i.IsDeleted==false))
+                if (_core.User.Any(i => i.TellNo == register.TellNo && i.IsDeleted == false))
                 {
                     ModelState.AddModelError("TellNo", "شماره تلفن تکراریست");
                 }
@@ -136,6 +157,27 @@ namespace IntakeSystem.Areas.Admin.Controllers
             }
 
         }
-
+        public ActionResult ChangePassword(int id)
+        {
+            ViewBag.UserName = _core.User.GetById(id).Name;
+            return PartialView(new VmChangePassword()
+            {
+                Id = id,
+            });
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(VmChangePassword pass)
+        {
+            if (ModelState.IsValid)
+            {
+                TblUser updateUser = _core.User.GetById(pass.Id);
+                updateUser.Password = PasswordHelper.EncodePasswordMd5(pass.Password);
+                _core.User.Update(updateUser);
+                _core.Save();
+                return JavaScript("alert('رمز کاربر تغیر یافت');location.reload();");
+                // return PartialView("ListUser", _db.User.Get());
+            }
+            return PartialView("ChangePassword", pass);
+        }
     }
 }

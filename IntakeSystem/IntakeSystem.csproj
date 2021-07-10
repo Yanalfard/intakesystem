@@ -127,6 +127,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatagoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
@@ -869,6 +870,11 @@
     <Content Include="Areas\Admin\Content\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Areas\Admin\Scripts\jquery-1.9.1.min.map" />
     <Content Include="Areas\Admin\Views\Hospital\ShowCity.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Catagory\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Catagory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Catagory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\List.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
