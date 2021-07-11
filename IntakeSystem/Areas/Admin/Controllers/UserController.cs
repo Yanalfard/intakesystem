@@ -14,14 +14,16 @@ namespace IntakeSystem.Areas.Admin.Controllers
     {
         private Core _core = new Core();
         // GET: Admin/User
-        public ActionResult Index(string name = "", string tell = "", string identificationNo = "")
+        public ActionResult Index(int pageId = 1, string name = "", string tell = "", string identificationNo = "")
         {
             ViewBag.name = name;
             ViewBag.tell = tell;
             ViewBag.identificationNo = identificationNo;
+
+
             return View();
         }
-        public ActionResult List(string name = "", string tell = "", string identificationNo = "")
+        public ActionResult List(int pageId = 1, string name = "", string tell = "", string identificationNo = "")
         {
             List<TblUser> list = new List<TblUser>();
             list.AddRange(_core.User.Get(i => i.IsDeleted == false, orderBy: i => i.OrderByDescending(j => j.UserId)));
@@ -37,7 +39,13 @@ namespace IntakeSystem.Areas.Admin.Controllers
             {
                 list = list.Where(p => p.IdentificationNo.Contains(identificationNo)).ToList();
             }
-            return PartialView(list.OrderByDescending(i => i.UserId));
+            //Pagging
+            int take = 10;
+            int skip = (pageId - 1) * take;
+            ViewBag.PageCount = Convert.ToInt32(Math.Ceiling((double)list.Count() / take));
+            ViewBag.PageShow = pageId;
+            ViewBag.skip = skip;
+            return PartialView(list.Skip(skip).Take(take));
         }
         public ActionResult PtCreate()
         {
