@@ -7,39 +7,43 @@
 <link href="~/Content/Styles/LoginRegister.min.css" rel="stylesheet" />
 <section class="login-section">
     <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
-        
+
         <div class="my-column">
             <label class="uk-legend uk-text-bold">
                 <span>ورود</span>
             </label>
             <img class="my-center MobileSize" src="~/img/formStatic/Login.svg" width="250" alt="picture" />
-            <form>
+            @using (Html.BeginForm())
+            {
+                @Html.Partial("_CaptchaInput")
                 <fieldset class="uk-fieldset">
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
-                            <input class="uk-input card-with-border" type="text" placeholder="شماره تماس">
-                            @Html.EditorFor(model => model.TellNo ,new { htmlAttributes = new { @class = "uk-input card-with-border" } })
+                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس" } })
                             @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:lock-closed"></span>
-                            <input class="uk-input card-with-border" type="text" placeholder="رمز عبور">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "رمز عبور" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
+                    <button type="submit" class="light-blue-button my-center uk-margin-top">
                         ورود
                     </button>
                     <div class="uk-margin-bottom uk-margin-top my-center">
                         <a href="/Account/ForgetPassword" class="mytext-gray ">فراموشی رمز عبور</a>
                     </div>
                 </fieldset>
-            </form>
+            }
+
         </div>
-    <div class="DesktopSize">
-        <img src="~/img/formStatic/Login.svg" width="360" alt="picture" />
-    </div>
-</content>
+        <div class="DesktopSize">
+            <img src="~/img/formStatic/Login.svg" width="360" alt="picture" />
+        </div>
+    </content>
 </section>

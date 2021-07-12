@@ -1,9 +1,10 @@
 ﻿using DataLayer.Models;
 using Services.Repositories;
+using System;
 
 namespace Services.Services
 {
-    public class Core
+    public class Core: IDisposable
     {
         private readonly IntakeSystemEntities _db = new IntakeSystemEntities();
 
@@ -32,6 +33,11 @@ namespace Services.Services
         public MainRepo<TblImage> Image => _image ?? (_image = new MainRepo<TblImage>(_db));
         public MainRepo<TblConfig> Config => _config ?? (_config = new MainRepo<TblConfig>(_db));
         public MainRepo<TblOrder> Order => _order ?? (_order = new MainRepo<TblOrder>(_db));
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
         public void Save() => _db.SaveChanges();
     }
 }

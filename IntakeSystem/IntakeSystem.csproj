@@ -152,6 +152,7 @@
     <Compile Include="Utilities\CodeMelliAttribute.cs" />
     <Compile Include="Utilities\ExtentionMethdos.cs" />
     <Compile Include="Utilities\ImageResizer.cs" />
+    <Compile Include="Utilities\MyEshopRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\bootstrap\css\bootstrap-grid.css" />

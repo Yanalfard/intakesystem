@@ -1,3 +1,19 @@
 ﻿@model DataLayer.ViewModels.CaptchaVm
 
-<input type="hidden" name="Captcha" id="Captcha" />
+<input type="hidden" class="GoogleCapcha" name="Captcha" id="Captcha" />
+
+
+<!-- #localhost  -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb&&hl=fa"></script>
+<script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb', { action: 'contact_us' }).then(function (token) {
+                    $('.GoogleCapcha').val(token);
+                });
+            });
+            function reloadRech() {
+                grecaptcha.execute('6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb', { action: 'contact_us' }).then(function (token) {
+                    $('.GoogleCapcha').val(token);
+                });
+            }
+</script>
