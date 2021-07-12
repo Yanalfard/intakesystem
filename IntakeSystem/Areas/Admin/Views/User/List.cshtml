@@ -79,7 +79,7 @@
             .pagination a {
                 color: black;
                 float: left;
-                padding: 8px 16px;
+                padding: 3px 6px;
                 text-decoration: none;
                 transition: background-color .3s;
                 border: 1px solid #ddd;
@@ -95,48 +95,8 @@
                     background-color: #ddd;
                 }
     </style>
-    <div style="width:100%">
-        <div class="pagination" style="display:block;margin:auto auto">
-            @{
-                int pageCount = ViewBag.PageCount;
-                int pageShow = ViewBag.PageShow;
-                int minPage = pageShow <= 1 ? pageShow : pageShow - 2;
-                int maxPage = pageShow <= 1 ? pageShow + 4 : pageShow + 2;
-                int notpage = 0; }
-            @if (pageShow > 1)
-            {
-                <a onclick="showOtherPage(@(pageShow==0?1:pageShow-1))"><span uk-pagination-previous></span></a>
-            }
-            @if (pageShow > 3)
-            {
-                <a onclick="showOtherPage(1)">1</a>
-            }
-            @for (int i = 1; i <= pageCount; i++)
-            {
-                if (i >= minPage && i <= maxPage)
-                {
-                    <a onclick="showOtherPage(@(i))" class="@(pageShow==i?"uk-text-danger":"")">@i</a>
-                    notpage = 0;
-                }
-                else
-                {
-                    if (notpage == 0)
-                    {
-                        <a class="uk-disabled"><span>...</span></a>
-                        notpage++;
-                    }
-                }
-            }
-            @if (pageShow <= pageCount - 3)
-            {
-                <a onclick="showOtherPage(@(pageCount))">@pageCount</a>
-            }
-            @if (pageShow < pageCount)
-            {
-                <a onclick="showOtherPage(@(pageShow==0?2:pageShow+1))"><span uk-pagination-next></span></a>
-            }
-        </div>
-    </div>
+
+
 
 
 
@@ -193,3 +153,45 @@
         </div>*@
 
 </div>
+    <div class="card-footer bg-white uk-text-center">
+        <div class="pagination" style="display:block;margin:auto auto">
+            @{
+                int pageCount = ViewBag.PageCount;
+                int pageShow = ViewBag.PageShow;
+                int minPage = pageShow <= 1 ? pageShow : pageShow - 2;
+                int maxPage = pageShow <= 1 ? pageShow + 4 : pageShow + 2;
+                int notpage = 0; }
+            @if (pageShow > 1)
+            {
+                <a onclick="showOtherPage(@(pageShow==0?1:pageShow-1))" style="height:29px"><span uk-pagination-previous></span></a>
+            }
+            @if (pageShow > 3)
+            {
+                <a onclick="showOtherPage(1)">1</a>
+            }
+            @for (int i = 1; i <= pageCount; i++)
+            {
+                if (i >= minPage && i <= maxPage)
+                {
+                    <a onclick="showOtherPage(@(i))" class="@(pageShow==i?"uk-text-danger":"")">@i</a>
+                    notpage = 0;
+                }
+                else
+                {
+                    if (notpage == 0)
+                    {
+                        <a class="uk-disabled"><span>...</span></a>
+                        notpage++;
+                    }
+                }
+            }
+            @if (pageShow <= pageCount - 3)
+            {
+                <a onclick="showOtherPage(@(pageCount))">@pageCount</a>
+            }
+            @if (pageShow < pageCount)
+            {
+                <a onclick="showOtherPage(@(pageShow==0?2:pageShow+1))" style="height:29px"><span uk-pagination-next></span></a>
+            }
+        </div>
+    </div>
