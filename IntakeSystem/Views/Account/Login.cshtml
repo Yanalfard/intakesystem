@@ -1,4 +1,4 @@
-﻿
+﻿@model DataLayer.ViewModels.LoginVm
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,6 +19,8 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
                             <input class="uk-input card-with-border" type="text" placeholder="شماره تماس">
+                            @Html.EditorFor(model => model.TellNo ,new { htmlAttributes = new { @class = "uk-input card-with-border" } })
+                            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="uk-margin">

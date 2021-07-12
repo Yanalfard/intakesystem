@@ -1,4 +1,5 @@
-﻿using Services.Services;
+﻿using DataLayer.ViewModels;
+using Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,84 @@ namespace IntakeSystem.Controllers
         {
             return View();
         }
+        // Login
+        [Route("Login")]
         public ActionResult Login()
         {
-            return View();
+            try
+            {
+                //if (User.Identity.IsAuthenticated)
+                //{
+                //    if (User.Claims.Last().Value == "user")
+                //    {
+                //        return Redirect("/User/Profile");
+                //    }
+                //    else if (User.Claims.Last().Value == "employee" || User.Claims.Last().Value == "admin")
+                //    {
+                //        return Redirect("/Admin");
+                //    }
+                //}
+                return View();
+            }
+            catch (Exception)
+            {
+                return Redirect("404.html");
+            }
+
+        }
+        [Route("Login")]
+        [HttpPost]
+        public ActionResult Login(LoginVm login, string ReturnUrl = "/")
+        {
+            try
+            {
+                //if (!await _captchaValidator.IsCaptchaPassedAsync(login.Captcha))
+                //{
+                //    ModelState.AddModelError("TellNo", "لطفا دوباره امتحان کنید");
+                //    return View(login);
+                //}
+                //if (ModelState.IsValid)
+                //{
+                //    string password = PasswordHelper.EncodePasswordMd5(login.Password);
+                //    if (db.Client.Get().Any(i => i.TellNo == login.TellNo && i.Password == password))
+                //    {
+                //        TblClient user = db.Client.Get().FirstOrDefault(i => i.TellNo == login.TellNo);
+                //        if (user.IsActive)
+                //        {
+                //            var claims = new List<Claim>()
+                //    {
+                //        new Claim(ClaimTypes.NameIdentifier,user.ClientId.ToString()),
+                //        new Claim(ClaimTypes.Name,user.TellNo),
+                //        new Claim(ClaimTypes.Role,db.Role.GetById(user.RoleId).Name.Trim()),
+                //    };
+                //            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                //            var principal = new ClaimsPrincipal(identity);
+
+                //            var properties = new AuthenticationProperties
+                //            {
+                //                IsPersistent = login.RememberMe
+                //            };
+                //            await HttpContext.SignInAsync(principal, properties);
+                //            ViewBag.IsSuccess = true;
+                //            return Redirect(ReturnUrl);
+                //        }
+                //        else
+                //        {
+                //            ModelState.AddModelError("TellNo", "حساب کاربری شما فعال نیست");
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("TellNo", "شماره تلفن  یا رمز اشتباه است");
+                //    }
+                //}
+                return View(login);
+            }
+            catch
+            {
+                return Redirect("404.html");
+            }
+
         }
         public ActionResult Register()
         {

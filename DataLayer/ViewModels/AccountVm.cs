@@ -75,4 +75,27 @@ namespace DataLayer.ViewModels
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
     }
+
+
+    public class LoginVm : CaptchaVm
+    {
+        [Display(Name = "شماره تلفن")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression("[0]{1}[9]{1}[0-9]{9}", ErrorMessage = "شماره تلفن وارد شده معتبر نمی باشد")]
+        [StringLength(11)]
+        public string TellNo { get; set; }
+        [Display(Name = "کد واژه")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [StringLength(25)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        public bool RememberMe { get; set; }
+    }
+
+    public class CaptchaVm
+    {
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Captcha { get; set; }
+    }
 }

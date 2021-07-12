@@ -4,6 +4,7 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">ردیف </th>
+                <th scope="col">کد </th>
                 <th scope="col">نام کاربر</th>
                 <th scope="col">شماره تماس</th>
                 <th scope="col">نقش</th>
@@ -13,10 +14,18 @@
             </tr>
         </thead>
         <tbody>
+            @{
+                int skip = ViewBag.skip;
+            }
+
 
             @foreach (var item in Model)
             {
                 <tr id="userId_@item.UserId">
+                    <td>@(skip + 1)</td>
+                    @{
+                        skip += 1;
+                    }
                     <td>@item.UserId</td>
                     <td>@item.Name</td>
                     <td>@item.TellNo</td>
@@ -88,15 +97,6 @@
     </style>
     <div style="width:100%">
         <div class="pagination" style="display:block;margin:auto auto">
-            @*<a href="#">&laquo;</a>*@
-            @*<a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>*@
-            @*<a href="#">&raquo;</a>*@
-
             @{
                 int pageCount = ViewBag.PageCount;
                 int pageShow = ViewBag.PageShow;
@@ -140,12 +140,12 @@
 
 
 
-        <script>
-            function showOtherPage(id) {
-                $('#pageId').val(id);
-                document.getElementById('formSearchUser').submit();
-            }
-        </script>
+    <script>
+        function showOtherPage(id) {
+            $('#pageId').val(id);
+            document.getElementById('formSearchUser').submit();
+        }
+    </script>
 
 
 
