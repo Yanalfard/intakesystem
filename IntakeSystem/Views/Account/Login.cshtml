@@ -29,9 +29,9 @@
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:lock-closed"></span>
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "رمز عبور" } })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
                     <button type="submit" class="light-blue-button my-center uk-margin-top">
                         ورود
                     </button>

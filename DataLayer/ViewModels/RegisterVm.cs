@@ -4,12 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace DataLayer.ViewModels
 {
- 
-    public class EditUserVm
+    public class RegisterVm
     {
         public int UserId { get; set; }
         [Display(Name = "نام ")]
@@ -21,7 +19,6 @@ namespace DataLayer.ViewModels
         [StringLength(11)]
         [Display(Name = "موبایل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [RegularExpression("[0]{1}[9]{1}[0-9]{9}", ErrorMessage = "شماره تلفن وارد شده معتبر نمی باشد")]
         //[Remote("VerifyTellNo", "Account")]
         public string TellNo { get; set; }
         [Display(Name = "کد ملی")]
@@ -32,36 +29,49 @@ namespace DataLayer.ViewModels
         [StringLength(10)]
         //[Remote("VerifyIdentificationNo", "Account")]
         public string IdentificationNo { get; set; }
-        public int RoleId { get; set; }
-        public int Gender { get; set; }
-    }
-    public class VmChangePassword
-    {
-        public int Id { get; set; }
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50)]
         [Display(Name = "کلمه عبور")]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
-    }
-    public class LoginVm : CaptchaVm
-    {
-        [Display(Name = "شماره تلفن")]
+        [Display(Name = "تکرار کد واژه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression("[0]{1}[9]{1}[0-9]{9}", ErrorMessage = "شماره تلفن وارد شده معتبر نمی باشد")]
-        [StringLength(11)]
-        public string TellNo { get; set; }
-        [Display(Name = "کد واژه")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [StringLength(25)]
+        [MinLength(4, ErrorMessage = "تعداد کاراکتر کم است")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
-        public bool RememberMe { get; set; }
+        [Compare("Password", ErrorMessage = "کلمه های عبور مغایرت دارند")]
+        [StringLength(25)]
+        public string RePassword { get; set; }
+        public int RoleId { get; set; }
+        public string ImageUrl { get; set; }
+        public int Gender { get; set; }
     }
 
-    public class CaptchaVm
+    public class RegisterUserVm : CaptchaVm
     {
-        public string Captcha { get; set; }
+        public int UserId { get; set; }
+        [Display(Name = "نام ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+
+        public string Name { get; set; }
+        [MaxLength(11)]
+        [StringLength(11)]
+        [Display(Name = "موبایل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Remote("VerifyTellNo", "Account")]
+        public string TellNo { get; set; }
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50)]
+        [Display(Name = "کلمه عبور")]
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
+        public string Password { get; set; }
+        [Display(Name = "تکرار کد واژه")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MinLength(4, ErrorMessage = "تعداد کاراکتر کم است")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "کلمه های عبور مغایرت دارند")]
+        [StringLength(25)]
+        public string RePassword { get; set; }
     }
 }

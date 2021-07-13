@@ -1,0 +1,40 @@
+﻿@model DataLayer.ViewModels.ActiveVm
+@{
+    ViewBag.Title = "ResetPassword";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Styles/LoginRegister.min.css" rel="stylesheet" />
+<section class="Reset-password-section">
+    <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
+        <div class="my-column uk-margin-medium-bottom">
+            <label class="uk-legend uk-margin-bottom uk-text-bold code-label">
+                <span>کد دریافتی را وارد کنید</span>
+            </label>
+            <img class="my-center MobileSize" src="~/img/formStatic/ForgetPassword.svg" width="250" alt="picture" />
+            @using (Html.BeginForm())
+            {
+                @Html.Partial("_CaptchaInput")
+                @Html.HiddenFor(model=>model.Tell)
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:download"></span>
+                            @Html.EditorFor(model => model.Auth, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "کد دریافتی", maxlength = "6" } })
+                            @Html.ValidationMessageFor(model => model.Auth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <button type="submit" class="light-blue-button my-center uk-margin-top">
+                        ارسال
+                    </button>
+                </fieldset>
+            }
+
+        </div>
+        <div class="DesktopSize">
+            <img src="~/img/formStatic/ForgetPassword.svg" width="360" alt="picture" />
+        </div>
+    </content>
+</section>
+

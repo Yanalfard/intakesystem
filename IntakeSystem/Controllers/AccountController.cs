@@ -1,5 +1,7 @@
 ﻿using DataLayer.Models;
+using DataLayer.Security;
 using DataLayer.ViewModels;
+using IntakeSystem.Utilities;
 using Newtonsoft.Json;
 using Services.Services;
 using System;
@@ -79,12 +81,13 @@ namespace IntakeSystem.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(LoginVm login, string ReturnUrl = "/")
         {
+
             try
             {
                 var isCaptchaValid = await IsCaptchaValid(login.Captcha);
                 if (!isCaptchaValid)
                 {
-                    ModelState.AddModelError("TellNo", "لطفا دوباره امتحان کنید");
+                    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
                     return View(login);
                 }
                 if (ModelState.IsValid)
@@ -120,6 +123,75 @@ namespace IntakeSystem.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterUserVm register)
+        {
+            if (ModelState.IsValid)
+            {
+                var isCaptchaValid = await IsCaptchaValid(register.Captcha);
+                if (!isCaptchaValid)
+                {
+                    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
+                    return View(register);
+                }
+                if (_core.User.Any(i => i.TellNo == register.TellNo && i.IsDeleted == false))
+                {
+                    ModelState.AddModelError("TellNo", "شماره تلفن تکراریست");
+                }
+                else
+                {
+                    #region random
+                    int min = 100000;
+                    int max = 999999;
+                    Random r = new Random();
+                    int randomNumber = r.Next(max - min + 1) + min;
+                    #endregion
+
+                    TblUser addUser = new TblUser();
+                    addUser.Name = register.Name;
+                    addUser.IdentificationNo = "0";
+                    addUser.TellNo = register.TellNo;
+                    addUser.Password = PasswordHelper.EncodePasswordMd5(register.Password);
+                    addUser.IsActive = false;
+                    addUser.RoleId = 4;
+                    addUser.Gender = true;
+                    addUser.DateCreated = DateTime.Now;
+                    addUser.Auth = randomNumber.ToString();
+                    _core.User.Add(addUser);
+                    _core.Save();
+                    string message = addUser.Auth;
+                    await Sms.SendSms(addUser.TellNo, message, "GhasrMobileRegister");
+                    //return await Task.FromResult(Redirect("/Verify/" + addUser.TellNo));
+                    //return RedirectToAction("Index");
+                    ActiveVm active = new ActiveVm();
+                    active.Tell = addUser.TellNo;
+                    return RedirectToAction("ActiveUser", active);
+
+                }
+            }
+            return View(register);
+        }
+        public ActionResult ActiveUser(ActiveVm active)
+        {
+            return View(new ActiveVm()
+            {
+                Tell = active.Tell,
+            });
+        }
+        [HttpPost]
+        public ActionResult ActiveUser(string Tell, ActiveVm active)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_core.User.Any(i => i.TellNo == active.Tell && i.Auth == active.Auth) && Tell == active.Tell)
+                {
+                    return Redirect("/Login?activeUser=true");
+                }
+                ModelState.AddModelError("Auth", "کد وارد شده اشتباه است");
+            }
+            return View(active);
+
         }
         public ActionResult ForgetPassword()
         {
