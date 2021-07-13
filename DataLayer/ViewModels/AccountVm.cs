@@ -44,6 +44,7 @@ namespace DataLayer.ViewModels
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
     }
+   
     public class LoginVm : CaptchaVm
     {
         [Display(Name = "شماره تلفن")]

@@ -9,6 +9,18 @@
     <content class="my-flex-card my-row my-clipped my-center" dir="rtl">
 
         <div class="my-column">
+            @if (Request.QueryString["activeUser"] == "true")
+            {
+                <div class="alert alert-success margin-bottom">
+                    <p>حساب شما فعال شد میتوانید وارد حساب خود شوید </p>
+                </div>
+            }
+            @if (Request.QueryString["resetPassWord"] == "true")
+            {
+                <div class="alert alert-success margin-bottom">
+                    <p>رمز شما تغیر یافت میتوانید وارد حساب خود شوید </p>
+                </div>
+            }
             <label class="uk-legend uk-text-bold">
                 <span>ورود</span>
             </label>
@@ -20,16 +32,16 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
-                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس" } })
-                            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس", maxlength = "11" } })
                         </div>
+                        @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
                     </div>
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:lock-closed"></span>
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "رمز عبور" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                     @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
                     <button type="submit" class="light-blue-button my-center uk-margin-top">

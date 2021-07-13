@@ -132,8 +132,10 @@
     <Compile Include="ViewModels\AccountVm.cs" />
     <Compile Include="ViewModels\ActiveVm.cs" />
     <Compile Include="ViewModels\CaptchaResponseViewModel.cs" />
+    <Compile Include="ViewModels\ForgetPasswordVm.cs" />
     <Compile Include="ViewModels\HospitalVm.cs" />
     <Compile Include="ViewModels\RegisterVm.cs" />
+    <Compile Include="ViewModels\ResetPasswordVm.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

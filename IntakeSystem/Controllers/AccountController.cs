@@ -93,7 +93,7 @@ namespace IntakeSystem.Controllers
                 if (ModelState.IsValid)
                 {
                     string password = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "SHA256");
-                    if (_core.User.Get().Any(i => i.TellNo == login.TellNo && i.Password == password))
+                    if (_core.User.Any(i => i.TellNo == login.TellNo && i.Password == password && i.IsDeleted == false))
                     {
                         TblUser user = _core.User.Get().FirstOrDefault(i => i.TellNo == login.TellNo);
                         if (user.IsActive)
@@ -120,6 +120,16 @@ namespace IntakeSystem.Controllers
             }
 
         }
+        public int SelectedRandom()
+        {
+            #region random
+            int min = 100000;
+            int max = 999999;
+            Random r = new Random();
+            int randomNumber = r.Next(max - min + 1) + min;
+            return randomNumber;
+            #endregion
+        }
         public ActionResult Register()
         {
             return View();
@@ -141,13 +151,6 @@ namespace IntakeSystem.Controllers
                 }
                 else
                 {
-                    #region random
-                    int min = 100000;
-                    int max = 999999;
-                    Random r = new Random();
-                    int randomNumber = r.Next(max - min + 1) + min;
-                    #endregion
-
                     TblUser addUser = new TblUser();
                     addUser.Name = register.Name;
                     addUser.IdentificationNo = "0";
@@ -157,7 +160,7 @@ namespace IntakeSystem.Controllers
                     addUser.RoleId = 4;
                     addUser.Gender = true;
                     addUser.DateCreated = DateTime.Now;
-                    addUser.Auth = randomNumber.ToString();
+                    addUser.Auth = SelectedRandom().ToString();
                     _core.User.Add(addUser);
                     _core.Save();
                     string message = addUser.Auth;
@@ -184,8 +187,12 @@ namespace IntakeSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_core.User.Any(i => i.TellNo == active.Tell && i.Auth == active.Auth) && Tell == active.Tell)
+                if (_core.User.Any(i => i.TellNo == active.Tell && i.Auth == active.Auth && Tell == active.Tell && i.IsDeleted == false))
                 {
+                    TblUser user = _core.User.Get().FirstOrDefault(i => i.TellNo == active.Tell);
+                    user.Auth = SelectedRandom().ToString();
+                    _core.User.Update(user);
+                    _core.Save();
                     return Redirect("/Login?activeUser=true");
                 }
                 ModelState.AddModelError("Auth", "کد وارد شده اشتباه است");
@@ -197,13 +204,46 @@ namespace IntakeSystem.Controllers
         {
             return View();
         }
-        public ActionResult ResetPassword()
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPasswordVm forget)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (_core.User.Any(i => i.TellNo == forget.TellNo && i.IsDeleted == false))
+                {
+                    ForgetPasswordVm forgetPasswordVm = new ForgetPasswordVm();
+                    forgetPasswordVm.TellNo = forget.TellNo;
+                    return RedirectToAction("ResetPassword", forgetPasswordVm);
+                }
+                ModelState.AddModelError("TellNo", "شماره تلفن وارد شده یافت نشد");
+            }
+            return View(forget);
         }
-        public ActionResult ResultChangePass()
+        public ActionResult ResetPassword(ForgetPasswordVm reset)
         {
-            return View();
+            return View(new ResetPasswordVm()
+            {
+                TellNo = reset.TellNo,
+            });
+        }
+        [HttpPost]
+        public ActionResult ResultChangePass(ResetPasswordVm reset)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_core.User.Any(i => i.TellNo == reset.TellNo && i.Auth == reset.Auth && i.IsDeleted == false))
+                {
+                    TblUser user = _core.User.Get().FirstOrDefault(i => i.TellNo == reset.TellNo);
+                    string password = FormsAuthentication.HashPasswordForStoringInConfigFile(reset.Password, "SHA256");
+                    user.Auth = SelectedRandom().ToString();
+                    user.Password = password;
+                    _core.User.Update(user);
+                    _core.Save();
+                    return Redirect("/Login?resetPassWord=true");
+                }
+                ModelState.AddModelError("Auth", "کد وارد شده اشتباه است");
+            }
+            return View(reset);
         }
 
 
