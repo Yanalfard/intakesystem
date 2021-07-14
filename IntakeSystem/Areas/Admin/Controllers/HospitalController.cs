@@ -29,6 +29,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             return View(new HospitalVm()
             {
                 TblCatagory = _core.Catagory.Get().ToList(),
+                TblUsers = _core.User.Get().ToList(),
                 TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList()
             });
         }
@@ -49,6 +50,10 @@ namespace IntakeSystem.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("ImageUrl", "سایز عکس بیشتر است");
                 }
+                else if (_core.Hospital.Any(i => i.AdminId == hospitalVm.UserId))
+                {
+                    ModelState.AddModelError("UserId", "برای این کاربر بیمارستان ثبت شده است");
+                }
                 else
                 {
                     #region Addimage
@@ -63,8 +68,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     addHospital.AboutUs = hospitalVm.AboutUs;
                     addHospital.Address = hospitalVm.Address;
                     addHospital.CatagoryId = (int)hospitalVm.CatagoryId;
-                    //addHospital.AdminId =SelectUser().UserId;
-                    addHospital.AdminId = 33082;
+                    addHospital.AdminId = (int)hospitalVm.UserId;
                     addHospital.DateCreated = DateTime.Now;
                     addHospital.Fee = hospitalVm.Fee;
                     addHospital.ImageUrl = hospitalVm.ImageUrl;
@@ -77,10 +81,15 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     addHospital.TellNo2 = hospitalVm.TellNo2;
                     _core.Hospital.Add(addHospital);
                     _core.Save();
+                    TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
+                    selectedUser.RoleId = 6;
+                    _core.User.Update(selectedUser);
+                    _core.Save();
                     return RedirectToAction("Index");
                 }
             }
             hospitalVm.TblCatagory = _core.Catagory.Get().ToList();
+            hospitalVm.TblUsers = _core.User.Get().ToList();
             hospitalVm.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             return View(hospitalVm);
         }
@@ -99,11 +108,13 @@ namespace IntakeSystem.Areas.Admin.Controllers
             TblHospital selectedHospital = _core.Hospital.GetById(id);
             HospitalVm editHospital = new HospitalVm();
             editHospital.TblCatagory = _core.Catagory.Get().ToList();
+            editHospital.TblUsers = _core.User.Get().ToList();
             editHospital.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             editHospital.AboutUs = selectedHospital.AboutUs;
             editHospital.HospitalId = selectedHospital.HospitalId;
             editHospital.Address = selectedHospital.Address;
-            editHospital.CatagoryId = (int)selectedHospital.CatagoryId;
+            editHospital.CatagoryId = selectedHospital.CatagoryId;
+            editHospital.UserId = selectedHospital.AdminId;
             editHospital.Fee = selectedHospital.Fee;
             editHospital.ImageUrl = selectedHospital.ImageUrl;
             editHospital.Lat = selectedHospital.Lat;
@@ -142,25 +153,45 @@ namespace IntakeSystem.Areas.Admin.Controllers
                         #endregion
                     }
                 }
-                TblHospital updateHospital = _core.Hospital.GetById(hospitalVm.HospitalId);
-                updateHospital.AboutUs = hospitalVm.AboutUs;
-                updateHospital.Address = hospitalVm.Address;
-                updateHospital.CatagoryId = (int)hospitalVm.CatagoryId;
-                //addHospital.AdminId =SelectUser().UserId;
-                updateHospital.AdminId = 33082;
-                updateHospital.Fee = hospitalVm.Fee;
-                updateHospital.ImageUrl = hospitalVm.ImageUrl;
-                updateHospital.Lat = hospitalVm.Lat;
-                updateHospital.Lon = hospitalVm.Lon;
-                updateHospital.LocationId = (int)hospitalVm.LocationId;
-                updateHospital.Name = hospitalVm.Name;
-                updateHospital.TellNo = hospitalVm.TellNo;
-                updateHospital.TellNo2 = hospitalVm.TellNo2;
-                _core.Hospital.Update(updateHospital);
-                _core.Save();
-                return RedirectToAction("Index");
+                else if (_core.Hospital.Any(i => i.HospitalId != hospitalVm.HospitalId && i.AdminId == hospitalVm.UserId))
+                {
+                    ModelState.AddModelError("UserId", "برای این کاربر بیمارستان ثبت شده است");
+                }
+                else
+                {
+
+                    TblHospital updateHospital = _core.Hospital.GetById(hospitalVm.HospitalId);
+                    int userId = updateHospital.AdminId;
+                    updateHospital.AboutUs = hospitalVm.AboutUs;
+                    updateHospital.Address = hospitalVm.Address;
+                    updateHospital.CatagoryId = (int)hospitalVm.CatagoryId;
+                    updateHospital.AdminId = (int)hospitalVm.UserId;
+                    updateHospital.Fee = hospitalVm.Fee;
+                    updateHospital.ImageUrl = hospitalVm.ImageUrl;
+                    updateHospital.Lat = hospitalVm.Lat;
+                    updateHospital.Lon = hospitalVm.Lon;
+                    updateHospital.LocationId = (int)hospitalVm.LocationId;
+                    updateHospital.Name = hospitalVm.Name;
+                    updateHospital.TellNo = hospitalVm.TellNo;
+                    updateHospital.TellNo2 = hospitalVm.TellNo2;
+                    _core.Hospital.Update(updateHospital);
+                    _core.Save();
+                    if (userId != hospitalVm.UserId)
+                    {
+                        TblUser selectedOldUse = _core.User.GetById((int)hospitalVm.UserId);
+                        selectedOldUse.RoleId = 4;
+                        _core.User.Update(selectedOldUse);
+                        TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
+                        selectedUser.RoleId = 6;
+                        _core.User.Update(selectedUser);
+                        _core.Save();
+                    }
+                    return RedirectToAction("Index");
+                }
+
             }
             hospitalVm.TblCatagory = _core.Catagory.Get().ToList();
+            hospitalVm.TblUsers = _core.User.Get().ToList();
             hospitalVm.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             return View(hospitalVm);
         }

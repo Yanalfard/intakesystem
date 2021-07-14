@@ -32,6 +32,8 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">نام مرکز</th>
+                                <th scope="col">کاربر </th>
+                                <th scope="col">شماره کاربر </th>
                                 <th scope="col">شماره تماس</th>
                                 <th scope="col">دسته بندی</th>
                                 <th scope="col">جزئیات</th>
@@ -44,6 +46,8 @@
                             {
                                 <tr>
                                     <td>@i.Name</td>
+                                    <td>@i.TblUser.Name</td>
+                                    <td>@i.TblUser.TellNo</td>
                                     <td>@i.TellNo</td>
                                     <td>@i.TblCatagory.Name</td>
                                     <td>

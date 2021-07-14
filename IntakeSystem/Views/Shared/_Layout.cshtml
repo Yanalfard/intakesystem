@@ -29,18 +29,29 @@
 
 
                     <ul class="uk-navbar-nav desktop-header">
-                        <li>
-                            <a href="/Account/Login">
-                                <span class="bg-orange-circle" uk-icon="icon: log-in"></span>
-                                ورود
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Account/Register">
-                                <span class="bg-orange-circle" uk-icon="icon: person-add"></span>
-                                ثبت نام
-                            </a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="">
+                                    @User.Identity.Name.Split('|')[0]
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="/Login">
+                                    <span class="bg-orange-circle" uk-icon="icon: log-in"></span>
+                                    ورود
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Account/Register">
+                                    <span class="bg-orange-circle" uk-icon="icon: person-add"></span>
+                                    ثبت نام
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <!--left header in mobile version-->
                     <ul class="uk-navbar-nav display-none mobile-header">

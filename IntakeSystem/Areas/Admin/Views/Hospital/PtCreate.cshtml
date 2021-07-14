@@ -69,6 +69,17 @@
             @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
 
         </div>
+        <div class="custom-file col-md-4">
+            <label>کاربر </label>
+            <select class="form-control userselect">
+                <option value="0">انتخاب کاربر</option>
+                @foreach (var item in Model.TblUsers)
+                {
+                    <option value="@item.UserId">@item.TellNo</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+        </div>
         <div class="form-row">
             <div class="form-group col-md-7">
                 <label class="mt-2">توضیحات کوتاه</label>
@@ -96,6 +107,7 @@
     </div>
     <input type="hidden" name="LocationId" id="LocationId" />
     <input type="hidden" name="CatagoryId" id="CatagoryId" />
+    <input type="hidden" name="UserId" id="UserId" />
 }
 
 
@@ -116,6 +128,11 @@
         $(".categoryselect").change(function () {
             var id = $(".categoryselect option:selected").val();
             $("#CatagoryId").val(id);
+        });
+
+        $(".userselect").change(function () {
+            var id = $(".userselect option:selected").val();
+            $("#UserId").val(id);
         });
     </script>
 

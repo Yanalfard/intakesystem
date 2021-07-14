@@ -34,54 +34,8 @@
         <hr class="uk-divider-vertical uk-margin-remove">
         <div class="uk-width-expand">
             <!--start each hospital section-->
-            <div class="my-borderless-card uk-margin-medium-bottom">
-                <content class="my-flex-card my-row my-center" dir="rtl">
-                    <div class="my-column">
-                        <label class="uk-legend uk-text-bold uk-margin-top uk-text-right uk-margin-right">
-                            <a class="mytext-darkBlue" href="/Doctor">نام مرکز درمانی</a>
-                        </label>
-                        <div class="my-center MobileSize">
-                            <div class="card-with-border my-center">
-                                <img src="~/img/TestSample/hospitalSample.jpg" alt="picture" />
-                            </div>
-                        </div>
-                        <ul class="uk-text-right uk-margin-right">
-                            <li class="my-row">
-                                <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: information-circle"></span>
-                                <p class="uk-margin-remove-top">
-                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                                </p>
-
-                            </li>
-                            <li class="uk-margin-top">
-                                <hr class="uk-divider-icon" />
-                                @*<span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>*@
-                                <span class="">
-                                    <img src="~/img/formStatic/Heart.svg" width="30" />
-                                </span>
-                                <a href="/Doctor" class="mytext-gray">لیست پزشکان</a>
-                            </li>
-                            <li class="uk-margin-small-top">
-                              @*  <hr class="uk-divider-icon" />*@
-                                <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
-                                <span>152454135 - 165115165</span>
-                            </li>
-                            <li class="uk-margin-small-top">
-                                <span class="text-danger uk-margin-small-left" uk-icon="icon: location"></span>
-                                <span>تبریز- آبرسان-13 ابان</span>
-                            </li>
-                            <li class="uk-margin-small-top uk-margin-bottom">
-                                <a href="#modal-media-image" uk-toggle class="text-info"><span class="text-info uk-margin-small-left" uk-icon="icon:images"></span>گالری تصاویر</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="DesktopSize uk-margin-auto-vertical my-center">
-                        <div class="card-with-border my-center">
-                            <img src="~/img/TestSample/hospitalSample.jpg" alt="picture" />
-                        </div>
-                    </div>
-                </content>
-            </div>
+            @Html.Action("Hospitals")
+         
             <!--end each hospital section-->
 
         </div>
@@ -90,11 +44,3 @@
 
 </section>
 
-<div id="modal-media-image" class="uk-flex-top uk-padding" uk-modal>
-    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical uk-padding uk-border-rounded">
-        <button class="uk-modal-close-outside bg-orange-circle" type="button" uk-close></button>
-        <img src="~/img/TestSample/hospitalSample.jpg" />
-        <img src="~/img/TestSample/hospitalSample.jpg" />
-        <img src="~/img/formStatic/Register.svg" />
-    </div>
-</div>

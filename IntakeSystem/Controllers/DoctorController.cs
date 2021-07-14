@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataLayer.Models;
+using Services.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,12 +10,15 @@ namespace IntakeSystem.Controllers
 {
     public class DoctorController : Controller
     {
+        private Core _core = new Core();
         // GET: Doctor
-        public ActionResult Index()
+        [Route("Doctor/{id}/{name}")]
+        public ActionResult Index(int id, string name)
         {
-            return View();
+            TblHospital selectedospital = _core.Hospital.GetById(id);
+            return View(selectedospital);
         }
-       
+
         public ActionResult Profile()
         {
             return View();

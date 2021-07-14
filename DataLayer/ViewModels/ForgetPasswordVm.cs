@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.ViewModels
 {
-    public class ForgetPasswordVm
+    public class ForgetPasswordVm : CaptchaVm
     {
         [MaxLength(11)]
         [StringLength(11)]

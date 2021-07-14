@@ -46,6 +46,10 @@ namespace DataLayer.ViewModels
         [Display(Name = "دسته ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int? CatagoryId { get; set; }
+        public List<TblUser> TblUsers { get; set; }
+        [Display(Name = "کاربر ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public int? UserId { get; set; }
         public List<TblCatagory> TblCatagory { get; set; }
         [DataType(DataType.MultilineText)]
         [Display(Name = "توضیحات کوتاه ")]

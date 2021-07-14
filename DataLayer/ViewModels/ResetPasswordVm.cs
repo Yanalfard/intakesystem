@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.ViewModels
 {
-    public class ResetPasswordVm
+    public class ResetPasswordVm:CaptchaVm
     {
         public string TellNo { get; set; }
         [Display(Name = "کد فعال سازی")]
@@ -20,6 +20,7 @@ namespace DataLayer.ViewModels
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50)]
         [Display(Name = "کلمه عبور")]
+        [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
         [Display(Name = "تکرار کد واژه")]

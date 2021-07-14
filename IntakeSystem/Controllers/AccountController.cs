@@ -98,7 +98,7 @@ namespace IntakeSystem.Controllers
                         TblUser user = _core.User.Get().FirstOrDefault(i => i.TellNo == login.TellNo);
                         if (user.IsActive)
                         {
-                            FormsAuthentication.SetAuthCookie(user.TellNo, login.RememberMe);
+                            FormsAuthentication.SetAuthCookie(user.TellNo + "|" + user.Name, login.RememberMe);
                             ViewBag.IsSuccess = true;
                             return Redirect(ReturnUrl);
                         }
@@ -119,6 +119,19 @@ namespace IntakeSystem.Controllers
                 return Redirect("404.html");
             }
 
+        }
+        [Route("LogOff")]
+        public ActionResult LogOff()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+                return Redirect("/");
+            }
+            catch
+            {
+                return Redirect("/fallback.html");
+            }
         }
         public int SelectedRandom()
         {
@@ -164,7 +177,7 @@ namespace IntakeSystem.Controllers
                     _core.User.Add(addUser);
                     _core.Save();
                     string message = addUser.Auth;
-                    await Sms.SendSms(addUser.TellNo, message, "GhasrMobileRegister");
+                    await Sms.SendSms(addUser.TellNo, message, "BehboodTavRegister");
                     //return await Task.FromResult(Redirect("/Verify/" + addUser.TellNo));
                     //return RedirectToAction("Index");
                     ActiveVm active = new ActiveVm();
@@ -205,7 +218,7 @@ namespace IntakeSystem.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ForgetPassword(ForgetPasswordVm forget)
+        public async Task<ActionResult> ForgetPassword(ForgetPasswordVm forget)
         {
             if (ModelState.IsValid)
             {
@@ -213,6 +226,9 @@ namespace IntakeSystem.Controllers
                 {
                     ForgetPasswordVm forgetPasswordVm = new ForgetPasswordVm();
                     forgetPasswordVm.TellNo = forget.TellNo;
+                    TblUser selectedUser = _core.User.Get(i => i.TellNo == forget.TellNo).FirstOrDefault();
+                    string message = selectedUser.Auth;
+                    await Sms.SendSms(forgetPasswordVm.TellNo, message, "BehboodTavForgetPassword");
                     return RedirectToAction("ResetPassword", forgetPasswordVm);
                 }
                 ModelState.AddModelError("TellNo", "شماره تلفن وارد شده یافت نشد");
@@ -227,7 +243,8 @@ namespace IntakeSystem.Controllers
             });
         }
         [HttpPost]
-        public ActionResult ResultChangePass(ResetPasswordVm reset)
+
+        public ActionResult ResetPassword(ResetPasswordVm reset)
         {
             if (ModelState.IsValid)
             {
@@ -239,11 +256,16 @@ namespace IntakeSystem.Controllers
                     user.Password = password;
                     _core.User.Update(user);
                     _core.Save();
-                    return Redirect("/Login?resetPassWord=true");
+                    // return Redirect("/Login?resetPassWord=true");
+                    return RedirectToAction("ResultChangePass");
                 }
                 ModelState.AddModelError("Auth", "کد وارد شده اشتباه است");
             }
             return View(reset);
+        }
+        public ActionResult ResultChangePass(ResetPasswordVm reset)
+        {
+            return View();
         }
 
 
