@@ -40,7 +40,8 @@ namespace IntakeSystem.Utilities
         {
             using (Core db = new Core())
             {
-                return db.User.Get().Where(u => u.TellNo == username).Select(u => u.TblRole.Name).ToArray();
+                string user = username.Split('|')[0];
+                return db.User.Get().Where(u => u.TellNo == user).Select(u => u.TblRole.Name).ToArray();
             }
         }
 
