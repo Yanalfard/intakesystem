@@ -1,0 +1,201 @@
+﻿@model IEnumerable<DataLayer.Models.TblUser>
+<div class="table-responsive flex">
+    <table class="table fixed">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ردیف </th>
+                <th scope="col">کد </th>
+                <th scope="col">نام کاربر</th>
+                <th scope="col">شماره تماس</th>
+                <th scope="col">تخصص</th>
+                <th scope="col">تنظیمات نوبت دهی</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">جزئیات</th>
+                <th scope="col">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int skip = ViewBag.skip;
+            }
+
+
+            @foreach (var item in Model)
+            {
+            <tr id="userId_@item.UserId">
+                <td>@(skip + 1)</td>
+                @{
+                    skip += 1;
+                }
+                <td>@item.UserId</td>
+                <td>@item.Name</td>
+                <td>@item.TellNo</td>
+                <td>@item.TblHospitalSpecialityRel.FirstOrDefault().TblSpeciality.Name</td>
+                <td>
+                    <a id="Visit" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="file-tray-full"></a>
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+
+                        <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="فعال">
+                            <a onclick="activeDisableUser(@item.UserId)">
+                                <span class="text-success" uk-icon="toggle"></span>
+                            </a>
+                        </span>
+                    }
+                    else
+                    {
+                        <span data-placement="top" id="IsActive" data-toggle="tooltip" title="" data-original-title="غیر فعال">
+                            <a onclick="activeDisableUser(@item.UserId)">
+                                <span class="text-secondary gly-rotate-180" uk-icon="toggle"></span>
+                            </a>
+                        </span>
+                    }
+                </td>
+                <td>
+                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                        <a onclick="Information(@item.UserId)" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                    </span>
+                </td>
+                <td>
+                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش رمز ">
+                        <a href="#" data-toggle="modal" data-target="#modalSave" onclick="changePassword(@item.UserId)"><i class="btn fas fa-edit mr-2 text-success">ویرایش رمز</i></a>
+                    </span>
+                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="ویرایش">
+                        <a href="#" data-toggle="modal" data-target="#modalSave" onclick="EditUser(@item.UserId)"><i class="btn fas fa-edit mr-2 text-primary">ویرایش</i></a>
+                    </span>
+                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حذف">
+                        <a onclick="deleteUser(@item.UserId)"><i class="btn fas fa-trash mr-2 text-danger">حذف</i></a>
+                    </span>
+                </td>
+            </tr>
+
+            }
+
+        </tbody>
+    </table>
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 3px 6px;
+                text-decoration: none;
+                transition: background-color .3s;
+                border: 1px solid #ddd;
+            }
+
+                .pagination a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                    border: 1px solid #4CAF50;
+                }
+
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                }
+    </style>
+
+
+
+
+
+    <script>
+        function showOtherPage(id) {
+            $('#pageId').val(id);
+            document.getElementById('formSearchUser').submit();
+        }
+    </script>
+
+
+
+
+    @*<div class="uk-margin-auto-right">
+            <ul class="uk-pagination uk-margin-remove uk-margin-auto-right">
+                @{ int pageCount = ViewBag.PageCount;
+                    int pageShow = ViewBag.PageShow;
+                    int minPage = pageShow <= 1 ? pageShow : pageShow - 2;
+                    int maxPage = pageShow <= 1 ? pageShow + 4 : pageShow + 2;
+                    int notpage = 0; }
+                @if (pageShow > 1)
+                {
+                    <li><a onclick="showOtherPage(@(pageShow==0?1:pageShow-1))"><span uk-pagination-previous></span></a></li>
+                }
+                @if (pageShow > 3)
+                {
+                    <li><a onclick="showOtherPage(1)">1</a></li>
+                }
+                @for (int i = 1; i <= pageCount; i++)
+                {
+                    @if (i >= minPage && i <= maxPage)
+                    {
+                        <li><a onclick="showOtherPage(@(i))" class="@(pageShow==i?"uk-text-danger":"")">@i</a></li>
+                        notpage = 0;
+                    }
+                    else
+                    {
+                        if (notpage == 0)
+                        {
+                            <li class="uk-disabled"><span>...</span></li>
+                            notpage++;
+                        }
+                    }}
+                @if (pageShow <= pageCount - 3)
+                {
+                    <li><a onclick="showOtherPage(@(pageCount))">@pageCount</a></li>
+                }
+                @if (pageShow < pageCount)
+                {
+                    <li><a onclick="showOtherPage(@(pageShow==0?2:pageShow+1))"><span uk-pagination-next></span></a></li>
+                }
+
+            </ul>
+        </div>*@
+
+</div>
+    <div class="card-footer bg-white uk-text-center">
+        <div class="pagination" style="display:block;margin:auto auto">
+            @{
+                int pageCount = ViewBag.PageCount;
+                int pageShow = ViewBag.PageShow;
+                int minPage = pageShow <= 1 ? pageShow : pageShow - 2;
+                int maxPage = pageShow <= 1 ? pageShow + 4 : pageShow + 2;
+                int notpage = 0; }
+            @if (pageShow > 1)
+            {
+                <a onclick="showOtherPage(@(pageShow==0?1:pageShow-1))" style="height:29px"><span uk-pagination-previous></span></a>
+            }
+            @if (pageShow > 3)
+            {
+                <a onclick="showOtherPage(1)">1</a>
+            }
+            @for (int i = 1; i <= pageCount; i++)
+            {
+                if (i >= minPage && i <= maxPage)
+                {
+                    <a onclick="showOtherPage(@(i))" class="@(pageShow==i?"uk-text-danger":"")">@i</a>
+                    notpage = 0;
+                }
+                else
+                {
+                    if (notpage == 0)
+                    {
+                        <a class="uk-disabled"><span>...</span></a>
+                        notpage++;
+                    }
+                }
+            }
+            @if (pageShow <= pageCount - 3)
+            {
+                <a onclick="showOtherPage(@(pageCount))">@pageCount</a>
+            }
+            @if (pageShow < pageCount)
+            {
+                <a onclick="showOtherPage(@(pageShow==0?2:pageShow+1))" style="height:29px"><span uk-pagination-next></span></a>
+            }
+        </div>
+    </div>

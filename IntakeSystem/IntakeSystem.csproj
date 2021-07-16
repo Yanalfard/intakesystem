@@ -853,8 +853,8 @@
     <Content Include="Areas\Hospital\Views\Doctor\PtInfo.cshtml" />
     <Content Include="Areas\Hospital\Views\Doctor\PtVisit.cshtml" />
     <Content Include="Areas\Hospital\Views\Speciality\Index.cshtml" />
-    <Content Include="Areas\Hospital\Views\Speciality\PtCreate.cshtml" />
-    <Content Include="Areas\Hospital\Views\Speciality\PtEdit.cshtml" />
+    <Content Include="Areas\Hospital\Views\Speciality\Create.cshtml" />
+    <Content Include="Areas\Hospital\Views\Speciality\Edit.cshtml" />
     <Content Include="Areas\Hospital\Views\Gallery\Index.cshtml" />
     <Content Include="Areas\Hospital\Views\Ticket\Index.cshtml" />
     <Content Include="Areas\Hospital\Views\Setting\Index.cshtml" />
@@ -880,6 +880,7 @@
     <Content Include="Areas\Admin\Views\Catagory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Catagory\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\List.cshtml" />
+    <Content Include="Areas\Hospital\Views\Doctor\List.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

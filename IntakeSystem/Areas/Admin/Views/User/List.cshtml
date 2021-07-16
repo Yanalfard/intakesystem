@@ -109,49 +109,6 @@
 
 
 
-
-    @*<div class="uk-margin-auto-right">
-            <ul class="uk-pagination uk-margin-remove uk-margin-auto-right">
-                @{ int pageCount = ViewBag.PageCount;
-                    int pageShow = ViewBag.PageShow;
-                    int minPage = pageShow <= 1 ? pageShow : pageShow - 2;
-                    int maxPage = pageShow <= 1 ? pageShow + 4 : pageShow + 2;
-                    int notpage = 0; }
-                @if (pageShow > 1)
-                {
-                    <li><a onclick="showOtherPage(@(pageShow==0?1:pageShow-1))"><span uk-pagination-previous></span></a></li>
-                }
-                @if (pageShow > 3)
-                {
-                    <li><a onclick="showOtherPage(1)">1</a></li>
-                }
-                @for (int i = 1; i <= pageCount; i++)
-                {
-                    @if (i >= minPage && i <= maxPage)
-                    {
-                        <li><a onclick="showOtherPage(@(i))" class="@(pageShow==i?"uk-text-danger":"")">@i</a></li>
-                        notpage = 0;
-                    }
-                    else
-                    {
-                        if (notpage == 0)
-                        {
-                            <li class="uk-disabled"><span>...</span></li>
-                            notpage++;
-                        }
-                    }}
-                @if (pageShow <= pageCount - 3)
-                {
-                    <li><a onclick="showOtherPage(@(pageCount))">@pageCount</a></li>
-                }
-                @if (pageShow < pageCount)
-                {
-                    <li><a onclick="showOtherPage(@(pageShow==0?2:pageShow+1))"><span uk-pagination-next></span></a></li>
-                }
-
-            </ul>
-        </div>*@
-
 </div>
     <div class="card-footer bg-white uk-text-center">
         <div class="pagination" style="display:block;margin:auto auto">
