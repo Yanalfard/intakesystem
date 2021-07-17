@@ -1,4 +1,8 @@
-﻿
+﻿@model DataLayer.ViewModels.RegisterVm
+@{
+    ViewBag.Title = "اضافه کردن پزشک";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 <div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
         افزودن پزشک
@@ -7,33 +11,38 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form>
+@using (Html.BeginForm("PtCreate", "Doctor", FormMethod.Post, new { enctype = "multipart/form-data", style = "overflow:auto" }))
+{
     <div class="modal-body">
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label>نام پزشک</label>
-                <input class="form-control" type="text" placeholder="مثال: علی علیزاده">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: علی علیزاده" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-3">
                 <label>شماره تماس</label>
-                <input class="form-control" type="tel" placeholder="...09">
+                @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "form-control", placeholder = "...09" } })
+                @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-3">
                 <label>کد ملی</label>
-                <input class="form-control" type="number" placeholder="...">
+                @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "form-control", placeholder = "1234567890" } })
+                @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
             </div>
 
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label>رمز عبور</label>
-                <input class="form-control" type="password" placeholder="...">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "****" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">
                 <label for="">تخصص</label>
                 <select class="form-control" id="">
-                    <option>تخصص </option>
-                    <option>تخصص 2</option>
+                    <option value="0">تخصص </option>
+                   
                 </select>
             </div>
         </div>
@@ -41,13 +50,13 @@
             <div class="form-check col-md-3">
                 <label>جنسیت</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" checked>
+                    @Html.RadioButtonFor(model => model.Gender, "0", new { @checked = true, @class = "form-check-input" })
                     <label class="form-check-label" for="Female">
                         زن
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male">
+                    @Html.RadioButtonFor(model => model.Gender, "1", new { @class = "form-check-input" })
                     <label class="form-check-label" for="male">
                         مرد
                     </label>
@@ -76,7 +85,8 @@
     <div class="modal-footer justify-content-end">
         <button type="submit" class="btn btn-success btn-sm text-white">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
     </div>
-</form>
+}
+
 <script>
     function inputChanged(sender) {
         var fileName = sender.files[0].name;

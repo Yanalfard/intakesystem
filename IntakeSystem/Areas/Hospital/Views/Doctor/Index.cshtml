@@ -14,7 +14,7 @@
         <div class="card flex-div border-0 main-shadow">
             <div class="card-header bg-white">
                 <div class="pr-1 pt-2">
-                    <form class="card-form form-row" id="formSearchUser" action="/Admin/User/Index">
+                    <form class="card-form form-row" id="formSearchUser" action="/Doctor/Hospital/Index">
                         <input type="hidden" id="pageId" name="pageId" value="@ViewBag.PageShow">
                         <div class="form-input">
                             <div class="form-inline">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-toolbar mr-md-3 mr-1">
                             <button type="submit" class="btn btn-primary btn-sm">جستجو<span class="icon-holder uk-margin-small-right" uk-icon="search-outline"></span></button>
-                            <button id="Create" data-toggle="modal" data-target="#modalSave" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
+                            <a href="PtCreate" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></a>
                         </div>
                     </form>
                 </div>
@@ -41,86 +41,7 @@
                 @Html.Action("List")
             </div>
 
-            <!--end list region-->
-            @*<div class="card-footer bg-white">*@
-            @*<nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
 
-                        @if (ViewBag.PageId == 1)
-                        {
-                            <li class="page-item d-none">
-                                <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="page-item">
-                                <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
-                            </li>
-
-                        }
-
-                        <li class="page-item">
-                            <select id="pageNumber" class="custom-select custom-select-sm">
-                                @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
-                                {
-                                    <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
-                                }
-                            </select>
-                        </li>
-
-
-                        @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
-                        {
-                            <li class="page-item d-none">
-                                <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
-                            </li>
-                        }
-                        else
-
-                        {
-                            <li class="page-item">
-                                <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
-                            </li>
-
-                        }
-                        <li>
-                            <select id="InPageCount" class="custom-select custom-select-sm">
-                                @if (ViewBag.InPageCount == 0)
-                                {
-                                    <option value="0" selected>18 در هر صفحه</option>
-                                    <option value="20">20 در هر صفحه</option>
-                                    <option value="30">30 در هر صفحه</option>
-                                    <option value="40">40 در هر صفحه</option>
-
-                                }
-
-                                @if (ViewBag.InPageCount == 20)
-                                {
-                                    <option value="0">18 در هر صفحه</option>
-                                    <option value="20" selected>20 در هر صفحه</option>
-                                    <option value="30">30 در هر صفحه</option>
-                                    <option value="40">40 در هر صفحه</option>
-                                }
-                                else if (ViewBag.InPageCount == 30)
-                                {
-                                    <option value="0">18 در هر صفحه</option>
-                                    <option value="20">20 در هر صفحه</option>
-                                    <option value="30" selected>30 در هر صفحه</option>
-                                    <option value="40">40 در هر صفحه</option>
-                                }
-                                else if (ViewBag.InPageCount == 40)
-                                {
-                                    <option value="0">18 در هر صفحه</option>
-                                    <option value="20">20 در هر صفحه</option>
-                                    <option value="30">30 در هر صفحه</option>
-                                    <option value="40" selected>40 در هر صفحه</option>
-                                }
-
-                            </select>
-                        </li>
-                    </ul>
-                </nav>*@
         </div>
     </div>
 </div>
@@ -140,11 +61,11 @@
             });
             $("#overlay").fadeOut(300);
         }
-        $("#Create").click(function () {
-            $.get("/Hospital/Doctor/PtCreate", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
+        //$("#Create").click(function () {
+        //    $.get("/Hospital/Doctor/PtCreate", function (result) {
+        //        $(".modal-content").html(result);
+        //    });
+        //});
         function Information(id) {
 
             $.get("/Hospital/Doctor/PtInfo/" + id, function (result) {

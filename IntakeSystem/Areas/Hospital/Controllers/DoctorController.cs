@@ -65,8 +65,8 @@ namespace IntakeSystem.Areas.Hospital.Controllers
         }
         public ActionResult PtCreate()
         {
-            ViewBag.Roles = _core.Role.Get(orderBy: i => i.OrderByDescending(j => j.RoleId));
-            return PartialView();
+            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            return View();
         }
         [HttpPost]
         public ActionResult PtCreate(RegisterVm register)
