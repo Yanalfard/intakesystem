@@ -18,7 +18,12 @@ namespace IntakeSystem.Controllers
             TblHospital selectedospital = _core.Hospital.GetById(id);
             return View(selectedospital);
         }
-
+        [Route("Doctors")]
+        public ActionResult Doctors()
+        {
+            List<TblUser> selectedUser = _core.User.Get(i=>i.RoleId==3).ToList();
+            return View(selectedUser);
+        }
         public ActionResult Profile()
         {
             return View();

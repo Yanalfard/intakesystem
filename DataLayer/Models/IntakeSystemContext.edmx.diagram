@@ -4,28 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f89af537c7ce49c499b729b65a93f9b1" Name="Diagram1">
-        <EntityTypeShape EntityType="IntakeSystemModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblCatagory" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblConfig" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblDay" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblHospital" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblHospitalSpecialityRel" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblImage" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblLocation" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblOrder" Width="1.5" PointX="12.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblRole" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblSpeciality" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblTicket" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntakeSystemModel.TblUser" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="2d7cad1f9f5e4b3aa7326ef222016e36" Name="Diagram1">
+        <EntityTypeShape EntityType="IntakeSystemModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblCatagory" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblConfig" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblDay" Width="1.5" PointX="10.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblHospital" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblHospitalSpecialityRel" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblHosSpecDayRel" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblImage" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblLocation" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblOrder" Width="1.5" PointX="12.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblRole" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblSpeciality" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblTicket" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntakeSystemModel.TblUser" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospital_TblCatagory" ManuallyRouted="false" />
-        <AssociationConnector Association="IntakeSystemModel.FK_TblHospitalSpecialityRel_TblDay" ManuallyRouted="false" />
+        <AssociationConnector Association="IntakeSystemModel.FK_TblHosSpecDayRel_TblDay" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospital_TblUser" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospitalSpecialityRel_TblHospital" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblImage_TblHospital" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblTicket_TblHospital" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospitalSpecialityRel_TblSpeciality" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblHospitalSpecialityRel_TblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="IntakeSystemModel.FK_TblHosSpecDayRel_TblHospitalSpecialityRel" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblOrder_TblHospitalSpecialityRel" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblLocation_TblLocation" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblUser_TblLocation" ManuallyRouted="false" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -65,10 +65,17 @@
           </Key>
           <Property Name="HospitalSpecialityRelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalId" Type="int" Nullable="false" />
-          <Property Name="SpecialityId" Type="int" Nullable="false" />
+          <Property Name="SpecialityId" Type="int" />
           <Property Name="DoctorId" Type="int" />
-          <Property Name="DayId" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblHosSpecDayRel">
+          <Key>
+            <PropertyRef Name="HosSpecDayRelId" />
+          </Key>
+          <Property Name="HosSpecDayRelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HosSpecId" Type="int" Nullable="false" />
+          <Property Name="DayId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TblImage">
           <Key>
@@ -179,20 +186,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TblHospitalSpecialityRel_TblDay">
-          <End Role="TblDay" Type="Self.TblDay" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblDay">
-              <PropertyRef Name="DayId" />
-            </Principal>
-            <Dependent Role="TblHospitalSpecialityRel">
-              <PropertyRef Name="DayId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TblHospitalSpecialityRel_TblHospital">
           <End Role="TblHospital" Type="Self.TblHospital" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -208,7 +201,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblHospitalSpecialityRel_TblSpeciality">
-          <End Role="TblSpeciality" Type="Self.TblSpeciality" Multiplicity="1">
+          <End Role="TblSpeciality" Type="Self.TblSpeciality" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="*" />
@@ -232,6 +225,30 @@
             </Principal>
             <Dependent Role="TblHospitalSpecialityRel">
               <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHosSpecDayRel_TblDay">
+          <End Role="TblDay" Type="Self.TblDay" Multiplicity="1" />
+          <End Role="TblHosSpecDayRel" Type="Self.TblHosSpecDayRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblDay">
+              <PropertyRef Name="DayId" />
+            </Principal>
+            <Dependent Role="TblHosSpecDayRel">
+              <PropertyRef Name="DayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHosSpecDayRel_TblHospitalSpecialityRel">
+          <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="1" />
+          <End Role="TblHosSpecDayRel" Type="Self.TblHosSpecDayRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblHospitalSpecialityRel">
+              <PropertyRef Name="HospitalSpecialityRelId" />
+            </Principal>
+            <Dependent Role="TblHosSpecDayRel">
+              <PropertyRef Name="HosSpecId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,37 +364,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="IntakeSystemModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCatagory" EntityType="Self.TblCatagory" Schema="dbo" store:Type="Tables" />
@@ -385,6 +371,7 @@
           <EntitySet Name="TblDay" EntityType="Self.TblDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblHospital" EntityType="Self.TblHospital" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblHospitalSpecialityRel" EntityType="Self.TblHospitalSpecialityRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblHosSpecDayRel" EntityType="Self.TblHosSpecDayRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblImage" EntityType="Self.TblImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblLocation" EntityType="Self.TblLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblOrder" EntityType="Self.TblOrder" Schema="dbo" store:Type="Tables" />
@@ -400,10 +387,6 @@
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblHospital" EntitySet="TblHospital" />
           </AssociationSet>
-          <AssociationSet Name="FK_TblHospitalSpecialityRel_TblDay" Association="Self.FK_TblHospitalSpecialityRel_TblDay">
-            <End Role="TblDay" EntitySet="TblDay" />
-            <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
-          </AssociationSet>
           <AssociationSet Name="FK_TblHospitalSpecialityRel_TblHospital" Association="Self.FK_TblHospitalSpecialityRel_TblHospital">
             <End Role="TblHospital" EntitySet="TblHospital" />
             <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
@@ -415,6 +398,14 @@
           <AssociationSet Name="FK_TblHospitalSpecialityRel_TblUser" Association="Self.FK_TblHospitalSpecialityRel_TblUser">
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHosSpecDayRel_TblDay" Association="Self.FK_TblHosSpecDayRel_TblDay">
+            <End Role="TblDay" EntitySet="TblDay" />
+            <End Role="TblHosSpecDayRel" EntitySet="TblHosSpecDayRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHosSpecDayRel_TblHospitalSpecialityRel" Association="Self.FK_TblHosSpecDayRel_TblHospitalSpecialityRel">
+            <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
+            <End Role="TblHosSpecDayRel" EntitySet="TblHosSpecDayRel" />
           </AssociationSet>
           <AssociationSet Name="FK_TblImage_TblHospital" Association="Self.FK_TblImage_TblHospital">
             <End Role="TblHospital" EntitySet="TblHospital" />
@@ -453,7 +444,8 @@
             <End Role="TblUser" EntitySet="TblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IntakeSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -491,7 +483,7 @@
           <Property Name="IsWorking" Type="Boolean" Nullable="false" />
           <Property Name="StartShift" Type="Int16" />
           <Property Name="EndShift" Type="Int16" />
-          <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblDay" FromRole="TblDay" ToRole="TblHospitalSpecialityRel" />
+          <NavigationProperty Name="TblHosSpecDayRel" Relationship="Self.FK_TblHosSpecDayRel_TblDay" FromRole="TblDay" ToRole="TblHosSpecDayRel" />
         </EntityType>
         <EntityType Name="TblHospital">
           <Key>
@@ -511,12 +503,12 @@
           <Property Name="CatagoryId" Type="Int32" Nullable="false" />
           <Property Name="AboutUs" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="Fee" Type="Int16" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblCatagory" Relationship="Self.FK_TblHospital_TblCatagory" FromRole="TblHospital" ToRole="TblCatagory" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblHospital_TblUser" FromRole="TblHospital" ToRole="TblUser" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblHospital" FromRole="TblHospital" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblImage" Relationship="Self.FK_TblImage_TblHospital" FromRole="TblHospital" ToRole="TblImage" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblHospital" FromRole="TblHospital" ToRole="TblTicket" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TblHospitalSpecialityRel">
           <Key>
@@ -524,15 +516,24 @@
           </Key>
           <Property Name="HospitalSpecialityRelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HospitalId" Type="Int32" Nullable="false" />
-          <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityId" Type="Int32" />
           <Property Name="DoctorId" Type="Int32" />
-          <Property Name="DayId" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TblDay" Relationship="Self.FK_TblHospitalSpecialityRel_TblDay" FromRole="TblHospitalSpecialityRel" ToRole="TblDay" />
           <NavigationProperty Name="TblHospital" Relationship="Self.FK_TblHospitalSpecialityRel_TblHospital" FromRole="TblHospitalSpecialityRel" ToRole="TblHospital" />
           <NavigationProperty Name="TblSpeciality" Relationship="Self.FK_TblHospitalSpecialityRel_TblSpeciality" FromRole="TblHospitalSpecialityRel" ToRole="TblSpeciality" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblHospitalSpecialityRel_TblUser" FromRole="TblHospitalSpecialityRel" ToRole="TblUser" />
+          <NavigationProperty Name="TblHosSpecDayRel" Relationship="Self.FK_TblHosSpecDayRel_TblHospitalSpecialityRel" FromRole="TblHospitalSpecialityRel" ToRole="TblHosSpecDayRel" />
           <NavigationProperty Name="TblOrder" Relationship="Self.FK_TblOrder_TblHospitalSpecialityRel" FromRole="TblHospitalSpecialityRel" ToRole="TblOrder" />
+        </EntityType>
+        <EntityType Name="TblHosSpecDayRel">
+          <Key>
+            <PropertyRef Name="HosSpecDayRelId" />
+          </Key>
+          <Property Name="HosSpecDayRelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HosSpecId" Type="Int32" Nullable="false" />
+          <Property Name="DayId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblDay" Relationship="Self.FK_TblHosSpecDayRel_TblDay" FromRole="TblHosSpecDayRel" ToRole="TblDay" />
+          <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHosSpecDayRel_TblHospitalSpecialityRel" FromRole="TblHosSpecDayRel" ToRole="TblHospitalSpecialityRel" />
         </EntityType>
         <EntityType Name="TblImage">
           <Key>
@@ -628,14 +629,14 @@
           <Property Name="DoctorDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Auth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblHospital" Relationship="Self.FK_TblHospital_TblUser" FromRole="TblUser" ToRole="TblHospital" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblUser" FromRole="TblUser" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblUser_TblLocation" FromRole="TblUser" ToRole="TblLocation" />
           <NavigationProperty Name="TblOrder" Relationship="Self.FK_TblOrder_TblUser" FromRole="TblUser" ToRole="TblOrder" />
           <NavigationProperty Name="TblRole" Relationship="Self.FK_TblUser_TblRole" FromRole="TblUser" ToRole="TblRole" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblUser" FromRole="TblUser" ToRole="TblTicket" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="Auth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_TblHospital_TblCatagory">
           <End Role="TblCatagory" Type="Self.TblCatagory" Multiplicity="1" />
@@ -649,16 +650,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TblHospitalSpecialityRel_TblDay">
-          <End Role="TblDay" Type="Self.TblDay" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="*" />
+        <Association Name="FK_TblHosSpecDayRel_TblDay">
+          <End Role="TblDay" Type="Self.TblDay" Multiplicity="1" />
+          <End Role="TblHosSpecDayRel" Type="Self.TblHosSpecDayRel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblDay">
               <PropertyRef Name="DayId" />
             </Principal>
-            <Dependent Role="TblHospitalSpecialityRel">
+            <Dependent Role="TblHosSpecDayRel">
               <PropertyRef Name="DayId" />
             </Dependent>
           </ReferentialConstraint>
@@ -718,7 +717,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblHospitalSpecialityRel_TblSpeciality">
-          <End Role="TblSpeciality" Type="Self.TblSpeciality" Multiplicity="1">
+          <End Role="TblSpeciality" Type="Self.TblSpeciality" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="*" />
@@ -742,6 +741,18 @@
             </Principal>
             <Dependent Role="TblHospitalSpecialityRel">
               <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHosSpecDayRel_TblHospitalSpecialityRel">
+          <End Role="TblHospitalSpecialityRel" Type="Self.TblHospitalSpecialityRel" Multiplicity="1" />
+          <End Role="TblHosSpecDayRel" Type="Self.TblHosSpecDayRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblHospitalSpecialityRel">
+              <PropertyRef Name="HospitalSpecialityRelId" />
+            </Principal>
+            <Dependent Role="TblHosSpecDayRel">
+              <PropertyRef Name="HosSpecId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -836,6 +847,7 @@
           <EntitySet Name="TblDay" EntityType="Self.TblDay" />
           <EntitySet Name="TblHospital" EntityType="Self.TblHospital" />
           <EntitySet Name="TblHospitalSpecialityRel" EntityType="Self.TblHospitalSpecialityRel" />
+          <EntitySet Name="TblHosSpecDayRel" EntityType="Self.TblHosSpecDayRel" />
           <EntitySet Name="TblImage" EntityType="Self.TblImage" />
           <EntitySet Name="TblLocation" EntityType="Self.TblLocation" />
           <EntitySet Name="TblOrder" EntityType="Self.TblOrder" />
@@ -847,9 +859,9 @@
             <End Role="TblCatagory" EntitySet="TblCatagory" />
             <End Role="TblHospital" EntitySet="TblHospital" />
           </AssociationSet>
-          <AssociationSet Name="FK_TblHospitalSpecialityRel_TblDay" Association="Self.FK_TblHospitalSpecialityRel_TblDay">
+          <AssociationSet Name="FK_TblHosSpecDayRel_TblDay" Association="Self.FK_TblHosSpecDayRel_TblDay">
             <End Role="TblDay" EntitySet="TblDay" />
-            <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
+            <End Role="TblHosSpecDayRel" EntitySet="TblHosSpecDayRel" />
           </AssociationSet>
           <AssociationSet Name="FK_TblHospital_TblUser" Association="Self.FK_TblHospital_TblUser">
             <End Role="TblUser" EntitySet="TblUser" />
@@ -874,6 +886,10 @@
           <AssociationSet Name="FK_TblHospitalSpecialityRel_TblUser" Association="Self.FK_TblHospitalSpecialityRel_TblUser">
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHosSpecDayRel_TblHospitalSpecialityRel" Association="Self.FK_TblHosSpecDayRel_TblHospitalSpecialityRel">
+            <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
+            <End Role="TblHosSpecDayRel" EntitySet="TblHosSpecDayRel" />
           </AssociationSet>
           <AssociationSet Name="FK_TblOrder_TblHospitalSpecialityRel" Association="Self.FK_TblOrder_TblHospitalSpecialityRel">
             <End Role="TblHospitalSpecialityRel" EntitySet="TblHospitalSpecialityRel" />
@@ -903,36 +919,6 @@
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblTicket" EntitySet="TblTicket" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -981,7 +967,6 @@
           <EntitySetMapping Name="TblHospital">
             <EntityTypeMapping TypeName="IntakeSystemModel.TblHospital">
               <MappingFragment StoreEntitySet="TblHospital">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
@@ -996,6 +981,7 @@
                 <ScalarProperty Name="CatagoryId" ColumnName="CatagoryId" />
                 <ScalarProperty Name="AboutUs" ColumnName="AboutUs" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1006,8 +992,16 @@
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
                 <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-                <ScalarProperty Name="DayId" ColumnName="DayId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblHosSpecDayRel">
+            <EntityTypeMapping TypeName="IntakeSystemModel.TblHosSpecDayRel">
+              <MappingFragment StoreEntitySet="TblHosSpecDayRel">
+                <ScalarProperty Name="HosSpecDayRelId" ColumnName="HosSpecDayRelId" />
+                <ScalarProperty Name="HosSpecId" ColumnName="HosSpecId" />
+                <ScalarProperty Name="DayId" ColumnName="DayId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1081,8 +1075,6 @@
           <EntitySetMapping Name="TblUser">
             <EntityTypeMapping TypeName="IntakeSystemModel.TblUser">
               <MappingFragment StoreEntitySet="TblUser">
-                <ScalarProperty Name="Auth" ColumnName="Auth" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TellNo" ColumnName="TellNo" />
@@ -1100,16 +1092,11 @@
                 <ScalarProperty Name="DoctorDescription" ColumnName="DoctorDescription" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Auth" ColumnName="Auth" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IntakeSystemModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IntakeSystemModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IntakeSystemModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="IntakeSystemModel.Store.sp_helpdiagramdefinition" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="IntakeSystemModel.Store.sp_helpdiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IntakeSystemModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IntakeSystemModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

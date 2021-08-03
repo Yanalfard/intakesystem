@@ -1,4 +1,5 @@
-﻿<div class="modal-header">
+﻿@model IEnumerable<DataLayer.Models.TblDay>
+<div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
         تنظیمات زمان ویزیت و نوبت دهی
     </h6>
@@ -32,95 +33,51 @@
                 ساعت اتمام کار
             </label>
         </div>
-        <div class="form-row bg-light pt-2">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Saturday">
-                <label class="form-check-label" for="Saturday">شنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
 
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Sunday">
-                <label class="form-check-label" for="Sunday">یکشنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
+        <div class="form-row bg-light pt-2"></div>
 
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
+        @foreach (var item in Model)
+        {
+            <div class="form-row bg-light ">
+                <div class="form-check col-4 pr-5 pb-1 pb-md-0">
+                    <input type="checkbox" @(item.IsWorking == true ? "checked" : "") class="form-check-input" id="Saturday">
+                    @if (item.DayOfWeek == 1)
+                    {
+                        <label class="form-check-label">شنبه</label>
+                    }
+                    else if (item.DayOfWeek == 2)
+                    {
+                        <label class="form-check-label">یک شنبه</label>
+                    }
+                    else if (item.DayOfWeek == 3)
+                    {
+                        <label class="form-check-label">دوشنبه</label>
+                    }
+                    else if (item.DayOfWeek == 4)
+                    {
+                        <label class="form-check-label">سه شنبه</label>
+                    }
+                    else if (item.DayOfWeek == 5)
+                    {
+                        <label class="form-check-label">چهارشنبه</label>
+                    }
+                    else if (item.DayOfWeek == 6)
+                    {
+                        <label class="form-check-label">پنجشنبه</label>
+                    }
+                    else if (item.DayOfWeek == 7)
+                    {
+                        <label class="form-check-label">جمعه</label>
+                    }
+                </div>
+                <div class="form-group col-4">
+                    <input type="time" class="col-md-4 form-control form-control-sm" value="@item.StartShift" placeholder="">
+                </div>
+                <div class="form-group col-4">
+                    <input type="time" class="col-md-4 form-control form-control-sm" value="@item.EndShift" placeholder="">
+                </div>
             </div>
-        </div>
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Monday">
-                <label class="form-check-label" for="Monday">دوشنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Tuesday">
-                <label class="form-check-label" for="Tuesday">سه شنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
-
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Wednesday">
-                <label class="form-check-label" for="Wednesday">چهارشنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Thursday">
-                <label class="form-check-label" for="Thursday">پنجشنبه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
-        <div class="form-row bg-light">
-            <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                <input type="checkbox" class="form-check-input " id="Friday">
-                <label class="form-check-label" for="Friday">جمعه</label>
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-            <div class="form-group col-4">
-                <input class="col-md-4 form-control form-control-sm" placeholder="">
-            </div>
-        </div>
+        }
     </div>
     <div class="modal-footer justify-content-end">
         <button type="submit" class="btn btn-success btn-sm text-white">ثبت<span class="icon-holder uk-margin-small-right" uk-icon="checkmark-circle-outline"></span></button>

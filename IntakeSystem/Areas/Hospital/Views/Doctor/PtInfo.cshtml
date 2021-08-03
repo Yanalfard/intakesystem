@@ -1,6 +1,7 @@
-﻿<div class="modal-header">
+﻿@model DataLayer.Models.TblUser
+<div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
-        جزئیات اطلاعات پزشک
+        جزئیات کاربر
     </h6>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -9,43 +10,57 @@
 <div class="modal-body">
     <div class="form-row ">
         <div class="form-group col-md-3">
-            <label>نام  پزشک: </label>
-            <span>علی رضایی</span>
+            <label>نام  کاربر: </label>
+            <span>@Model.Name</span>
         </div>
         <div class="form-group col-md-3">
             <label>شماره تماس: </label>
-            <span>09585456</span>
+            <span>@Model.TellNo</span>
         </div>
         <div class="form-group col-md-3">
             <label>کد ملی: </label>
-            <span>856958</span>
+            <span>@Model.IdentificationNo</span>
         </div>
         <div class="form-group col-md-3">
             <label>جنسیت:</label>
-            <span>زن</span>
-            <span>مرد</span>
+            @if (Model.Gender)
+            {
+                <span>مرد</span>
+            }
+            else
+            {
+                <span>زن</span>
+            }
         </div>
         <div class="form-group col-md-3">
             <label>نقش: </label>
-            <span>پزشک</span>
-        </div>
-        <div class="form-group col-md-3">
-            <label>تخصص: </label>
-            <span>قلب</span>
+            <span>@Model.TblRole.Title</span>
         </div>
         <div class="form-group col-md-3">
             <label>وضعیت: </label>
-            <span class="text-success">فعال</span>
-            <span class="text-danger">غیر فعال</span>
+            @if (Model.IsActive)
+            {
+                <span class="text-success">فعال</span>
+            }
+            else
+            {
+                <span class="text-danger">غیر فعال</span>
+            }
         </div>
-
     </div>
     <hr />
     <div class="form-group col-12">
         <label>توضیحات:</label>
         <div class="bg-light p-3 uk-border-rounded">
-            از آنجا که لورم ایپسوم، شباهت زیادی به متن های واقعی دارد، طراحان معمولا از لورم ایپسوم استفاده میکنند تا فقط به مشتری یا کار فرما نشان دهند که قالب طراحی شده بعد از اینکه متن در آن قرار میگرد چگونه خواهد بود و فونت ها و اندازه ها چگونه در نظر گرفته شده است.
+            @Model.DoctorDescription
+        </div>
+    </div>
+    <div class="form-group col-12">
+        <label>آدرس:</label>
+        <div class="bg-light p-3 uk-border-rounded">
+            @Model.Address
         </div>
     </div>
 </div>
+
 

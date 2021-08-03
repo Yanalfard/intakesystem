@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DataLayer.Models.TblUser>
+@{
+    ViewBag.Title = "پزشکان";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Admin/Resource/css/leaflet.css" rel="stylesheet" />
+<link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
+<hr class="map-bg-border" />
+<section class="doctor-section my-clipped uk-margin-medium-bottom">
+    <div class="uk-text-center" uk-grid dir="rtl">
+        <!--search filter section-->
+        <div class="uk-width-1-4 filter-section">
+            <div class="filter-card my-column">
+                <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
+                <form>
+                    <div class="">
+                        <select class="uk-select card-with-border city">
+                            <option>انتخاب شهر</option>
+                            <option>تبریز</option>
+                            <option>تهران</option>
+                        </select>
+                    </div>
+                    <hr class="uk-divider-icon" />
+                    <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
+                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr class="uk-divider-vertical uk-margin-remove">
+        <div class="uk-width-expand">
+
+            @foreach (var item in Model)
+            {
+                <label class="uk-legend uk-text-bold uk-margin-top uk-text-center uk-legend-mobile uk-margin-remove d-none">
+                    <span>@item.Name</span>
+                </label>
+                <div class="my-borderless-card uk-margin-medium-bottom">
+                    <content class="my-flex-card my-row my-center" dir="rtl">
+                        <div class="my-column">
+                            <label class="uk-legend uk-text-bold uk-margin-top uk-text-right uk-margin-right">
+                                <span> @item.Name</span>
+                            </label>
+                            <div class="my-center MobileSize">
+                                <div class="card-with-border my-center">
+                                    <img src="~/Resources/Images/User/@item.ImageUrl" alt="picture" />
+                                    @*<img src="~/img/TestSample/doctor1.jpg" alt="picture" />*@
+                                </div>
+                            </div>
+                            <ul class="uk-text-right uk-margin-right">
+                                <li class="my-row">
+                                    <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: information-circle"></span>
+                                    <p class="uk-margin-remove-top">
+                                        @item.DoctorDescription
+                                    </p>
+
+                                </li>
+                                @*<li class="uk-margin-small-top">
+                                        <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: pulse"></span>
+                                        <span> @item.TblHospitalSpecialityRel.Name </span>
+                                    </li>*@
+                                @*<li class="uk-margin-small-top">
+                                        <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: business"></span>
+                                        <span>@Model.Name</span>
+                                    </li>*@
+                                <li class="uk-margin-small-top">
+                                    <span class="mytext-orange uk-margin-small-left" uk-icon="icon: card"></span>
+                                    <span>هزینه ویزیت @item.VisitPrice تومان</span>
+                                </li>
+                                <li class="uk-margin-small-top">
+                                    <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
+                                    <span>@item.TellNo</span>
+                                    <a href="/Home/IntakeDay" class="desktop-intake-button float-left take-intake uk-text-center uk-margin-auto-right uk-margin-bottom">دریافت نوبت</a>
+                                </li>
+                                <li class="uk-margin-small-top">
+                                    <span class="text-danger uk-margin-small-left" uk-icon="icon: location"></span>
+                                    <span>@item.Address</span>
+                                </li>
+                            </ul>
+                            <a href="/Home/IntakeDay" class="mobile-intake-button take-intake uk-text-center my-center uk-margin-small-top uk-margin-medium-bottom d-none">دریافت نوبت</a>
+                        </div>
+                        <div class="DesktopSize uk-margin-auto-vertical my-center">
+                            <div class="card-with-border my-center">
+                                <img src="~/Resources/Images/User/@item.ImageUrl" alt="picture" />
+                            </div>
+                        </div>
+                    </content>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

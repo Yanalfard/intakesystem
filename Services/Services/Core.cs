@@ -16,6 +16,7 @@ namespace Services.Services
         private MainRepo<TblUser> _user;
         private MainRepo<TblTicket> _ticket;
         private MainRepo<TblHospitalSpecialityRel> _hospitalSpecialityRel;
+        private MainRepo<TblHosSpecDayRel> _hosSpecDayRel;
         private MainRepo<TblHospital> _hospital;
         private MainRepo<TblImage> _image;
         private MainRepo<TblConfig> _config;
@@ -29,6 +30,7 @@ namespace Services.Services
         public MainRepo<TblUser> User => _user ?? (_user = new MainRepo<TblUser>(_db));
         public MainRepo<TblTicket> Ticket => _ticket ?? (_ticket = new MainRepo<TblTicket>(_db));
         public MainRepo<TblHospitalSpecialityRel> HospitalSpecialityRel => _hospitalSpecialityRel ?? (_hospitalSpecialityRel = new MainRepo<TblHospitalSpecialityRel>(_db));
+        public MainRepo<TblHosSpecDayRel> HosSpecDayRel => _hosSpecDayRel ?? (_hosSpecDayRel = new MainRepo<TblHosSpecDayRel>(_db));
         public MainRepo<TblHospital> Hospital => _hospital ?? (_hospital = new MainRepo<TblHospital>(_db));
         public MainRepo<TblImage> Image => _image ?? (_image = new MainRepo<TblImage>(_db));
         public MainRepo<TblConfig> Config => _config ?? (_config = new MainRepo<TblConfig>(_db));

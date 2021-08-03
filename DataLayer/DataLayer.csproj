@@ -105,6 +105,9 @@
     <Compile Include="Models\TblHospitalSpecialityRel.cs">
       <DependentUpon>IntakeSystemContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TblHosSpecDayRel.cs">
+      <DependentUpon>IntakeSystemContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TblImage.cs">
       <DependentUpon>IntakeSystemContext.tt</DependentUpon>
     </Compile>
@@ -137,7 +140,6 @@
     <Compile Include="ViewModels\RegisterVm.cs" />
     <Compile Include="ViewModels\ResetPasswordVm.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.Config" />
     <EntityDeploy Include="Models\IntakeSystemContext.edmx">

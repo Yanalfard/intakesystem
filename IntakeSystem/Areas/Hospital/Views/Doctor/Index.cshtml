@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-toolbar mr-md-3 mr-1">
                             <button type="submit" class="btn btn-primary btn-sm">جستجو<span class="icon-holder uk-margin-small-right" uk-icon="search-outline"></span></button>
-                            <a href="PtCreate" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></a>
+                            <a href="/Hospital/Doctor/PtCreate" class="btn btn-success btn-sm float-left mr-2">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></a>
                         </div>
                     </form>
                 </div>
@@ -80,20 +80,21 @@
         }
 
         function changePassword(id) {
-            $.get("/Admin/User/ChangePassword/" + id, function (result) {
+            $.get("/Hospital/Doctor/ChangePassword/" + id, function (result) {
                 $(".modal-content").html(result);
             });
 
         }
 
-        $("#Visit").click(function () {
-            $.get("/Hospital/Doctor/PtVisit", function (result) {
+        function Visit(id) {
+            $.get("/Hospital/Doctor/PtVisit/" + id, function (result) {
                 $(".modal-content").html(result);
             });
-        });
+        }
+
         function deleteUser(id) {
             if (confirm('آیا از حذف کالای  مورد نظر مطمئن هستید؟')) {
-                $.post("/Admin/User/Delete/" + id, function (result) {
+                $.post("/Hospital/Doctor/Delete/" + id, function (result) {
                     if (result == "true") {
                         $('#userId_' + id).addClass('text-danger');
                         $("#userId_" + id).hide('slow');

@@ -17,7 +17,7 @@ namespace DataLayer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TblDay()
         {
-            this.TblHospitalSpecialityRel = new HashSet<TblHospitalSpecialityRel>();
+            this.TblHosSpecDayRel = new HashSet<TblHosSpecDayRel>();
         }
     
         public int DayId { get; set; }
@@ -27,6 +27,6 @@ namespace DataLayer.Models
         public Nullable<short> EndShift { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblHospitalSpecialityRel> TblHospitalSpecialityRel { get; set; }
+        public virtual ICollection<TblHosSpecDayRel> TblHosSpecDayRel { get; set; }
     }
 }
