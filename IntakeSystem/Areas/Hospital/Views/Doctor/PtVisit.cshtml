@@ -7,7 +7,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form>
+<form action="/Hospital/Doctor/PtVisit" method="post">
     <div class="modal-body">
         <div class="form-row mt-2">
             <div class="form-group col-md-3">
@@ -38,9 +38,10 @@
 
         @foreach (var item in Model)
         {
+            <input type="hidden" id="DayId" name="DayId" value="@item.DayId" />
             <div class="form-row bg-light ">
                 <div class="form-check col-4 pr-5 pb-1 pb-md-0">
-                    <input type="checkbox" @(item.IsWorking == true ? "checked" : "") class="form-check-input" id="Saturday">
+                    <input name="IsWorking" value="@item.DayOfWeek" id="IsWorking" type="checkbox" @(item.IsWorking == true ? "checked" : "") class="form-check-input" >
                     @if (item.DayOfWeek == 1)
                     {
                         <label class="form-check-label">شنبه</label>
@@ -71,10 +72,10 @@
                     }
                 </div>
                 <div class="form-group col-4">
-                    <input type="time" class="col-md-4 form-control form-control-sm" value="@item.StartShift" placeholder="">
+                    <input type="time" class="col-md-4 form-control form-control-sm" id="StartShift" name="StartShift" value="@item.StartShift" placeholder="">
                 </div>
                 <div class="form-group col-4">
-                    <input type="time" class="col-md-4 form-control form-control-sm" value="@item.EndShift" placeholder="">
+                    <input type="time" class="col-md-4 form-control form-control-sm" id="EndShift" name="EndShift" value="@item.EndShift" placeholder="">
                 </div>
             </div>
         }

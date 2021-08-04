@@ -26,7 +26,24 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             List<TblDay> list = _core.HosSpecDayRel.Get(i => i.HosSpecId == id).Select(i => i.TblDay).ToList();
             return PartialView(list);
         }
-
+        [HttpPost]
+        public ActionResult PtVisit(List<int> DayId,
+            //List<string> DayOfWeek,
+            List<int> IsWorking,
+            List<string> StartShift,
+            List<string> EndShift)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                TblDay selectedDay = _core.Day.GetById(DayId[i]);
+                selectedDay.IsWorking = IsWorking[i] == selectedDay.DayOfWeek ? true : false;
+                selectedDay.StartShift = short.Parse(StartShift[i]);
+                selectedDay.EndShift = short.Parse(EndShift[i]);
+                _core.Day.Update(selectedDay);
+                _core.Save();
+            }
+            return RedirectToAction("Index");
+        }
 
         // GET: Admin/User
         public ActionResult Index(int pageId = 1, string name = "", string tell = "", string identificationNo = "")
@@ -120,8 +137,8 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                     {
                         TblDay addDay = new TblDay()
                         {
-                            IsWorking=false,
-                            DayOfWeek=(short)i,
+                            IsWorking = false,
+                            DayOfWeek = (short)i,
                         };
                         _core.Day.Add(addDay);
                         _core.Save();
