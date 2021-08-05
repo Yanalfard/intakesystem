@@ -1,82 +1,107 @@
-﻿
+﻿@model DataLayer.ViewModels.RegisterDoctorVm
+@{
+    ViewBag.Title = "اضافه کردن پزشک";
+    Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
+}
 <div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
-        ویرایش اطلاعات پزشک
+        افزودن پزشک
     </h6>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
-<form>
-    <div class="modal-body">
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label>نام پزشک</label>
-                <input class="form-control" type="text" placeholder="مثال: علی علیزاده">
-            </div>
-            <div class="form-group col-md-3">
-                <label>شماره تماس</label>
-                <input class="form-control" type="tel" placeholder="...09">
-            </div>
-            <div class="form-group col-md-3">
-                <label>کد ملی</label>
-                <input class="form-control" type="number" placeholder="...">
-            </div>
+@using (Html.BeginForm("PtCreate", "Doctor", FormMethod.Post, new { enctype = "multipart/form-data", style = "overflow:auto" }))
+{
+<div class="modal-body">
+    @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+    <input type="hidden" name="UserId" id="UserId" value="@Model.UserId" />
+    <input type="hidden" name="ImageUrl" id="ImageUrl" value="@Model.ImageUrl" />
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>نام پزشک</label>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: علی علیزاده" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-3">
+            <label>شماره تماس</label>
+            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "form-control", placeholder = "...09" } })
+            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-3">
+            <label>کد ملی</label>
+            @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "form-control", placeholder = "1234567890" } })
+            @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>رمز عبور</label>
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "****" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="">تخصص</label>
+            <select class="form-control" id="SpecialityId" name="SpecialityId">
+                <option value="0">تخصص </option>
+                @{
+                    List<DataLayer.Models.TblSpeciality> specialities = ViewBag.Speciality as List<DataLayer.Models.TblSpeciality>;
+                }
+                @foreach (var item in specialities)
+                {
+                    <option value="@item.SpecialityId" @(item.SpecialityId == Model.SpecialityId ? "selected" : "")>@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.SpecialityId, "", new { @class = "text-danger" })
 
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label>رمز عبور</label>
-                <input class="form-control" type="password" placeholder="...">
+    </div>
+    <div class="form-row bg-light pt-2">
+        <div class="form-check col-md-3">
+            <label>جنسیت</label>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.Gender, "0", new { @checked = true, @class = "form-check-input" })
+                <label class="form-check-label" for="Female">
+                    زن
+                </label>
             </div>
-            <div class="form-group col-md-4">
-                <label for="">تخصص</label>
-                <select class="form-control" id="">
-                    <option>تخصص </option>
-                    <option>تخصص 2</option>
-                </select>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.Gender, "1", new { @class = "form-check-input" })
+                <label class="form-check-label" for="male">
+                    مرد
+                </label>
             </div>
-        </div>
-        <div class="form-row bg-light pt-2">
-            <div class="form-check col-md-3">
-                <label>جنسیت</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Gender" id="Female" value="Female" checked>
-                    <label class="form-check-label" for="Female">
-                        زن
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Gender" id="Male" value="Male">
-                    <label class="form-check-label" for="male">
-                        مرد
-                    </label>
-                </div>
-            </div>
-            <div class="form-check col-md-3 mr-4">
-                <input type="checkbox" class="form-check-input " id="ActiveCheck">
-                <label class="form-check-label" for="ActiveCheck">فعال است</label>
-            </div>
-        </div>
-        <label class="mt-3">ویرایش تصویر</label>
-        <div class="form-row">
-            <div class="custom-file form-group col-md-7 ">
-                <input type="file" class="custom-file-input form-control form-control-sm" onchange="inputChanged(this)">
-                <label class="custom-file-label" for="Image" data-browse="انتخاب" id="FileName">انتخاب تصویر</label>
-            </div>
-        </div>
-        <div class="form-row mt-3">
-            <div class="form-group col-12">
-                <label>توضیحات کوتاه</label>
-                <textarea class="textarea-fix-height-120" placeholder=" متن توضیحات... "></textarea>
-            </div>
-            <span class="text-danger"></span>
         </div>
     </div>
+    <label class="mt-3">افزودن تصویر</label>
+    <div class="form-row">
+        <img src="~/Resources/Images/User/Thumb/@Model.ImageUrl" style="max-height:150px;display:block;margin:0 auto" />
+    </div>
+
+    <div class="form-row">
+        <div class="custom-file form-group col-md-7 ">
+            <input type="file" class="custom-file-input form-control form-control-sm" onchange="inputChanged(this)" id="imgUrl" name="imgUrl">
+            <label class="custom-file-label" for="Image" data-browse="انتخاب" id="FileName">انتخاب تصویر</label>
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-12">
+            <label>آدرس </label>
+            <textarea class="textarea-fix-height-120" name="Address" id="Address" maxlength="150" placeholder=" متن توضیحات... ">@Model.Address</textarea>
+        </div>
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-12">
+            <label>توضیحات کوتاه</label>
+            <textarea class="textarea-fix-height-120" name="DoctorDescription" id="DoctorDescription" maxlength="300" placeholder=" متن توضیحات... ">@Model.DoctorDescription</textarea>
+        </div>
+        <span class="text-danger"></span>
+    </div>
+</div>
     <div class="modal-footer justify-content-end">
-        <button type="submit" class="btn btn-success btn-sm text-white">ویرایش<span class="icon-holder uk-margin-small-right" uk-icon="create-outline"></span></button>
+        <button type="submit" class="btn btn-success btn-sm text-white">افزودن<span class="icon-holder uk-margin-small-right" uk-icon="add-circle-outline"></span></button>
     </div>
-</form>
+}
+
 <script>
     function inputChanged(sender) {
         var fileName = sender.files[0].name;

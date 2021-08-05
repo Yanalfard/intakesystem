@@ -23,8 +23,8 @@ namespace DataLayer.Models
         public int DayId { get; set; }
         public Nullable<short> DayOfWeek { get; set; }
         public bool IsWorking { get; set; }
-        public Nullable<short> StartShift { get; set; }
-        public Nullable<short> EndShift { get; set; }
+        public Nullable<System.TimeSpan> StartShift { get; set; }
+        public Nullable<System.TimeSpan> EndShift { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblHosSpecDayRel> TblHosSpecDayRel { get; set; }

@@ -1,6 +1,7 @@
 ﻿using DataLayer.Models;
 using DataLayer.Security;
 using DataLayer.ViewModels;
+using IntakeSystem.Utilities;
 using Services.Services;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,35 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             List<string> StartShift,
             List<string> EndShift)
         {
-            for (int i = 0; i < 8; i++)
+            int[] newIsWorking = new int[7];
+            for (int i = 1; i < 8; i++)
             {
-                TblDay selectedDay = _core.Day.GetById(DayId[i]);
-                selectedDay.IsWorking = IsWorking[i] == selectedDay.DayOfWeek ? true : false;
-                selectedDay.StartShift = short.Parse(StartShift[i]);
-                selectedDay.EndShift = short.Parse(EndShift[i]);
+                if (IsWorking == null)
+                {
+                    newIsWorking = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+                    break;
+                }
+                if (IsWorking.Contains(i))
+                {
+                    newIsWorking[i - 1] = 1;
+                }
+                else
+                {
+                    newIsWorking[i - 1] = 0;
+                }
+            }
+            for (int i = 1; i < 8; i++)
+            {
+                TblDay selectedDay = _core.Day.GetById(DayId[i - 1]);
+                if (StartShift[i - 1] != "")
+                {
+                    selectedDay.StartShift = Main.SimplifyTime(TimeSpan.Parse(StartShift[i - 1]));
+                }
+                if (EndShift[i - 1] != "")
+                {
+                    selectedDay.EndShift = Main.SimplifyTime(TimeSpan.Parse(EndShift[i - 1]));
+                }
+                selectedDay.IsWorking = newIsWorking[i - 1] == 1;
                 _core.Day.Update(selectedDay);
                 _core.Save();
             }
@@ -154,7 +178,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             }
             ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
 
-            return PartialView("PtCreate", register);
+            return View(register);
         }
         public ActionResult PtInfo(int id)
         {
@@ -164,18 +188,21 @@ namespace IntakeSystem.Areas.Hospital.Controllers
         public ActionResult PtEdit(int id)
         {
             TblUser selectedUser = _core.User.GetById(id);
-            EditUserVm editUser = new EditUserVm();
+            RegisterDoctorVm editUser = new RegisterDoctorVm();
+            editUser.ImageUrl = selectedUser.ImageUrl;
             editUser.UserId = selectedUser.UserId;
+            editUser.SpecialityId = selectedUser.TblHospitalSpecialityRel.FirstOrDefault().SpecialityId;
             editUser.Name = selectedUser.Name;
+            editUser.DoctorDescription = selectedUser.DoctorDescription;
+            editUser.Address = selectedUser.Address;
             editUser.IdentificationNo = selectedUser.IdentificationNo;
             editUser.TellNo = selectedUser.TellNo;
-            editUser.RoleId = selectedUser.RoleId;
             editUser.Gender = Convert.ToInt32(selectedUser.Gender);
-            ViewBag.Roles = _core.Role.Get(orderBy: i => i.OrderByDescending(j => j.RoleId));
+            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return PartialView(editUser);
         }
         [HttpPost]
-        public ActionResult PtEdit(EditUserVm register)
+        public ActionResult PtEdit(RegisterDoctorVm register, HttpPostedFileBase imgUrl)
         {
             if (ModelState.IsValid)
             {
@@ -185,24 +212,49 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                 }
                 else if (_core.User.Any(i => i.UserId != register.UserId && i.IdentificationNo == register.IdentificationNo && i.IsDeleted == false))
                 {
-                    ModelState.AddModelError("IdentificationNo", "شماره تلفن تکراریست");
+                    ModelState.AddModelError("IdentificationNo", " کد ملی تکراریست");
                 }
                 else
                 {
-                    TblUser updateUser = _core.User.GetById(register.UserId);
-                    updateUser.Name = register.Name;
-                    updateUser.IdentificationNo = register.IdentificationNo;
-                    updateUser.TellNo = register.TellNo;
-                    updateUser.RoleId = register.RoleId;
-                    updateUser.Gender = Convert.ToBoolean(register.Gender);
-                    _core.User.Update(updateUser);
+                    if (imgUrl != null && imgUrl.IsImage())
+                    {
+                        string fullPathLogo = Request.MapPath("/Resources/Images/User/" + register.ImageUrl);
+                        if (System.IO.File.Exists(fullPathLogo))
+                        {
+                            System.IO.File.Delete(fullPathLogo);
+                        }
+                        register.ImageUrl = Guid.NewGuid().ToString() + Path.GetExtension(imgUrl.FileName);
+                        imgUrl.SaveAs(Server.MapPath("/Resources/Images/User/" + register.ImageUrl));
+                        ImageResizer img = new ImageResizer();
+                        img.Resize(Server.MapPath("/Resources/Images/User/" + register.ImageUrl),
+                            Server.MapPath("/Resources/Images/User/Thumb/" + register.ImageUrl));
+                    }
+                    TblUser addUser = _core.User.GetById(register.UserId);
+                    addUser.Name = register.Name;
+                    addUser.ImageUrl = register.ImageUrl;
+                    addUser.IdentificationNo = register.IdentificationNo;
+                    addUser.TellNo = register.TellNo;
+                    addUser.Address = register.Address;
+                    addUser.DoctorDescription = register.DoctorDescription;
+                    addUser.Password = PasswordHelper.EncodePasswordMd5(register.Password);
+                    addUser.IsActive = true;
+                    addUser.RoleId = 3;
+                    addUser.Gender = Convert.ToBoolean(register.Gender);
+                    addUser.DateCreated = DateTime.Now;
+
+                    _core.User.Update(addUser);
                     _core.Save();
-                    return JavaScript("location.reload()");
+                    int userId = SelectedUser().UserId;
+                    TblHospitalSpecialityRel specialityRel = _core.HospitalSpecialityRel.Get(i => i.DoctorId == register.UserId).FirstOrDefault();
+                    specialityRel.SpecialityId = register.SpecialityId;
+                    _core.HospitalSpecialityRel.Update(specialityRel);
+                    _core.Save();
+                    return RedirectToAction("Index");
 
                 }
             }
-            ViewBag.Roles = _core.Role.Get(orderBy: i => i.OrderByDescending(j => j.RoleId));
-            return PartialView("PtEdit", register);
+            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            return View(register);
         }
         public ActionResult ActiveDisableUser(int id)
         {
