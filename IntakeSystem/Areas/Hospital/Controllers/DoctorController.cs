@@ -188,7 +188,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
         public ActionResult PtEdit(int id)
         {
             TblUser selectedUser = _core.User.GetById(id);
-            RegisterDoctorVm editUser = new RegisterDoctorVm();
+            EditDoctorVm editUser = new EditDoctorVm();
             editUser.ImageUrl = selectedUser.ImageUrl;
             editUser.UserId = selectedUser.UserId;
             editUser.SpecialityId = selectedUser.TblHospitalSpecialityRel.FirstOrDefault().SpecialityId;
@@ -202,7 +202,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             return PartialView(editUser);
         }
         [HttpPost]
-        public ActionResult PtEdit(RegisterDoctorVm register, HttpPostedFileBase imgUrl)
+        public ActionResult PtEdit(EditDoctorVm register, HttpPostedFileBase imgUrl)
         {
             if (ModelState.IsValid)
             {
@@ -236,11 +236,9 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                     addUser.TellNo = register.TellNo;
                     addUser.Address = register.Address;
                     addUser.DoctorDescription = register.DoctorDescription;
-                    addUser.Password = PasswordHelper.EncodePasswordMd5(register.Password);
                     addUser.IsActive = true;
                     addUser.RoleId = 3;
                     addUser.Gender = Convert.ToBoolean(register.Gender);
-                    addUser.DateCreated = DateTime.Now;
 
                     _core.User.Update(addUser);
                     _core.Save();

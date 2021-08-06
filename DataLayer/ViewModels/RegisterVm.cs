@@ -7,6 +7,36 @@ using System.Threading.Tasks;
 
 namespace DataLayer.ViewModels
 {
+    public class EditDoctorVm
+    {
+        public int UserId { get; set; }
+        [Display(Name = "نام ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+
+        public string Name { get; set; }
+        [MaxLength(11)]
+        [StringLength(11)]
+        [Display(Name = "موبایل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Remote("VerifyTellNo", "Account")]
+        public string TellNo { get; set; }
+        [Display(Name = "کد ملی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
+        [StringLength(10)]
+        //[Remote("VerifyIdentificationNo", "Account")]
+        public string IdentificationNo { get; set; }
+        [Display(Name = "تخصص ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public int? SpecialityId { get; set; }
+        public string ImageUrl { get; set; }
+        public int Gender { get; set; }
+        public string Address { get; set; }
+        public string DoctorDescription { get; set; }
+    }
     public class RegisterDoctorVm
     {
         public int UserId { get; set; }
