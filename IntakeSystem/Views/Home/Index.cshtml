@@ -28,7 +28,7 @@
 <section class="menu-grid-section ">
     <div class="grid" dir="rtl">
         <content class="card-with-border my-column my-center">
-            <a href="/Hospitals/2">
+            <a href="/Hospitals/2?name= مراکز درمانی">
                 <img class="my-center" src="~/img/HomeStatic/Hospital.svg" width="140" />
                 <label>مراکز درمانی</label>
             </a>
@@ -46,7 +46,7 @@
             </a>
         </content>
         <content class="card-with-border my-column my-center">
-            <a href="/Hospitals/7">
+            <a href="/Hospitals/7?name=آزمایشگاه ها">
                 <img class="my-center" src="~/img/HomeStatic/Laboratory.svg" width="140" />
                 <label>آزمایشگاه ها</label>
             </a>
@@ -58,60 +58,7 @@
 <div id="SpecialitySection"></div>
 <section id="speciality" class="speciality-section my-center">
     <div class="flex-container " dir="rtl">
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality" href="/Doctor">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
-        <a class="Speciality">
-            <span>نام تخصص</span>
-        </a>
+        @Html.Action("ListSpeciality")
     </div>
 </section>
 <!--end speciality section-->

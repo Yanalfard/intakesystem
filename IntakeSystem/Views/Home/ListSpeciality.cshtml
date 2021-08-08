@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DataLayer.Models.TblSpeciality>
+
+@foreach (var item in Model)
+{
+    <a class="Speciality" href="/Doctors/@item.SpecialityId?name=@item.Name.Replace(" ","-")">
+        <span>@item.Name</span>
+    </a>
+}
+

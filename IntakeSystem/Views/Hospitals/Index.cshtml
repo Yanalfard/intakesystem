@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "مراکز درمانی";
+    ViewBag.Title = ViewBag.name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,22 +11,31 @@
         <div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
                 <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
-                <form>
+                <form id="searchHospitals" action="Hospitals" method="post">
+                    <input type="hidden" name="name" value="@ViewBag.name" />
                     <div class="">
+                        @{
+                            List<DataLayer.Models.TblLocation> listCity = ViewBag.CityList as List<DataLayer.Models.TblLocation>;
+                            List<DataLayer.Models.TblCatagory> listCatagory = ViewBag.CatagoryList as List<DataLayer.Models.TblCatagory>;
+
+
+                        }
+                        <input type="hidden" name="city" id="city" value="@ViewBag.city" />
                         <select class="uk-select card-with-border city">
-                            <option>انتخاب شهر</option>
-                            <option>تبریز</option>
-                            <option>تهران</option>
+                            <option name="citySelected" value="0">انتخاب شهر</option>
+                            @foreach (var item in listCity)
+                            {
+                                <option name="citySelected" value="@item.LocationId"  @(ViewBag.city==item.LocationId?"selected":"") >@item.LocationName</option>
+                            }
                         </select>
                     </div>
                     <hr class="uk-divider-icon" />
                     <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 6 </label>
+                        <label class="my-row"><input name="id" class="uk-checkbox" type="radio" value="0" disabled>  مراکز درمان </label>
+                        @foreach (var item in listCatagory)
+                        {
+                            <label onclick="searchHospitals()" class="my-row"><input name="id" class="uk-checkbox" @(ViewBag.id==item.CatagoryId?"checked":"")  type="radio" value="@item.CatagoryId">  @item.Name </label>
+                        }
                     </div>
                 </form>
             </div>
@@ -35,7 +44,7 @@
         <div class="uk-width-expand">
             <!--start each hospital section-->
             @Html.Action("Hospitals")
-         
+
             <!--end each hospital section-->
 
         </div>
@@ -44,3 +53,19 @@
 
 </section>
 
+
+@section Scripts{
+
+
+    <script>
+        $("select").change(function () {
+            var selectedCountry = $(this).children("option:selected").val();
+            //alert(selectedCountry);
+            $('#city').val(selectedCountry);
+            searchHospitals()
+        });
+        function searchHospitals() {
+            $('form#searchHospitals').submit();
+        }
+    </script>
+}

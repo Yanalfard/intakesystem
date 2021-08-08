@@ -27,7 +27,6 @@ namespace IntakeSystem.Areas.Hospital.Controllers
         {
             TblHospital selectedHospital = _core.Hospital.Get()
                 .FirstOrDefault(i => i.AdminId == SelectedUser().UserId);
-
             return View(_core.Image.Get(i => i.HospitalId == selectedHospital.HospitalId));
         }
         [HttpPost]
@@ -41,13 +40,20 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                     foreach (var galleryimage in GalleryFile)
                     {
                         TblImage addImage = new TblImage();
+
                         if (galleryimage != null && galleryimage.IsImage())
                         {
                             addImage.ImageUrl = Guid.NewGuid().ToString() + Path.GetExtension(galleryimage.FileName);
-                            galleryimage.SaveAs(Server.MapPath("/Resources/Hospital/Images/" + addImage.ImageUrl));
+                            galleryimage.SaveAs(Server.MapPath("/Resources/Images/Hospital/Images/" + addImage.ImageUrl));
                             ImageResizer img = new ImageResizer();
-                            img.Resize(Server.MapPath("/Resources/Hospital/Images/" + addImage.ImageUrl),
-                                Server.MapPath("/Resources/Hospital/Images/Thumb/" + addImage.ImageUrl));
+                            img.Resize(Server.MapPath("/Resources/Images/Hospital/Images/" + addImage.ImageUrl),
+                                Server.MapPath("/Resources/Images/Hospital/Images/Thumb/" + addImage.ImageUrl));
+                            TblHospital selectedHospital = _core.Hospital.Get()
+                    .FirstOrDefault(i => i.AdminId == SelectedUser().UserId);
+                            addImage.Name = selectedHospital.Name;
+                            addImage.HospitalId = selectedHospital.HospitalId;
+                            _core.Image.Add(addImage);
+                            _core.Save();
                         }
                     }
                 }
@@ -58,6 +64,24 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             {
                 return RedirectToAction("Index");
             }
+        }
+
+        public string RemoveAlbumImage(int id)
+        {
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "/Resources/Images/Hospital/Images/", _core.Image.GetById(id).ImageUrl);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+            var imagePath2 = Path.Combine(Directory.GetCurrentDirectory(), "/Resources/Images/Hospital/Images/Thumb/", _core.Image.GetById(id).ImageUrl);
+
+            if (System.IO.File.Exists(imagePath2))
+            {
+                System.IO.File.Delete(imagePath2);
+            }
+            _core.Image.DeleteById(id);
+            _core.Save();
+            return "true";
         }
     }
 }

@@ -13,14 +13,31 @@ namespace IntakeSystem.Controllers
         private Core _core = new Core();
 
         // GET: Hospitals
-        [Route("Hospitals/{id=0}")]
-        public ActionResult Index(int id = 0)
+        [Route("Hospitals/{id=0}/{name?}/{speciality=0}/{city=0}")]
+        public ActionResult Index(int id = 0, string name = "", int city = 0)
         {
+            ViewBag.id = id;
+            ViewBag.name = name;
+            ViewBag.city = city;
+            ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
+            ViewBag.CatagoryList = _core.Catagory.Get().ToList();
+            if (name == "")
+            {
+                ViewBag.name = "مراکز درمانی";
+            }
             return View();
         }
-        public ActionResult Hospitals(int id = 0)
+        public ActionResult Hospitals(int id = 0, string name = "", int city = 0)
         {
-            List<TblHospital> list = _core.Hospital.Get(i => i.CatagoryId == id, orderBy: i => i.OrderByDescending(j => j.HospitalId)).ToList();
+            List<TblHospital> list = _core.Hospital.Get(orderBy: i => i.OrderByDescending(j => j.HospitalId)).ToList();
+            if (id != 0)
+            {
+                list = list.Where(i => i.CatagoryId == id).ToList();
+            }
+            if (city != 0)
+            {
+                list = list.Where(i => i.LocationId == city || i.TblLocation.LocationParentId == city).ToList();
+            }
             //if (name != "")
             //{
             //    list = list.Where(p => p.Name.Contains(name)).ToList();

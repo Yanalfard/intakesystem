@@ -10,6 +10,7 @@ namespace IntakeSystem.Controllers
 {
     public class HomeController : Controller
     {
+        private Core _core = new Core();
         // GET: Home
         public ActionResult Index()
         {
@@ -54,6 +55,9 @@ namespace IntakeSystem.Controllers
         {
             return View();
         }
-        
+        public ActionResult ListSpeciality()
+        {
+            return PartialView(_core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId)));
+        }
     }
 }

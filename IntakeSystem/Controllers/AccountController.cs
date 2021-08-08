@@ -204,6 +204,7 @@ namespace IntakeSystem.Controllers
                 {
                     TblUser user = _core.User.Get().FirstOrDefault(i => i.TellNo == active.Tell);
                     user.Auth = SelectedRandom().ToString();
+                    user.IsActive = true;
                     _core.User.Update(user);
                     _core.Save();
                     return Redirect("/Login?activeUser=true");

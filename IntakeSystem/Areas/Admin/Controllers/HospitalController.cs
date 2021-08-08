@@ -81,10 +81,13 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     addHospital.TellNo2 = hospitalVm.TellNo2;
                     _core.Hospital.Add(addHospital);
                     _core.Save();
-                    TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
-                    selectedUser.RoleId = 6;
-                    _core.User.Update(selectedUser);
-                    _core.Save();
+                    if (SelectUser().RoleId != 1)
+                    {
+                        TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
+                        selectedUser.RoleId = 6;
+                        _core.User.Update(selectedUser);
+                        _core.Save();
+                    }
                     return RedirectToAction("Index");
                 }
             }

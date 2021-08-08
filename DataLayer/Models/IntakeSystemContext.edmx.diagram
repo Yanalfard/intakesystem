@@ -35,6 +35,7 @@
         <AssociationConnector Association="IntakeSystemModel.FK_TblUser_TblRole" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblTicket_TblTicket" ManuallyRouted="false" />
         <AssociationConnector Association="IntakeSystemModel.FK_TblTicket_TblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="IntakeSystemModel.FK_TblHospital_TblLocation" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

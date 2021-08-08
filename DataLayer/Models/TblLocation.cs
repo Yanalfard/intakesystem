@@ -19,6 +19,7 @@ namespace DataLayer.Models
         {
             this.TblLocation1 = new HashSet<TblLocation>();
             this.TblUser = new HashSet<TblUser>();
+            this.TblHospital = new HashSet<TblHospital>();
         }
     
         public int LocationId { get; set; }
@@ -30,5 +31,7 @@ namespace DataLayer.Models
         public virtual TblLocation TblLocation2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblUser> TblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblHospital> TblHospital { get; set; }
     }
 }

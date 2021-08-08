@@ -12,16 +12,39 @@ namespace IntakeSystem.Controllers
     {
         private Core _core = new Core();
         // GET: Doctor
-        [Route("Doctor/{id}/{name}")]
-        public ActionResult Index(int id, string name)
+        [Route("Doctor/{id}/{name}/{speciality?}")]
+        public ActionResult Index(int id, string name, int speciality = 0)
         {
             TblHospital selectedospital = _core.Hospital.GetById(id);
+            ViewBag.SpecialityList = _core.Speciality.Get().ToList();
+            ViewBag.Speciality = 0;
+            ViewBag.id = id;
+            ViewBag.name = name;
+            ViewBag.specialityId = speciality;
+            if (speciality != 0)
+            {
+                ViewBag.Speciality = speciality;
+            }
             return View(selectedospital);
         }
-        [Route("Doctors")]
-        public ActionResult Doctors()
+        [Route("Doctors/{id?}/{name?}")]
+        public ActionResult Doctors(int? id = 0, string name = "")
         {
-            List<TblUser> selectedUser = _core.User.Get(i=>i.RoleId==3).ToList();
+            List<TblUser> selectedUser = new List<TblUser>();
+            ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
+            ViewBag.SpecialityList = _core.Speciality.Get().ToList();
+            ViewBag.id = id;
+            ViewBag.name = name;
+            if (id != 0)
+            {
+                ViewBag.Name = name;
+                selectedUser = _core.HospitalSpecialityRel.Get(i => i.SpecialityId == id).Select(i => i.TblUser).ToList();
+            }
+            else
+            {
+                ViewBag.Name = "پزشکان";
+                selectedUser = _core.User.Get(i => i.RoleId == 3).ToList();
+            }
             return View(selectedUser);
         }
         public ActionResult Profile()

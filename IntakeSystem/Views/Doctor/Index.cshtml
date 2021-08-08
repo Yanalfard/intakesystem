@@ -43,21 +43,32 @@
         <div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
                 <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
-                <form>
+                <form id="searchHospitals" action="Doctor" method="post">
+                    <input type="hidden" name="id" value="@ViewBag.id" />
+                    <input type="hidden" name="name" value="@ViewBag.name" />
                     <div class="">
-                        <select class="uk-select card-with-border city">
-                            <option>انتخاب شهر</option>
-                            <option>تبریز</option>
-                            <option>تهران</option>
-                        </select>
+                        @{
+                            List<DataLayer.Models.TblSpeciality> selectedSpeciality = ViewBag.SpecialityList as List<DataLayer.Models.TblSpeciality>;
+                            List<DataLayer.Models.TblHospitalSpecialityRel> listSpeciality = new List<DataLayer.Models.TblHospitalSpecialityRel>();
+                            if (ViewBag.Speciality != 0)
+                            {
+                                listSpeciality = Model.TblHospitalSpecialityRel
+                                    .Where(i => i.SpecialityId == ViewBag.Speciality).ToList();
+                            }
+                            else
+                            {
+                                listSpeciality = Model.TblHospitalSpecialityRel.ToList();
+                            }
+
+                        }
                     </div>
                     <hr class="uk-divider-icon" />
                     <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox" checked> گزینه 1 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 2 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 3 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 4 </label>
-                        <label class="my-row"><input class="uk-checkbox" type="checkbox"> گزینه 5 </label>
+                        <label  class="my-row"><input name="speciality" class="uk-checkbox" type="radio" value="0" disabled>  تخصص ها  </label>
+                        @foreach (var item in selectedSpeciality)
+                        {
+                            <label onclick="searchHospitals()" class="my-row"><input name="speciality" class="uk-checkbox" @(ViewBag.specialityId == item.SpecialityId ? "checked" : "") type="radio" value="@item.SpecialityId">  @item.Name </label>
+                        }
                     </div>
                 </form>
             </div>
@@ -65,7 +76,7 @@
         <hr class="uk-divider-vertical uk-margin-remove">
         <div class="uk-width-expand">
 
-            @foreach (var item in Model.TblHospitalSpecialityRel)
+            @foreach (var item in listSpeciality)
             {
                 <label class="uk-legend uk-text-bold uk-margin-top uk-text-center uk-legend-mobile uk-margin-remove d-none">
                     <span>@item.TblUser.Name</span>
@@ -239,26 +250,44 @@
 <input type="hidden" name="Lat" id="Lat" value="@Model.Lat" />
 <input type="hidden" name="Lon" id="Lon" value="@Model.Lon" />
 
-<script src="~/Areas/Admin/Resource/js/leaflet.js"></script>
-<script>
+@section Scripts{
 
-    var map = L.map('map').setView([38.07674409597339, 46.29700302496196], 12);
-
-    L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-
-    var iconSetting = L.Icon.extend({
-        options: {
-            iconSize: [38, 35],
-            iconAnchor: [12, 35]
+    <script>
+        $("select").change(function () {
+            var selectedCountry = $(this).children("option:selected").val();
+            //alert(selectedCountry);
+            $('#city').val(selectedCountry);
+            searchHospitals()
+        });
+        function searchHospitals() {
+            $('form#searchHospitals').submit();
         }
-    });
-    var customIcon = new iconSetting({ iconUrl: '/marker.png' });
-    var theMarker = {};
-    var lat = $("#Lat").val();
-    var Lon = $("#Lon").val();
-    theMarker = L.marker([lat, Lon],
-        { icon: customIcon }).addTo(map).bindPopup(
-            `<h6 class='mytext-darkBlue'>نام مرکز درمانی</h6>`
-        );
-</script>
+    </script>
+
+    <script src="~/Areas/Admin/Resource/js/leaflet.js"></script>
+    <script>
+        var lat = $("#Lat").val();
+        var Lon = $("#Lon").val();
+        var map = L.map('map').setView([lat, Lon], 12);
+
+        L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+
+        var iconSetting = L.Icon.extend({
+            options: {
+                iconSize: [38, 35],
+                iconAnchor: [12, 35]
+            }
+        });
+        var customIcon = new iconSetting({ iconUrl: '/marker.png' });
+        var theMarker = {};
+
+        theMarker = L.marker([lat, Lon],
+            { icon: customIcon }).addTo(map).bindPopup(
+                `<h6 class='mytext-darkBlue'>نام مرکز درمانی</h6>`
+            );
+
+    </script>
+
+
+}

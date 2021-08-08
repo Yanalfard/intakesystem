@@ -53,7 +53,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult PtCreate(RegisterVm register)
+        public ActionResult PtCreate(RegisterInAdminVm register)
         {
             if (ModelState.IsValid)
             {

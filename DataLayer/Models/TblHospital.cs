@@ -46,5 +46,6 @@ namespace DataLayer.Models
         public virtual ICollection<TblImage> TblImage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblTicket> TblTicket { get; set; }
+        public virtual TblLocation TblLocation { get; set; }
     }
 }

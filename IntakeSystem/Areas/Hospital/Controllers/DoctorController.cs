@@ -107,7 +107,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
         }
         public ActionResult PtCreate()
         {
-            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return View();
         }
         [HttpPost]
@@ -176,7 +176,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
 
                 }
             }
-            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
 
             return View(register);
         }
@@ -198,7 +198,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             editUser.IdentificationNo = selectedUser.IdentificationNo;
             editUser.TellNo = selectedUser.TellNo;
             editUser.Gender = Convert.ToInt32(selectedUser.Gender);
-            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return PartialView(editUser);
         }
         [HttpPost]
@@ -251,7 +251,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
 
                 }
             }
-            ViewBag.Speciality = _core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId));
+            ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return View(register);
         }
         public ActionResult ActiveDisableUser(int id)

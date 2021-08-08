@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -171,6 +171,18 @@
             </Principal>
             <Dependent Role="TblHospital">
               <PropertyRef Name="CatagoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHospital_TblLocation">
+          <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
+          <End Role="TblHospital" Type="Self.TblHospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="TblHospital">
+              <PropertyRef Name="LocationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,6 +426,10 @@
             <End Role="TblCatagory" EntitySet="TblCatagory" />
             <End Role="TblHospital" EntitySet="TblHospital" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblHospital_TblLocation" Association="Self.FK_TblHospital_TblLocation">
+            <End Role="TblLocation" EntitySet="TblLocation" />
+            <End Role="TblHospital" EntitySet="TblHospital" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblHospital_TblUser" Association="Self.FK_TblHospital_TblUser">
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblHospital" EntitySet="TblHospital" />
@@ -475,8 +491,7 @@
             <End Role="TblUser" EntitySet="TblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IntakeSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -540,6 +555,7 @@
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblHospital" FromRole="TblHospital" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblImage" Relationship="Self.FK_TblImage_TblHospital" FromRole="TblHospital" ToRole="TblImage" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblHospital" FromRole="TblHospital" ToRole="TblTicket" />
+          <NavigationProperty Name="TblLocation" Relationship="IntakeSystemModel.FK_TblHospital_TblLocation" FromRole="TblHospital" ToRole="TblLocation" />
         </EntityType>
         <EntityType Name="TblHospitalSpecialityRel">
           <Key>
@@ -586,6 +602,7 @@
           <NavigationProperty Name="TblLocation1" Relationship="Self.FK_TblLocation_TblLocation" FromRole="TblLocation" ToRole="TblLocation1" />
           <NavigationProperty Name="TblLocation2" Relationship="Self.FK_TblLocation_TblLocation" FromRole="TblLocation1" ToRole="TblLocation" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblUser_TblLocation" FromRole="TblLocation" ToRole="TblUser" />
+          <NavigationProperty Name="TblHospital" Relationship="IntakeSystemModel.FK_TblHospital_TblLocation" FromRole="TblLocation" ToRole="TblHospital" />
         </EntityType>
         <EntityType Name="TblOrder">
           <Key>
@@ -980,7 +997,23 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_TblHospital_TblLocation" Association="IntakeSystemModel.FK_TblHospital_TblLocation">
+            <End Role="TblLocation" EntitySet="TblLocation" />
+            <End Role="TblHospital" EntitySet="TblHospital" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_TblHospital_TblLocation">
+          <End Type="IntakeSystemModel.TblLocation" Role="TblLocation" Multiplicity="1" />
+          <End Type="IntakeSystemModel.TblHospital" Role="TblHospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="TblHospital">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -23,7 +23,7 @@ namespace DataLayer.ViewModels
         public string TellNo { get; set; }
         [Display(Name = "کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
         [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
         [StringLength(10)]
@@ -53,7 +53,7 @@ namespace DataLayer.ViewModels
         public string TellNo { get; set; }
         [Display(Name = "کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
         [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
         [StringLength(10)]
@@ -87,7 +87,7 @@ namespace DataLayer.ViewModels
         public string TellNo { get; set; }
         [Display(Name = "کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
         [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
         [StringLength(10)]
@@ -96,7 +96,7 @@ namespace DataLayer.ViewModels
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50)]
         [Display(Name = "کلمه عبور")]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
+        //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
         [Display(Name = "تکرار کد واژه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -109,7 +109,38 @@ namespace DataLayer.ViewModels
         public string ImageUrl { get; set; }
         public int Gender { get; set; }
     }
+    public class RegisterInAdminVm
+    {
+        public int UserId { get; set; }
+        [Display(Name = "نام ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
 
+        public string Name { get; set; }
+        [MaxLength(11)]
+        [StringLength(11)]
+        [Display(Name = "موبایل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[Remote("VerifyTellNo", "Account")]
+        public string TellNo { get; set; }
+        [Display(Name = "کد ملی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
+        [StringLength(10)]
+        //[Remote("VerifyIdentificationNo", "Account")]
+        public string IdentificationNo { get; set; }
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50)]
+        [Display(Name = "کلمه عبور")]
+        //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
+        public string Password { get; set; }
+
+        public int RoleId { get; set; }
+        public string ImageUrl { get; set; }
+        public int Gender { get; set; }
+    }
     public class RegisterUserVm : CaptchaVm
     {
         public int UserId { get; set; }
@@ -128,7 +159,7 @@ namespace DataLayer.ViewModels
         [MaxLength(50)]
         [Display(Name = "کلمه عبور")]
         [DataType(DataType.Password)]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
+        //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$", ErrorMessage = "کلمه عبور باید شامل حرف و عدد باشد")]
         public string Password { get; set; }
         [Display(Name = "تکرار کد واژه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
