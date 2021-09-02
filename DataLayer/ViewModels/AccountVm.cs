@@ -65,4 +65,26 @@ namespace DataLayer.ViewModels
     {
         public string Captcha { get; set; }
     }
+
+    public class UserProfileVm
+    {
+        [Display(Name = "نام ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        [StringLength(50)]
+        public string Name { get; set; }
+        [Display(Name = "کد ملی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
+        [StringLength(10)]
+        public string IdentificationNo { get; set; }
+        [Display(Name = "آدرس")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(500, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        [StringLength(500)]
+        public string Address { get; set; }
+        public int Gender { get; set; }
+    }
 }

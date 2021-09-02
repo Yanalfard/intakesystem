@@ -1,4 +1,4 @@
-﻿
+﻿@model DataLayer.Models.TblUser
 @{
     ViewBag.Title = "پروفایل کاربر";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,34 +20,37 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
-                            <input class="uk-input card-with-border" type="text" placeholder="نام و نام خانوادگی">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "نام و نام خانوادگی" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="uk-margin">
+                    @*<div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
-                            <input class="uk-input card-with-border" type="tel" placeholder="شماره تماس">
+                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس" } })
+                            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
                         </div>
-                    </div>
+                    </div>*@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person-circle"></span>
-                            <input class="uk-input card-with-border" type="number" placeholder="کد ملی">
+                            @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "کد ملی" } })
+                            @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <label class="input-label uk-legend uk-margin-remove-bottom">جنسیت: </label>
                     <div class="gender-label">
                         <div class="uk-flex-inline">
-                            <input class="uk-radio" type="radio" name="gender">
+                            <input class="uk-radio" type="radio" name="gender" value="0" @(Model.Gender == false ? "checked" : "") >
                             <label class="pl-1">زن</label>
                         </div>
                         <br />
                         <div class="uk-flex-inline">
-                            <input class="uk-radio" type="radio" name="gender">
+                            <input class="uk-radio" type="radio" name="gender" value="1" @(Model.Gender == true ? "checked" : "")>
                             <label>مرد</label>
                         </div>
                     </div>
-                    <div class="uk-margin">
+                    @*<div class="uk-margin">
                         <label class="input-label uk-legend">تاریخ تولد: </label>
                         <br />
                         <div class="uk-inline uk-grid birthDay">
@@ -55,11 +58,12 @@
                             <input class="uk-input card-with-border" type="number" placeholder="02">
                             <input class="uk-input card-with-border" type="number" placeholder="05">
                         </div>
-                    </div>
+                    </div>*@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:location"></span>
-                            <input class="uk-input card-with-border" type="text" placeholder="تبریز- آبرسان-خیابان فلان">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "آدرس......" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,14 +23,68 @@ namespace IntakeSystem.Controllers
 
             return View();
         }
+        [Authorize]
         public ActionResult UserProfile()
         {
-
-            return View();
+            string tell = User.Identity.Name.Split('|')[0];
+            TblUser selectedUser = _core.User.Get().SingleOrDefault(i => i.TellNo == tell);
+            return View(selectedUser);
         }
-        public ActionResult IntakeDay()
+        [HttpPost]
+        public ActionResult UserProfile(TblUser user)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View(user);
+        }
+        public ActionResult IntakeDay(int id, string name = "")
+        {
+            TblUser selectedUser = _core.User.GetById(id);
+            return View(_core.User.GetById(id));
+        }
+        public int DayOfWeek(string name)
+        {
+            int id = 0;
+            switch (name)
+            {
+                case "Saturday":
+                    id = 1;
+                    break;
+                case "Sunday":
+                    id = 2;
+                    break;
+                case "Monday":
+                    id = 3;
+                    break;
+                case "Tuesday":
+                    id = 4;
+                    break;
+                case "Wednesday":
+                    id = 5;
+                    break;
+                case "Thursday":
+                    id = 6;
+                    break;
+                case "Friday":
+                    id = 7;
+                    break;
+            }
+
+            return id;
+        }
+        public ActionResult ViewDayVisit(int id, string day)
+        {
+            ////
+            PersianCalendar pc = new PersianCalendar();
+            string[] Start = day.Split('/');
+            DateTime startTime = pc.ToDateTime(Convert.ToInt32(Start[0]), Convert.ToInt32(Start[1]), Convert.ToInt32(Start[2]), 0, 0, 0, 0).Date;
+            var data1 = DayOfWeek(startTime.DayOfWeek.ToString());
+            /////////////////////
+            ViewBag.day = day;
+            TblHospitalSpecialityRel selected = _core.HospitalSpecialityRel.Get().SingleOrDefault(i => i.DoctorId == id);
+            return PartialView();
         }
         public ActionResult ConfirmInformation()
         {

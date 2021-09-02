@@ -64,7 +64,7 @@
                     </div>
                     <hr class="uk-divider-icon" />
                     <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
-                        <label  class="my-row"><input name="speciality" class="uk-checkbox" type="radio" value="0" disabled>  تخصص ها  </label>
+                        <label class="my-row"><input name="speciality" class="uk-checkbox" type="radio" value="0" disabled>  تخصص ها  </label>
                         @foreach (var item in selectedSpeciality)
                         {
                             <label onclick="searchHospitals()" class="my-row"><input name="speciality" class="uk-checkbox" @(ViewBag.specialityId == item.SpecialityId ? "checked" : "") type="radio" value="@item.SpecialityId">  @item.Name </label>
@@ -116,14 +116,14 @@
                                 <li class="uk-margin-small-top">
                                     <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
                                     <span>@item.TblUser.TellNo</span>
-                                    <a href="/Home/IntakeDay" class="desktop-intake-button float-left take-intake uk-text-center uk-margin-auto-right uk-margin-bottom">دریافت نوبت</a>
+                                    <a href="/Home/IntakeDay/@item.TblUser.UserId?name=@item.TblUser.Name.Replace(" ","-")" class="desktop-intake-button float-left take-intake uk-text-center uk-margin-auto-right uk-margin-bottom">دریافت نوبت</a>
                                 </li>
                                 <li class="uk-margin-small-top">
                                     <span class="text-danger uk-margin-small-left" uk-icon="icon: location"></span>
                                     <span>@item.TblUser.Address</span>
                                 </li>
                             </ul>
-                            <a href="/Home/IntakeDay" class="mobile-intake-button take-intake uk-text-center my-center uk-margin-small-top uk-margin-medium-bottom d-none">دریافت نوبت</a>
+                            <a href="/Home/IntakeDayy/@item.TblUser.UserId?name=@item.TblUser.Name.Replace(" ","-")" class="mobile-intake-button take-intake uk-text-center my-center uk-margin-small-top uk-margin-medium-bottom d-none">دریافت نوبت</a>
                         </div>
                         <div class="DesktopSize uk-margin-auto-vertical my-center">
                             <div class="card-with-border my-center">

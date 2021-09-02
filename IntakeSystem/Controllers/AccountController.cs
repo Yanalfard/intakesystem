@@ -84,12 +84,12 @@ namespace IntakeSystem.Controllers
 
             try
             {
-                var isCaptchaValid = await IsCaptchaValid(login.Captcha);
-                if (!isCaptchaValid)
-                {
-                    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
-                    return View(login);
-                }
+                //var isCaptchaValid = await IsCaptchaValid(login.Captcha);
+                //if (!isCaptchaValid)
+                //{
+                //    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
+                //    return View(login);
+                //}
                 if (ModelState.IsValid)
                 {
                     string password = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "SHA256");

@@ -1010,6 +1010,7 @@
     <Content Include="Views\Hospitals\Hospitals.cshtml" />
     <Content Include="Views\Doctor\Doctors.cshtml" />
     <Content Include="Views\Home\ListSpeciality.cshtml" />
+    <Content Include="Views\Home\ViewDayVisit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

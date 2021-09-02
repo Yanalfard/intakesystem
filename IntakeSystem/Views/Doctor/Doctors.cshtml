@@ -16,20 +16,18 @@
                     @{
                         List<DataLayer.Models.TblLocation> listCity = ViewBag.CityList as List<DataLayer.Models.TblLocation>;
                         List<DataLayer.Models.TblSpeciality> listSpeciality = ViewBag.SpecialityList as List<DataLayer.Models.TblSpeciality>;
-
-
                     }
                     @*<div class="">
 
-                        <input type="hidden" name="city" id="city" value="@ViewBag.city" />
-                        <select class="uk-select card-with-border city">
-                            <option name="citySelected" value="0">انتخاب شهر</option>
-                            @foreach (var item in listCity)
-                            {
-                                <option name="citySelected" value="@item.LocationId" @(ViewBag.city == item.LocationId ? "selected" : "")>@item.LocationName</option>
-                            }
-                        </select>
-                    </div>*@
+                            <input type="hidden" name="city" id="city" value="@ViewBag.city" />
+                            <select class="uk-select card-with-border city">
+                                <option name="citySelected" value="0">انتخاب شهر</option>
+                                @foreach (var item in listCity)
+                                {
+                                    <option name="citySelected" value="@item.LocationId" @(ViewBag.city == item.LocationId ? "selected" : "")>@item.LocationName</option>
+                                }
+                            </select>
+                        </div>*@
                     <hr class="uk-divider-icon" />
                     <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
                         <label class="my-row"><input name="id" class="uk-checkbox" type="radio" value="0" disabled>  تخصص ها  </label>
@@ -69,14 +67,14 @@
                                     </p>
 
                                 </li>
-                                @*<li class="uk-margin-small-top">
-                                        <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: pulse"></span>
-                                        <span> @item.TblHospitalSpecialityRel.Name </span>
-                                    </li>*@
-                                @*<li class="uk-margin-small-top">
-                                        <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: business"></span>
-                                        <span>@Model.Name</span>
-                                    </li>*@
+                                <li class="uk-margin-small-top">
+                                    <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: pulse"></span>
+                                    <span> @item.TblHospitalSpecialityRel.SingleOrDefault().TblSpeciality.Name </span>
+                                </li>
+                                <li class="uk-margin-small-top">
+                                    <span class="mytext-darkBlue uk-margin-small-left" uk-icon="icon: business"></span>
+                                    <span>@item.TblHospitalSpecialityRel.SingleOrDefault().TblHospital.Name</span>
+                                </li>
                                 <li class="uk-margin-small-top">
                                     <span class="mytext-orange uk-margin-small-left" uk-icon="icon: card"></span>
                                     <span>هزینه ویزیت @item.VisitPrice تومان</span>
@@ -84,14 +82,14 @@
                                 <li class="uk-margin-small-top">
                                     <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>
                                     <span>@item.TellNo</span>
-                                    <a href="/Home/IntakeDay" class="desktop-intake-button float-left take-intake uk-text-center uk-margin-auto-right uk-margin-bottom">دریافت نوبت</a>
+                                    <a href="/Home/IntakeDay/@item.UserId?name=@item.Name.Replace(" ","-")" class="desktop-intake-button float-left take-intake uk-text-center uk-margin-auto-right uk-margin-bottom">دریافت نوبت</a>
                                 </li>
                                 <li class="uk-margin-small-top">
                                     <span class="text-danger uk-margin-small-left" uk-icon="icon: location"></span>
                                     <span>@item.Address</span>
                                 </li>
                             </ul>
-                            <a href="/Home/IntakeDay" class="mobile-intake-button take-intake uk-text-center my-center uk-margin-small-top uk-margin-medium-bottom d-none">دریافت نوبت</a>
+                            <a href="/Home/IntakeDay/@item.UserId?name=@item.Name.Replace(" ","-")" class="mobile-intake-button take-intake uk-text-center my-center uk-margin-small-top uk-margin-medium-bottom d-none">دریافت نوبت</a>
                         </div>
                         <div class="DesktopSize uk-margin-auto-vertical my-center">
                             <div class="card-with-border my-center">
