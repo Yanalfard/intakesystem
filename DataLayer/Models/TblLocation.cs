@@ -17,9 +17,9 @@ namespace DataLayer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TblLocation()
         {
+            this.TblHospital = new HashSet<TblHospital>();
             this.TblLocation1 = new HashSet<TblLocation>();
             this.TblUser = new HashSet<TblUser>();
-            this.TblHospital = new HashSet<TblHospital>();
         }
     
         public int LocationId { get; set; }
@@ -27,11 +27,11 @@ namespace DataLayer.Models
         public Nullable<int> LocationParentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblHospital> TblHospital { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblLocation> TblLocation1 { get; set; }
         public virtual TblLocation TblLocation2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblUser> TblUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblHospital> TblHospital { get; set; }
     }
 }

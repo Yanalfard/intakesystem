@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntakeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="artatiya_BehbudTavModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -376,38 +376,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="IntakeSystemModelStoreContainer">
+        <EntityContainer Name="artatiya_BehbudTavModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCatagory" EntityType="Self.TblCatagory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblConfig" EntityType="Self.TblConfig" Schema="dbo" store:Type="Tables" />
@@ -491,10 +460,11 @@
             <End Role="TblUser" EntitySet="TblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="IntakeSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="artatiya_BehbudTavModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -551,11 +521,11 @@
           <Property Name="Fee" Type="Int16" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblCatagory" Relationship="Self.FK_TblHospital_TblCatagory" FromRole="TblHospital" ToRole="TblCatagory" />
+          <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblHospital_TblLocation" FromRole="TblHospital" ToRole="TblLocation" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblHospital_TblUser" FromRole="TblHospital" ToRole="TblUser" />
           <NavigationProperty Name="TblHospitalSpecialityRel" Relationship="Self.FK_TblHospitalSpecialityRel_TblHospital" FromRole="TblHospital" ToRole="TblHospitalSpecialityRel" />
           <NavigationProperty Name="TblImage" Relationship="Self.FK_TblImage_TblHospital" FromRole="TblHospital" ToRole="TblImage" />
           <NavigationProperty Name="TblTicket" Relationship="Self.FK_TblTicket_TblHospital" FromRole="TblHospital" ToRole="TblTicket" />
-          <NavigationProperty Name="TblLocation" Relationship="IntakeSystemModel.FK_TblHospital_TblLocation" FromRole="TblHospital" ToRole="TblLocation" />
         </EntityType>
         <EntityType Name="TblHospitalSpecialityRel">
           <Key>
@@ -599,10 +569,10 @@
           <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LocationParentId" Type="Int32" />
+          <NavigationProperty Name="TblHospital" Relationship="Self.FK_TblHospital_TblLocation" FromRole="TblLocation" ToRole="TblHospital" />
           <NavigationProperty Name="TblLocation1" Relationship="Self.FK_TblLocation_TblLocation" FromRole="TblLocation" ToRole="TblLocation1" />
           <NavigationProperty Name="TblLocation2" Relationship="Self.FK_TblLocation_TblLocation" FromRole="TblLocation1" ToRole="TblLocation" />
           <NavigationProperty Name="TblUser" Relationship="Self.FK_TblUser_TblLocation" FromRole="TblLocation" ToRole="TblUser" />
-          <NavigationProperty Name="TblHospital" Relationship="IntakeSystemModel.FK_TblHospital_TblLocation" FromRole="TblLocation" ToRole="TblHospital" />
         </EntityType>
         <EntityType Name="TblOrder">
           <Key>
@@ -707,6 +677,18 @@
             </Principal>
             <Dependent Role="TblHosSpecDayRel">
               <PropertyRef Name="DayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHospital_TblLocation">
+          <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
+          <End Role="TblHospital" Type="Self.TblHospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="TblHospital">
+              <PropertyRef Name="LocationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -911,6 +893,10 @@
             <End Role="TblDay" EntitySet="TblDay" />
             <End Role="TblHosSpecDayRel" EntitySet="TblHosSpecDayRel" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblHospital_TblLocation" Association="Self.FK_TblHospital_TblLocation">
+            <End Role="TblLocation" EntitySet="TblLocation" />
+            <End Role="TblHospital" EntitySet="TblHospital" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblHospital_TblUser" Association="Self.FK_TblHospital_TblUser">
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblHospital" EntitySet="TblHospital" />
@@ -967,61 +953,15 @@
             <End Role="TblUser" EntitySet="TblUser" />
             <End Role="TblTicket" EntitySet="TblTicket" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <AssociationSet Name="FK_TblHospital_TblLocation" Association="IntakeSystemModel.FK_TblHospital_TblLocation">
-            <End Role="TblLocation" EntitySet="TblLocation" />
-            <End Role="TblHospital" EntitySet="TblHospital" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_TblHospital_TblLocation">
-          <End Type="IntakeSystemModel.TblLocation" Role="TblLocation" Multiplicity="1" />
-          <End Type="IntakeSystemModel.TblHospital" Role="TblHospital" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblLocation">
-              <PropertyRef Name="LocationId" />
-            </Principal>
-            <Dependent Role="TblHospital">
-              <PropertyRef Name="LocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IntakeSystemModelStoreContainer" CdmEntityContainer="IntakeSystemEntities">
+        <EntityContainerMapping StorageEntityContainer="artatiya_BehbudTavModelStoreContainer" CdmEntityContainer="IntakeSystemEntities">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="IntakeSystemModel.sysdiagrams">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1032,7 +972,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblCatagory">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblCatagory">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblCatagory">
               <MappingFragment StoreEntitySet="TblCatagory">
                 <ScalarProperty Name="CatagoryId" ColumnName="CatagoryId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1040,7 +980,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblConfig">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblConfig">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblConfig">
               <MappingFragment StoreEntitySet="TblConfig">
                 <ScalarProperty Name="Key" ColumnName="Key" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1048,7 +988,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblDay">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblDay">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblDay">
               <MappingFragment StoreEntitySet="TblDay">
                 <ScalarProperty Name="DayId" ColumnName="DayId" />
                 <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
@@ -1059,7 +999,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblHospital">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblHospital">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblHospital">
               <MappingFragment StoreEntitySet="TblHospital">
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1080,7 +1020,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblHospitalSpecialityRel">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblHospitalSpecialityRel">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblHospitalSpecialityRel">
               <MappingFragment StoreEntitySet="TblHospitalSpecialityRel">
                 <ScalarProperty Name="HospitalSpecialityRelId" ColumnName="HospitalSpecialityRelId" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
@@ -1091,7 +1031,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblHosSpecDayRel">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblHosSpecDayRel">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblHosSpecDayRel">
               <MappingFragment StoreEntitySet="TblHosSpecDayRel">
                 <ScalarProperty Name="HosSpecDayRelId" ColumnName="HosSpecDayRelId" />
                 <ScalarProperty Name="HosSpecId" ColumnName="HosSpecId" />
@@ -1100,7 +1040,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblImage">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblImage">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblImage">
               <MappingFragment StoreEntitySet="TblImage">
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
@@ -1110,7 +1050,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblLocation">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblLocation">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblLocation">
               <MappingFragment StoreEntitySet="TblLocation">
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
@@ -1119,7 +1059,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblOrder">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblOrder">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblOrder">
               <MappingFragment StoreEntitySet="TblOrder">
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1135,7 +1075,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblRole">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblRole">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblRole">
               <MappingFragment StoreEntitySet="TblRole">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1144,7 +1084,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblSpeciality">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblSpeciality">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblSpeciality">
               <MappingFragment StoreEntitySet="TblSpeciality">
                 <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1153,7 +1093,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblTicket">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblTicket">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblTicket">
               <MappingFragment StoreEntitySet="TblTicket">
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1167,7 +1107,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblUser">
-            <EntityTypeMapping TypeName="IntakeSystemModel.TblUser">
+            <EntityTypeMapping TypeName="artatiya_BehbudTavModel.TblUser">
               <MappingFragment StoreEntitySet="TblUser">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1191,13 +1131,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IntakeSystemModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IntakeSystemModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IntakeSystemModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="IntakeSystemModel.Store.sp_helpdiagramdefinition" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="IntakeSystemModel.Store.sp_helpdiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IntakeSystemModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IntakeSystemModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

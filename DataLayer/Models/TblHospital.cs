@@ -39,6 +39,7 @@ namespace DataLayer.Models
         public bool IsActive { get; set; }
     
         public virtual TblCatagory TblCatagory { get; set; }
+        public virtual TblLocation TblLocation { get; set; }
         public virtual TblUser TblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblHospitalSpecialityRel> TblHospitalSpecialityRel { get; set; }
@@ -46,6 +47,5 @@ namespace DataLayer.Models
         public virtual ICollection<TblImage> TblImage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblTicket> TblTicket { get; set; }
-        public virtual TblLocation TblLocation { get; set; }
     }
 }
