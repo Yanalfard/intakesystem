@@ -19,7 +19,34 @@ namespace IntakeSystem.Controllers
             //var cats = core.Catagory.Get();
             //bool catss = core.Catagory.Any(i => i.Name == "آزمایشگاه");
             //bool catsss = core.Catagory.Any(i => i.Name == "آزمایشگا");
+            //TblRole role = new TblRole();
+            //role.RoleId = 1;
+            //role.Name = "admin";
+            //role.Title = "مدیر";
+            //_core.Role.Add(role);
+            //_core.Save();
+            ////////
+            //TblRole role1 = _core.Role.GetById(3);
+            //role1.Name = "Doctor";
+            //role1.Title = "پزشک";
+            //_core.Role.Update(role1);
+            //_core.Save();
+            //////////
+            //TblRole role2 = _core.Role.GetById(4);
+            //role2.Name = "Patient";
+            //role2.Title = "بیمار";
+            //_core.Role.Update(role2);
+            //_core.Save();
+            //////////
+            //TblRole role3 = _core.Role.GetById(6);
+            //role3.Name = "Hospital";
+            //role3.Title = "بیمارستان";
+            //_core.Role.Update(role3);
+            //_core.Save();
 
+            //_core.Role.DeleteById(2);
+            //_core.Role.DeleteById(5);
+            //_core.Save();
 
             return View();
         }

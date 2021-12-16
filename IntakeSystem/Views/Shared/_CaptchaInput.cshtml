@@ -4,15 +4,15 @@
 
 
 <!-- #localhost  -->
-<script src="https://www.google.com/recaptcha/api.js?render=6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb&&hl=fa"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfPb54dAAAAALwQoAmKhBvVhBsEEMfZmy_DLadG&&hl=fa"></script>
 <script>
             grecaptcha.ready(function () {
-                grecaptcha.execute('6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb', { action: 'contact_us' }).then(function (token) {
+                grecaptcha.execute('6LfPb54dAAAAALwQoAmKhBvVhBsEEMfZmy_DLadG', { action: 'contact_us' }).then(function (token) {
                     $('.GoogleCapcha').val(token);
                 });
             });
             function reloadRech() {
-                grecaptcha.execute('6LfQPpUaAAAAAONo6vR-RUiCELT4dvDLiNmZMLkb', { action: 'contact_us' }).then(function (token) {
+                grecaptcha.execute('6LfPb54dAAAAALwQoAmKhBvVhBsEEMfZmy_DLadG', { action: 'contact_us' }).then(function (token) {
                     $('.GoogleCapcha').val(token);
                 });
             }
