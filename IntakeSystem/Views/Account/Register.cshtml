@@ -22,13 +22,22 @@
                             <div class="uk-inline">
                                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
                                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "نام و نام خانوادگی " } })
+                            </div>
+                            <div>
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
+
                         </div>
+                        <div class="uk-margin">
+                        </div>
+
                         <div class="uk-margin">
                             <div class="uk-inline">
                                 <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
                                 @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = " شماره تماس" } })
+                            </div>
+                            <div>
+
                                 @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -36,15 +45,21 @@
                             <div class="uk-inline">
                                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:key"></span>
                                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "  رمز عبور  " } })
+                            </div>
+                            <div>
                                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
+
                         </div>
                         <div class="uk-margin">
                             <div class="uk-inline">
                                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:key"></span>
                                 @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "  تکرار رمز عبور  " } })
+                            </div>
+                            <div>
                                 @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
                             </div>
+
                         </div>
                         <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
                             ثبت نام

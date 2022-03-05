@@ -58,17 +58,12 @@ namespace IntakeSystem.Controllers
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.Claims.Last().Value == "user")
-                //    {
-                //        return Redirect("/User/Profile");
-                //    }
-                //    else if (User.Claims.Last().Value == "employee" || User.Claims.Last().Value == "admin")
-                //    {
-                //        return Redirect("/Admin");
-                //    }
-                //}
+                if (User.Identity.IsAuthenticated)
+                {
+
+                    return Redirect("/");
+
+                }
                 return View();
             }
             catch (Exception)
@@ -84,12 +79,12 @@ namespace IntakeSystem.Controllers
 
             try
             {
-                //var isCaptchaValid = await IsCaptchaValid(login.Captcha);
-                //if (!isCaptchaValid)
-                //{
-                //    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
-                //    return View(login);
-                //}
+                var isCaptchaValid = await IsCaptchaValid(login.Captcha);
+                if (!isCaptchaValid)
+                {
+                    ModelState.AddModelError("Captcha", "لطفا دوباره امتحان کنید");
+                    return View(login);
+                }
                 if (ModelState.IsValid)
                 {
                     string password = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "SHA256");
@@ -145,6 +140,12 @@ namespace IntakeSystem.Controllers
         }
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+
+                return Redirect("/");
+
+            }
             return View();
         }
         [HttpPost]

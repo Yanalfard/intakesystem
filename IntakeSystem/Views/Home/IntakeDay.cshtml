@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "دریافت نوبت";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<DataLayer.Models.TblDay> listDay= ViewBag.DayIsVisit as List<DataLayer.Models.TblDay>;
 }
 
 <link href="~/Content/Styles/Hospital.min.css" rel="stylesheet" />
@@ -53,12 +54,65 @@
             </div>
         </div>
         <hr class="uk-divider-vertical uk-margin-remove">
+
         <div class="uk-width-expand">
+            <span class="education-page-card-main-item2 mr-5">
+                <p> روزها و ساعت ویزیت</p>
+                @*@foreach (var item in Model.OnlineClassOfDays)
+        {
+            <span class="ml-5"> <strong>@item.Day</strong> (@item.EndTime الی @item.StartTime) </span>
+        }*@
+                @foreach (var item in listDay)
+                {
+                    var dayOfWeek = "";
+                    switch (item.DayOfWeek)
+                    {
+                        case 1:
+                            {
+                                dayOfWeek = "شنبه";
+                                break;
+                            }
+                        case 2:
+                            {
+                                dayOfWeek = "یک شنبه";
+                                break;
+                            }
+                        case 3:
+                            {
+                                dayOfWeek = "دوشنبه";
+                                break;
+                            }
+                        case 4:
+                            {
+                                dayOfWeek = "سه شنبه";
+                                break;
+                            }
+                        case 5:
+                            {
+                                dayOfWeek = " چهارشنبه";
+                                break;
+                            }
+                        case 6:
+                            {
+                                dayOfWeek = "پنج شنبه";
+                                break;
+                            }
+                        case 7:
+                            {
+                                dayOfWeek = "جمعه";
+                                break;
+                            }
+
+                    }
+            <span class="ml-5"> <strong>@dayOfWeek</strong> (@item.StartShift.ToString().Replace(":00", "") الی @item.EndShift.ToString().Replace(":00", "") ) </span>
+                }
+            </span>
 
             <div class="my-borderless-card uk-margin-medium-bottom">
                 <div class="my-row my-center pb-1">
                     <span class="mytext-orange calendar-icon" uk-icon="icon: calendar"></span>
-                    <input id="VisitDay" class="uk-input mytext-darkBlue intake-day-input pr-1" type="text" placeholder="مشاهده تقویم زمانی" data-jdp>
+                    <input id="VisitDay" class="uk-input mytext-darkBlue intake-day-input pr-1"
+                           type="button" value="مشاهده تقویم زمانی" placeholder="مشاهده تقویم زمانی" data-jdp>
                 </div>
                 <!--calender section-->
                 <calendar id="calendar">
@@ -82,8 +136,9 @@
 <script>
     jalaliDatepicker.startWatch({
         days: ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"],
-        showTodayBtn: "false",
+        showTodayBtn: "true",
         showEmptyBtn: "false",
+        minDate:"today",
         /*selector: "div[data-jdp]",*/
         container: "calendar",
         //container:"jdp-container",
@@ -98,6 +153,10 @@
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
+    function closeUikit() {
+        modal.style.display = "none";
+
+    }
     // When the user clicks the button, open the modal
     input.onchange = function (elmt) {
         var fields = input.value.split('/');

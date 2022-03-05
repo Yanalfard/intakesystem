@@ -45,9 +45,11 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                         {
                             addImage.ImageUrl = Guid.NewGuid().ToString() + Path.GetExtension(galleryimage.FileName);
                             galleryimage.SaveAs(Server.MapPath("/Resources/Images/Hospital/Images/" + addImage.ImageUrl));
+
                             ImageResizer img = new ImageResizer();
                             img.Resize(Server.MapPath("/Resources/Images/Hospital/Images/" + addImage.ImageUrl),
                                 Server.MapPath("/Resources/Images/Hospital/Images/Thumb/" + addImage.ImageUrl));
+
                             TblHospital selectedHospital = _core.Hospital.Get()
                     .FirstOrDefault(i => i.AdminId == SelectedUser().UserId);
                             addImage.Name = selectedHospital.Name;

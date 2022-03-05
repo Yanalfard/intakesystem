@@ -54,12 +54,9 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             for (int i = 1; i < 8; i++)
             {
                 TblDay selectedDay = _core.Day.GetById(DayId[i - 1]);
-                if (StartShift[i - 1] != "")
+                if (StartShift[i - 1] != "" && EndShift[i - 1] != "")
                 {
                     selectedDay.StartShift = Main.SimplifyTime(TimeSpan.Parse(StartShift[i - 1]));
-                }
-                if (EndShift[i - 1] != "")
-                {
                     selectedDay.EndShift = Main.SimplifyTime(TimeSpan.Parse(EndShift[i - 1]));
                 }
                 selectedDay.IsWorking = newIsWorking[i - 1] == 1;
@@ -110,6 +107,16 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return View();
         }
+        public int SelectedRandom()
+        {
+            #region random
+            int min = 100000;
+            int max = 999999;
+            Random r = new Random();
+            int randomNumber = r.Next(max - min + 1) + min;
+            return randomNumber;
+            #endregion
+        }
         [HttpPost]
         public ActionResult PtCreate(RegisterDoctorVm register, HttpPostedFileBase imgUrl)
         {
@@ -122,6 +129,10 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                 else if (_core.User.Any(i => i.IdentificationNo == register.IdentificationNo && i.IsDeleted == false))
                 {
                     ModelState.AddModelError("IdentificationNo", "کد ملی  تکراریست");
+                }
+                else if (register.SpecialityId == 0)
+                {
+                    ModelState.AddModelError("SpecialityId", "تخصص را وارد کنید");
                 }
                 else
                 {
@@ -139,10 +150,12 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                     addUser.IdentificationNo = register.IdentificationNo;
                     addUser.TellNo = register.TellNo;
                     addUser.Address = register.Address;
+                    addUser.VisitPrice = register.VisitPrice;
                     addUser.DoctorDescription = register.DoctorDescription;
                     addUser.Password = PasswordHelper.EncodePasswordMd5(register.Password);
                     addUser.IsActive = true;
                     addUser.RoleId = 3;
+                    addUser.Auth = SelectedRandom().ToString();
                     addUser.Gender = Convert.ToBoolean(register.Gender);
                     addUser.DateCreated = DateTime.Now;
 
@@ -198,6 +211,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
             editUser.IdentificationNo = selectedUser.IdentificationNo;
             editUser.TellNo = selectedUser.TellNo;
             editUser.Gender = Convert.ToInt32(selectedUser.Gender);
+            editUser.VisitPrice = selectedUser.VisitPrice;
             ViewBag.Speciality = _core.Speciality.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.SpecialityId));
             return PartialView(editUser);
         }
@@ -235,6 +249,7 @@ namespace IntakeSystem.Areas.Hospital.Controllers
                     addUser.IdentificationNo = register.IdentificationNo;
                     addUser.TellNo = register.TellNo;
                     addUser.Address = register.Address;
+                    addUser.VisitPrice = register.VisitPrice;
                     addUser.DoctorDescription = register.DoctorDescription;
                     addUser.IsActive = true;
                     addUser.RoleId = 3;

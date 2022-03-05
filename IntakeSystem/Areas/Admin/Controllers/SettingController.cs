@@ -13,6 +13,10 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Index2()
+        {
+            return View();
+        }
         public ActionResult PtFeeSetting()
         {
             return PartialView();

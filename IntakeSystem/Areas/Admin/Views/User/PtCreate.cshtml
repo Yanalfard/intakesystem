@@ -12,7 +12,7 @@
     </div>
     <div class="modal-body">
         <div class="form-row">
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
             <div class="form-group col-md-3">
                 <label>نام کاریر</label>
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "مثال: علی علیزاده" } })

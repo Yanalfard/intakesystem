@@ -1,4 +1,4 @@
-﻿@model DataLayer.Models.TblUser
+﻿@model DataLayer.ViewModels.UserProfileVm
 @{
     ViewBag.Title = "پروفایل کاربر";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,64 +13,80 @@
                 <span>پروفایل کاربر</span>
             </label>
             <div class="my-center MobileSize">
-                <img src="~/img/formStatic/UserProfile.svg" width="200" alt="picture" />
+                <img src="~/img/formStatic/Usee.svg" width="200" alt="picture" />
             </div>
-            <form class="my-flex-card-content">
-                <fieldset class="uk-fieldset">
-                    <div class="uk-margin">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "نام و نام خانوادگی" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
+            @using (Html.BeginForm("UserProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", style = "my-flex-card-content" }))
+            {
+
+                @Html.HiddenFor(m => m.UserId)
+        <fieldset class="uk-fieldset">
+            @if (ViewBag.IsEditUser == true)
+            {
+
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-text-success">
+                            اطلاعات شما ویرایش شد
+                        </span>
                     </div>
-                    @*<div class="uk-margin">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
-                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس" } })
-                            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
-                    <div class="uk-margin">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person-circle"></span>
-                            @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "کد ملی" } })
-                            @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <label class="input-label uk-legend uk-margin-remove-bottom">جنسیت: </label>
-                    <div class="gender-label">
-                        <div class="uk-flex-inline">
-                            <input class="uk-radio" type="radio" name="gender" value="0" @(Model.Gender == false ? "checked" : "") >
-                            <label class="pl-1">زن</label>
-                        </div>
-                        <br />
-                        <div class="uk-flex-inline">
-                            <input class="uk-radio" type="radio" name="gender" value="1" @(Model.Gender == true ? "checked" : "")>
-                            <label>مرد</label>
-                        </div>
-                    </div>
-                    @*<div class="uk-margin">
-                        <label class="input-label uk-legend">تاریخ تولد: </label>
-                        <br />
-                        <div class="uk-inline uk-grid birthDay">
-                            <input class="uk-input card-with-border" type="number" placeholder="1352">
-                            <input class="uk-input card-with-border" type="number" placeholder="02">
-                            <input class="uk-input card-with-border" type="number" placeholder="05">
-                        </div>
-                    </div>*@
-                    <div class="uk-margin">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:location"></span>
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "آدرس......" } })
-                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
-                        ویرایش اطلاعات
-                    </button>
-                </fieldset>
-            </form>
+                </div>
+
+            }
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person"></span>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "نام و نام خانوادگی" } })
+                </div>
+            </div>
+            @*<div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
+                @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس" } })
+                @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:person-circle"></span>
+                    @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "کد ملی" } })
+                </div>
+            </div>
+            <label class="input-label uk-legend uk-margin-remove-bottom">جنسیت: </label>
+            <div class="gender-label">
+                <div class="uk-flex-inline">
+                    <input class="uk-radio" type="radio" name="gender" value="0" @(Model.Gender == 0 ? "checked" : "")>
+                    <label class="pl-1">زن</label>
+                </div>
+                <br />
+                <div class="uk-flex-inline">
+                    <input class="uk-radio" type="radio" name="gender" value="1" @(Model.Gender == 1 ? "checked" : "")>
+                    <label>مرد</label>
+                </div>
+            </div>
+            @*<div class="uk-margin">
+            <label class="input-label uk-legend">تاریخ تولد: </label>
+            <br />
+            <div class="uk-inline uk-grid birthDay">
+                <input class="uk-input card-with-border" type="number" placeholder="1352">
+                <input class="uk-input card-with-border" type="number" placeholder="02">
+                <input class="uk-input card-with-border" type="number" placeholder="05">
+            </div>
+        </div>*@
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:location"></span>
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "آدرس......" } })
+                </div>
+            </div>
+            <div class="uk-margin">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+            <button onclick="location.href=''" class="light-blue-button my-center uk-margin-top">
+                ویرایش اطلاعات
+            </button>
+        </fieldset>
+            }
+
         </div>
         <div class="DesktopSize uk-margin-auto-vertical my-center">
             <img src="~/img/formStatic/UserProfile.svg" width="420" alt="picture" />

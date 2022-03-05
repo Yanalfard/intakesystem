@@ -5,30 +5,58 @@
 
 <link href="~/Content/Styles/Home.min.css" rel="stylesheet" />
 <!--Search-Section-->
-<hr class="search-section-hr"/>
+<hr class="search-section-hr" />
 <section class="search-section" dir="rtl">
-    <div class="Search-info uk-flex uk-flex-center">
+    @{
+        List<DataLayer.Models.TblLocation> listCity = ViewBag.CityList as List<DataLayer.Models.TblLocation>;
+
+
+    }
+    <form id="searchHospitalsInHome" action="/Hospitals" method="post" class="Search-info uk-flex uk-flex-center">
         <div class="">
             <select class="uk-select card-with-border city ">
-                <option>تبریز</option>
-                <option>تهران</option>
+                <option name="city" value="0">انتخاب شهر</option>
+                @foreach (var item in listCity)
+                {
+                    <option name="city" value="@item.LocationId">@item.LocationName</option>
+                }
             </select>
         </div>
+        <input type="hidden" name="city" class="city" id="city" value="@ViewBag.city" />
+
         <div class="">
-            <input class="uk-input card-with-border search-box " type="text" placeholder="متن جستجو">
+            <input name="name" class="uk-input card-with-border search-box " type="text" placeholder="متن جستجو">
         </div>
         <div class="">
-            <span class="serach-icon" uk-icon="icon:search"></span>
+            <span onclick="searchHospitalsInHome()" class="serach-icon" uk-icon="icon:search"></span>
         </div>
-    </div>
+    </form>
 </section>
+@section Scripts{
+
+
+    <script>
+        $("select").change(function () {
+            var selectedCountry = $(this).children("option:selected").val();
+            $('.city').val(selectedCountry);
+        });
+        function searchHospitalsInHome() {
+            $('form#searchHospitalsInHome').submit();
+        }
+    </script>
+}
 <!--End Search-Section-->
 <!--menu grid section-->
 
 <section class="menu-grid-section ">
     <div class="grid" dir="rtl">
         <content class="card-with-border my-column my-center">
-            <a href="/Hospitals/2?name= مراکز درمانی">
+            @{
+                string nameHospital = "مراکز درمانی".Replace(' ', '-');
+                string nameAzmayeshgah = "آزمایشگاه ها".Replace(' ', '-');
+            }
+            @*<a href="/Hospitals/2?@nameHospital">*@
+            <a href="/Hospitals">
                 <img class="my-center" src="~/img/HomeStatic/Hospital.svg" width="140" />
                 <label>مراکز درمانی</label>
             </a>
@@ -46,7 +74,7 @@
             </a>
         </content>
         <content class="card-with-border my-column my-center">
-            <a href="/Hospitals/7?name=آزمایشگاه ها">
+            <a href="/Hospitals/7?@nameAzmayeshgah">
                 <img class="my-center" src="~/img/HomeStatic/Laboratory.svg" width="140" />
                 <label>آزمایشگاه ها</label>
             </a>

@@ -21,15 +21,15 @@ namespace IntakeSystem.Controllers
             ViewBag.city = city;
             ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
             ViewBag.CatagoryList = _core.Catagory.Get().ToList();
-            if (name == "")
-            {
-                ViewBag.name = "مراکز درمانی";
-            }
+            //if (name == "")
+            //{
+            //    ViewBag.name = "مراکز درمانی";
+            //}
             return View();
         }
         public ActionResult Hospitals(int id = 0, string name = "", int city = 0)
         {
-            List<TblHospital> list = _core.Hospital.Get(orderBy: i => i.OrderByDescending(j => j.HospitalId)).ToList();
+            List<TblHospital> list = _core.Hospital.Get(i => i.IsActive, orderBy: i => i.OrderByDescending(j => j.HospitalId)).ToList();
             if (id != 0)
             {
                 list = list.Where(i => i.CatagoryId == id).ToList();
@@ -38,10 +38,10 @@ namespace IntakeSystem.Controllers
             {
                 list = list.Where(i => i.LocationId == city || i.TblLocation.LocationParentId == city).ToList();
             }
-            //if (name != "")
-            //{
-            //    list = list.Where(p => p.Name.Contains(name)).ToList();
-            //}
+            if (name != "")
+            {
+                list = list.Where(p => p.Name.Contains(name) || p.Name.Contains(name)).ToList();
+            }
             //if (tell != "")
             //{
             //    list = list.Where(p => p.TellNo.Contains(tell)).ToList();

@@ -63,7 +63,13 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PersianTools.Core, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PersianTools.Core.2.0.2\lib\net45\PersianTools.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -864,6 +870,8 @@
     <Content Include="Areas\Admin\Views\Catagory\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\List.cshtml" />
     <Content Include="Areas\Hospital\Views\Doctor\List.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -1064,7 +1072,7 @@
     <Content Include="Areas\Admin\Views\Hospital\PtHospitalInfo.cshtml" />
     <Content Include="Areas\Admin\Views\Hospital\Fiat.cshtml" />
     <Content Include="Areas\Admin\Views\Hospital\PtFiatInfo.cshtml" />
-    <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\Index2.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\PtFeeSetting.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\PtUSSDSetting.cshtml" />

@@ -3,221 +3,48 @@
     ViewBag.Title = "تنظیمات";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<div class="row flex-div">
+<!--<div class="row flex-div">
     <div class="col-md-12 flex-div pb-3 pt-3">
         <div class="card flex-div border-0 main-shadow">
-            <!--list region-->
-            <div id="card-table" class="card-body flex-div mt-2">
-                <div class="table-responsive flex">
-                    <table class="table fixed">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">عنوان</th>
-                                <th scope="col">تنظیمات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>درصد برداشت از مراکز درمانی</td>
-                                <td>
-                                    <a id="TotalFee" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>کدهای USSD</td>
-                                <td>
-                                    <a id="USSDCodes" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>پرونده های الکترونیکی</td>
-                                <td>
-                                    <a id="ElectronicFile" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>سیستم فراخوان صوتی</td>
-                                <td>
-                                    <a id="VoicePager" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات قبل فروش</td>
-                                <td>
-                                    <a id="BeforeSale" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>توضیحات بعد از فروش</td>
-                                <td>
-                                    <a id="AfterSale" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>لینک های فوتر</td>
-                                <td>
-                                    <a id="FooterSetting" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>تماس با ما</td>
-                                <td>
-                                    <a id="ContactUs" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>درباره ما</td>
-                                <td>
-                                    <a id="AboutUs" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>قوانین</td>
-                                <td>
-                                    <a id="Rule" data-toggle="modal" data-target="#modalSave" class="text-info" uk-icon="settings"></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="card-header bg-white">
             </div>
-            <!--end list region-->
-            <div class="card-footer bg-white">
-                @*<nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
+            <div id="card-table" class="card-body flex-div">
 
-                            @if (ViewBag.PageId == 1)
-                            {
-                                <li class="page-item d-none">
-                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId-1))">قبلی</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">قبلی</a>
-                                </li>
+                @using (Html.BeginForm())
+                {
+                    <div class="form-row mt-3 fixed overflow-auto">
+                        <div class="form-group col-lg-12">
+                            <label>سقف هزینه ارسال رایگان: </label>
+                            <input data-type='currency' class="form-control form-control-sm d-inline-block d-sm-block col-lg-10 float-left PriceInput" placeholder="مثال: 19,000">
+                            <input type="hidden" asp-for="SagfePost" />
+                            <br /><span class="text-danger" asp-validation-for="SagfePost"></span>
+                        </div>
 
-                            }
+                        <div class="form-group col-lg-12">
+                            <div class="form-group col-12">
+                                <label class="mt-2">متن درباره ما </label>
+                                <textarea id="Description" class="textarea-fix-height-120" placeholder=" متن توضیحات... "></textarea>
+                            </div>
+                        </div>
 
-                            <li class="page-item">
-                                <select id="pageNumber" class="custom-select custom-select-sm">
-                                    @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
-                                    {
-                                        <option class="page-item" value="@i" @(((int)ViewBag.pageId == i) ? "selected" : "")>صفحه @i از @((int)ViewBag.PageCount + 1)</option>
-                                    }
-                                </select>
-                            </li>
+                        <button type="submit" class="btn btn-success btn-sm text-white">ثبت تغییرات<span class="icon-holder uk-margin-small-right" uk-icon="create-outline"></span></button>
+                    </div>
+                }
 
+            </div>
 
-                            @if ((int)ViewBag.PageId > (int)ViewBag.PageCount)
-                            {
-                                <li class="page-item d-none">
-                                    <a class="page-link" onclick="Page(@((int)ViewBag.PageId + 1))">بعدی</a>
-                                </li>
-                            }
-                            else
-
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="/Admin/Project?PageId=@((int)ViewBag.PageId-1)&Result=@ViewBag.Result&InPageCount=@ViewBag.InPageCount">بعدی</a>
-                                </li>
-
-                            }
-                            <li>
-                                <select id="InPageCount" class="custom-select custom-select-sm">
-                                    @if (ViewBag.InPageCount == 0)
-                                    {
-                                        <option value="0" selected>18 در هر صفحه</option>
-                                        <option value="20">20 در هر صفحه</option>
-                                        <option value="30">30 در هر صفحه</option>
-                                        <option value="40">40 در هر صفحه</option>
-
-                                    }
-
-                                    @if (ViewBag.InPageCount == 20)
-                                    {
-                                        <option value="0">18 در هر صفحه</option>
-                                        <option value="20" selected>20 در هر صفحه</option>
-                                        <option value="30">30 در هر صفحه</option>
-                                        <option value="40">40 در هر صفحه</option>
-                                    }
-                                    else if (ViewBag.InPageCount == 30)
-                                    {
-                                        <option value="0">18 در هر صفحه</option>
-                                        <option value="20">20 در هر صفحه</option>
-                                        <option value="30" selected>30 در هر صفحه</option>
-                                        <option value="40">40 در هر صفحه</option>
-                                    }
-                                    else if (ViewBag.InPageCount == 40)
-                                    {
-                                        <option value="0">18 در هر صفحه</option>
-                                        <option value="20">20 در هر صفحه</option>
-                                        <option value="30">30 در هر صفحه</option>
-                                        <option value="40" selected>40 در هر صفحه</option>
-                                    }
-
-                                </select>
-                            </li>
-                        </ul>
-                    </nav>*@
+            <div class="card-footer bg-white text-left">
+                <nav aria-label="Page navigation example">-->
+                    @*@await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })*@
+                <!--</nav>
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
-@section Script{
-    <script>
-        $("#TotalFee").click(function () {
-            $.get("/Admin/Setting/PtFeeSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#USSDCodes").click(function () {
-            $.get("/Admin/Setting/PtUSSDSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#ElectronicFile").click(function () {
-            $.get("/Admin/Setting/PtFileSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#VoicePager").click(function () {
-            $.get("/Admin/Setting/PtVoicePagerSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#BeforeSale").click(function () {
-            $.get("/Admin/Setting/PtBeforeSaleSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#AfterSale").click(function () {
-            $.get("/Admin/Setting/PtAfterSaleSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#FooterSetting").click(function () {
-            $.get("/Admin/Setting/PtFooterSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#ContactUs").click(function () {
-            $.get("/Admin/Setting/PtContactSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#AboutUs").click(function () {
-            $.get("/Admin/Setting/PtAboutSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-        $("#Rule").click(function () {
-            $.get("/Admin/Setting/PtRuleSetting", function (result) {
-                $(".modal-content").html(result);
-            });
-        });
-    </script>
-}
+
+<script>
+    $(function () {
+        $('#Description').ckeditor();
+    });
+</script>

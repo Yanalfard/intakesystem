@@ -1,45 +1,63 @@
-﻿
+﻿@model DataLayer.ViewModels.VisitDayViewModel
 <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close" onclick="closeUikit()">&times;</span>
     <!--visit time-->
     <div class="my-column my-center">
-        <div class="visit-time-header uk-text-center mytext-gray">تعیین زمان ویزیت برای دکتر <span>نام دکتر</span></div>
+        <div class="visit-time-header uk-text-center mytext-gray">تعیین زمان ویزیت برای دکتر <span> @Model.DoctorName </span></div>
         <div class="my-row intake-day-header uk-margin-top" dir="ltr">
             <div class="uk-margin-auto-vertical my-column">
                 <div class="card-with-border my-center">
-                    <img src="~/img/TestSample/doctor1.jpg" alt="picture" />
+                    <img src="~/Resources/Images/User/Thumb/@Model.DoctorImage" alt="picture" />
                 </div>
                 <span class="uk-margin-small-top">نام پزشک</span>
+                @Model.DoctorName
             </div>
             <label class="uk-legend uk-margin-auto-vertical uk-text-bold uk-text-right uk-margin-right" dir="rtl">
-                <span>تخصص دکتر</span>
+                <span>تخصص دکتر :</span>
+                @Model.SpecialityName
                 <br />
                 <br />
-                <span>روز ویزیت</span>
+                <span>روز ویزیت :</span>
+                @if (Model.IsValid)
+                {
+                    <span>
+                        @Model.DayName
+                        @Model.DayVisit
+                    </span>
+                }
+                else
+                {
+                    <span class="uk-text-danger"> ویزیت در زمان انتخاب شده مقدور نمیباشد</span>
+                }
+
+
             </label>
         </div>
         <div class="flex-container my-center" dir="rtl">
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>10-11</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>11-12</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>12-13</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>13-14</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>14-15</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>15-16</span>
-            </a>
-            <a href="/Home/ConfirmInformation" class="VisitTime">
-                <span>16-17</span>
-            </a>
+            @if (Model.IsValid)
+            {
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>10-11</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>11-12</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>12-13</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>13-14</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>14-15</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>15-16</span>
+                </a>
+                <a href="/Home/ConfirmInformation" class="VisitTime">
+                    <span>16-17</span>
+                </a>
+            }
         </div>
     </div>
 </div>

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer.Models;
+using DataLayer.Utilities;
+using DataLayer.ViewModels;
 using Services.Services;
 
 namespace IntakeSystem.Controllers
@@ -47,6 +49,7 @@ namespace IntakeSystem.Controllers
             //_core.Role.DeleteById(2);
             //_core.Role.DeleteById(5);
             //_core.Save();
+            ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
 
             return View();
         }
@@ -55,20 +58,48 @@ namespace IntakeSystem.Controllers
         {
             string tell = User.Identity.Name.Split('|')[0];
             TblUser selectedUser = _core.User.Get().SingleOrDefault(i => i.TellNo == tell);
-            return View(selectedUser);
+            return View(new UserProfileVm()
+            {
+                Address = selectedUser.Address,
+                Gender = Convert.ToInt32(selectedUser.Gender),
+                IdentificationNo = selectedUser.IdentificationNo,
+                Name = selectedUser.Name,
+                UserId = selectedUser.UserId,
+            });
         }
         [HttpPost]
-        public ActionResult UserProfile(TblUser user)
+        public ActionResult UserProfile(UserProfileVm user)
         {
             if (ModelState.IsValid)
             {
-                return View();
+                if (_core.User.Any(i => i.UserId != user.UserId && i.IdentificationNo == user.IdentificationNo && i.IsDeleted == false))
+                {
+                    ModelState.AddModelError("IdentificationNo", " کد ملی تکراریست");
+                }
+                else
+                {
+
+                    string tell = User.Identity.Name.Split('|')[0];
+                    TblUser selectedUser = _core.User.Get().SingleOrDefault(i => i.TellNo == tell);
+                    selectedUser.Name = user.Name;
+                    selectedUser.Address = user.Address;
+                    selectedUser.IdentificationNo = user.IdentificationNo;
+                    selectedUser.Gender = Convert.ToBoolean(user.Gender);
+                    _core.User.Update(selectedUser);
+                    _core.Save();
+                    ViewBag.IsEditUser = true;
+                    return View(user);
+                }
             }
             return View(user);
         }
         public ActionResult IntakeDay(int id, string name = "")
         {
             TblUser selectedUser = _core.User.GetById(id);
+            int hospitalSpecialId = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id).HospitalSpecialityRelId;
+            List<TblDay> dayList = _core.HosSpecDayRel.Get(i => i.HosSpecId == hospitalSpecialId).Select(i => i.TblDay).Where(i => i.IsWorking
+                  && i.StartShift != null && i.EndShift != null).ToList();
+            ViewBag.DayIsVisit = dayList;
             return View(_core.User.GetById(id));
         }
         public int DayOfWeek(string name)
@@ -101,17 +132,94 @@ namespace IntakeSystem.Controllers
 
             return id;
         }
+        public string DayOfName(int id)
+        {
+            var dayOfWeek = "";
+            switch (id)
+            {
+                case 1:
+                    {
+                        dayOfWeek = "شنبه";
+                        break;
+                    }
+                case 2:
+                    {
+                        dayOfWeek = "یک شنبه";
+                        break;
+                    }
+                case 3:
+                    {
+                        dayOfWeek = "دوشنبه";
+                        break;
+                    }
+                case 4:
+                    {
+                        dayOfWeek = "سه شنبه";
+                        break;
+                    }
+                case 5:
+                    {
+                        dayOfWeek = " چهارشنبه";
+                        break;
+                    }
+                case 6:
+                    {
+                        dayOfWeek = "پنج شنبه";
+                        break;
+                    }
+                case 7:
+                    {
+                        dayOfWeek = "جمعه";
+                        break;
+                    }
+
+            }
+            return dayOfWeek;
+        }
         public ActionResult ViewDayVisit(int id, string day)
         {
-            ////
-            PersianCalendar pc = new PersianCalendar();
-            string[] Start = day.Split('/');
-            DateTime startTime = pc.ToDateTime(Convert.ToInt32(Start[0]), Convert.ToInt32(Start[1]), Convert.ToInt32(Start[2]), 0, 0, 0, 0).Date;
-            var data1 = DayOfWeek(startTime.DayOfWeek.ToString());
+            VisitDayViewModel visitDayViewModel = new VisitDayViewModel();
+            string showErroe = "";
+            bool isValid = false;
+            DateTime dateTimeMilady = day.ShamsiToMiladi(out isValid, out showErroe);
+            if (!isValid)
+            {
+                visitDayViewModel.Text = showErroe;
+            }
+            else
+            {
+                visitDayViewModel.Text = "";
+
+                visitDayViewModel.IsValid = true;
+            }
+            TblHospitalSpecialityRel selected = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id);
+            int data = DayOfWeek(dateTimeMilady.DayOfWeek.ToString());
+
+            int hospitalSpecialId = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id).HospitalSpecialityRelId;
+            TblDay dayList = _core.HosSpecDayRel.Get(i => i.HosSpecId == hospitalSpecialId)
+                .Select(i => i.TblDay).FirstOrDefault(i => i.IsWorking
+                  && i.StartShift != null && i.EndShift != null && i.DayOfWeek == data);
+            if (dayList == null)
+            {
+                visitDayViewModel.IsValid = false;
+
+                visitDayViewModel.Text = "روز انتخابی قابل رزرو نیست";
+            }
+            else
+            {
+                visitDayViewModel.Text = "";
+                visitDayViewModel.IsValid = true;
+            }
             /////////////////////
-            ViewBag.day = day;
-            TblHospitalSpecialityRel selected = _core.HospitalSpecialityRel.Get().SingleOrDefault(i => i.DoctorId == id);
-            return PartialView();
+
+            visitDayViewModel.TblDay = dayList;
+            visitDayViewModel.TblHospitalSpecialityRel = selected;
+            visitDayViewModel.DayVisit = day;
+            visitDayViewModel.SpecialityName = selected.TblSpeciality.Name;
+            visitDayViewModel.DoctorName = selected.TblUser.Name;
+            visitDayViewModel.DoctorImage = selected.TblUser.ImageUrl;
+            visitDayViewModel.DayName = DayOfName(data);
+            return PartialView(visitDayViewModel);
         }
         public ActionResult ConfirmInformation()
         {

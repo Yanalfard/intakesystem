@@ -32,6 +32,9 @@ namespace DataLayer.ViewModels
         [Display(Name = "تخصص ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int? SpecialityId { get; set; }
+        [Display(Name = "هزینه ویزیت ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public long VisitPrice { get; set; }
         public string ImageUrl { get; set; }
         public int Gender { get; set; }
         public string Address { get; set; }
@@ -66,6 +69,10 @@ namespace DataLayer.ViewModels
         [Display(Name = "تخصص ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int? SpecialityId { get; set; }
+        [Display(Name = "هزینه ویزیت ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public long VisitPrice { get; set; }
+
         public string ImageUrl { get; set; }
         public int Gender { get; set; }
         public string Address { get; set; }

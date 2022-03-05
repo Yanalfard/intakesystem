@@ -28,35 +28,41 @@
             @using (Html.BeginForm())
             {
                 @Html.Partial("_CaptchaInput")
-        <fieldset class="uk-fieldset">
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
-                    @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس", maxlength = "11" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
-            </div>
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:lock-closed"></span>
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "رمز عبور" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span >مرا بخاطر بسپار</span>
-                    @Html.EditorFor(model => model.RememberMe, new { htmlAttributes = new { } })
-                </div>
-            </div>
-            @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
-            <button type="submit" class="light-blue-button my-center uk-margin-top">
-                ورود
-            </button>
-            <div class="uk-margin-bottom uk-margin-top my-center">
-                <a href="/Account/ForgetPassword" class="mytext-gray ">فراموشی رمز عبور</a>
-            </div>
-        </fieldset>
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip gly-rotate-270" uk-icon="icon:call"></span>
+                            @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "شماره تماس", maxlength = "11" } })
+                        </div>
+                        <div>
+
+                            @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:lock-closed"></span>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "رمز عبور" } })
+                        </div>
+                        <div>
+
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span>مرا بخاطر بسپار</span>
+                            @Html.EditorFor(model => model.RememberMe, new { htmlAttributes = new { } })
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
+                    <button type="submit" class="light-blue-button my-center uk-margin-top">
+                        ورود
+                    </button>
+                    <div class="uk-margin-bottom uk-margin-top my-center">
+                        <a href="/Account/ForgetPassword" class="mytext-gray ">فراموشی رمز عبور</a>
+                    </div>
+                </fieldset>
             }
 
         </div>

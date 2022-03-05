@@ -31,7 +31,7 @@
                     </div>
                     <hr class="uk-divider-icon" />
                     <div class="uk-text-right my-column uk-margin-right uk-margin-bottom">
-                        <label class="my-row"><input name="id" class="uk-checkbox" type="radio" value="0" disabled>  مراکز درمان </label>
+                        <label onclick="window.location.href='/Hospitals'" class="my-row"><input name="id" class="uk-checkbox" type="radio" value="0" disabled>  مراکز درمان </label>
                         @foreach (var item in listCatagory)
                         {
                             <label onclick="searchHospitals()" class="my-row"><input name="id" class="uk-checkbox" @(ViewBag.id==item.CatagoryId?"checked":"")  type="radio" value="@item.CatagoryId">  @item.Name </label>

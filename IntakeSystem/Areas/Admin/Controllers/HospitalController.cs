@@ -15,8 +15,8 @@ namespace IntakeSystem.Areas.Admin.Controllers
         private Core _core = new Core();
         TblUser SelectUser()
         {
-            int userId = Convert.ToInt32(User.Identity.Name);
-            TblUser selectUser = _core.User.GetById(userId);
+            string userId = User.Identity.Name.Split('|')[0].ToString();
+            TblUser selectUser = _core.User.Get().SingleOrDefault(i => i.TellNo == userId);
             return selectUser;
         }
         public ActionResult Index(int PageId = 1, string Result = "", int InPageCount = 20)
@@ -135,34 +135,38 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (imgUrl != null)
-                {
-                    if (!imgUrl.IsImage())
-                    {
-                        ModelState.AddModelError("ImageUrl", "عکس مورد نظر مشکل دارد ");
-                    }
-                    else if (imgUrl.ContentLength > 10485760)
-                    {
-                        ModelState.AddModelError("ImageUrl", "سایز عکس بیشتر است");
-                    }
-                    else
-                    {
-                        #region Addimage
-                        hospitalVm.ImageUrl = Guid.NewGuid() + Path.GetExtension(imgUrl.FileName);
-                        imgUrl.SaveAs(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl));
-                        ImageResizer img = new ImageResizer();
-                        img.Resize(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl),
-                            Server.MapPath("/Resources/Images/Hospital/Thumb/" + hospitalVm.ImageUrl));
-                        #endregion
-                    }
-                }
-                else if (_core.Hospital.Any(i => i.HospitalId != hospitalVm.HospitalId && i.AdminId == hospitalVm.UserId))
+               
+                if (_core.Hospital.Any(i => i.HospitalId != hospitalVm.HospitalId && i.AdminId == hospitalVm.UserId))
                 {
                     ModelState.AddModelError("UserId", "برای این کاربر بیمارستان ثبت شده است");
                 }
                 else
                 {
+                    if (imgUrl != null)
+                    {
+                        if (!imgUrl.IsImage())
+                        {
+                            ModelState.AddModelError("ImageUrl", "عکس مورد نظر مشکل دارد ");
+                            return View(hospitalVm);
 
+                        }
+                        else if (imgUrl.ContentLength > 10485760)
+                        {
+                            ModelState.AddModelError("ImageUrl", "سایز عکس بیشتر است");
+                            return View(hospitalVm);
+
+                        }
+                        else
+                        {
+                            #region Addimage
+                            hospitalVm.ImageUrl = Guid.NewGuid() + Path.GetExtension(imgUrl.FileName);
+                            imgUrl.SaveAs(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl));
+                            ImageResizer img = new ImageResizer();
+                            img.Resize(Server.MapPath("/Resources/Images/Hospital/" + hospitalVm.ImageUrl),
+                                Server.MapPath("/Resources/Images/Hospital/Thumb/" + hospitalVm.ImageUrl));
+                            #endregion
+                        }
+                    }
                     TblHospital updateHospital = _core.Hospital.GetById(hospitalVm.HospitalId);
                     int userId = updateHospital.AdminId;
                     updateHospital.AboutUs = hospitalVm.AboutUs;

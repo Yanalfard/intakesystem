@@ -31,9 +31,48 @@
                     <ul class="uk-navbar-nav desktop-header">
                         @if (User.Identity.IsAuthenticated)
                         {
+
+
+                            if (User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a href="/Admin/Home">
+                                        <span class="bg-orange-circle" uk-icon="icon: person"></span>
+                                        پروفایل
+                                    </a>
+                                </li>
+                            }
+                            if (User.IsInRole("Hospital"))
+                            {
+                                <li>
+                                    <a href="/Hospital/Home">
+                                        <span class="bg-orange-circle" uk-icon="icon: person"></span>
+                                        پروفایل
+                                    </a>
+                                </li>
+                            }
+                            if (User.IsInRole("Patient"))
+                            {
+                                <li>
+                                    <a href="/Home/UserProfile">
+                                        <span class="bg-orange-circle" uk-icon="icon: person"></span>
+                                        پروفایل
+                                    </a>
+                                </li>
+                            }
+                            if (User.IsInRole("Doctor"))
+                            {
+                                <li>
+                                    <a href="/Home/UserProfile">
+                                        <span class="bg-orange-circle" uk-icon="icon: person"></span>
+                                        پروفایل
+                                    </a>
+                                </li>
+                            }
                             <li>
-                                <a href="">
-                                    @User.Identity.Name.Split('|')[0]
+                                <a href="/LogOff">
+                                    <span class="bg-orange-circle" uk-icon="icon: log-out"></span>
+                                    خروج
                                 </a>
                             </li>
                         }
@@ -66,9 +105,36 @@
                             </a>
                             <div class="uk-navbar-dropdown uk-border-rounded">
                                 <ul class="uk-nav uk-navbar-dropdown-nav uk-text-right">
-                                    <li><a href="/Account/Login" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: log-in"></span>ورود</a></li>
-                                    <li class="uk-nav-divider"></li>
-                                    <li><a href="/Account/Register" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person-add"></span>ثبت نام</a></li>
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+
+                                        if (User.IsInRole("admin"))
+                                        {
+                                            <li><a href="/Admin/Home" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person"></span>پروفایل</a></li>
+                                        }
+                                        if (User.IsInRole("Hospital"))
+                                        {
+                                            <li><a href="/Hospital/Home" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person"></span>پروفایل</a></li>
+                                        }
+                                        if (User.IsInRole("Patient"))
+                                        {
+                                            <li><a href="/Home/UserProfile" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person"></span>پروفایل</a></li>
+                                        }
+                                        if (User.IsInRole("Doctor"))
+                                        {
+                                            <li><a href="/Home/UserProfile" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person"></span>پروفایل</a></li>
+                                        }
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="/Account/Login" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: log-out"></span>خروج</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/Login" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: log-in"></span>ورود</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="/Account/Register" class="uk-padding-remove"><span class="uk-margin-small-left" uk-icon="icon: person-add"></span>ثبت نام</a></li>
+                                    }
+
                                 </ul>
                             </div>
                         </li>
@@ -124,7 +190,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="mobile-menu" href="/Doctor">
+                                    <a class="mobile-menu" href="/Doctors">
                                         <span class="bg-orange-circle" uk-icon="icon:person"></span>
                                         پزشکان
                                     </a>
@@ -159,7 +225,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/Doctor">
+                            <a href="/Doctors">
                                 <span class="" uk-icon="icon: person"></span>
                                 پزشکان
                             </a>
@@ -232,7 +298,7 @@
                             </ul>
                         </div>
                     </nav>
-                    <div class="uk-text-center mytext-white Signature uk-margin-small-top"> طراحی و توسعه توسط ایده پرداز آروین تاو</div>
+                    @*<div class="uk-text-center mytext-white Signature uk-margin-small-top"> طراحی و توسعه توسط ایده پرداز آروین تاو</div>*@
                 </div>
             </div>
             <!--end footer section-->
@@ -255,7 +321,7 @@
 
 
 
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 
 </body>
 </html>

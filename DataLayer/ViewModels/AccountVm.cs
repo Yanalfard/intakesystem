@@ -35,6 +35,32 @@ namespace DataLayer.ViewModels
         public int RoleId { get; set; }
         public int Gender { get; set; }
     }
+    public class EditUserInAdminVm
+    {
+        public int UserId { get; set; }
+        [Display(Name = "نام ")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+
+        public string Name { get; set; }
+        [MaxLength(11)]
+        [StringLength(11)]
+        [Display(Name = "موبایل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [RegularExpression("[0]{1}[9]{1}[0-9]{9}", ErrorMessage = "شماره تلفن وارد شده معتبر نمی باشد")]
+        //[Remote("VerifyTellNo", "Account")]
+        public string TellNo { get; set; }
+        [Display(Name = "کد ملی")]
+        //[Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        //[MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
+        //[MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
+        [StringLength(10)]
+        //[Remote("VerifyIdentificationNo", "Account")]
+        public string IdentificationNo { get; set; }
+        public int RoleId { get; set; }
+        public int Gender { get; set; }
+    }
     public class VmChangePassword
     {
         public int Id { get; set; }
@@ -68,23 +94,28 @@ namespace DataLayer.ViewModels
 
     public class UserProfileVm
     {
+        public int UserId { get; set; }
+
         [Display(Name = "نام ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(50, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [StringLength(50)]
         public string Name { get; set; }
+
         [Display(Name = "کد ملی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
+        //[CodeMelli("لطفا کد ملی را بدرستی وارد کنید")]
         [MaxLength(10, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [MinLength(10, ErrorMessage = "تعداد کاراکتر کم است")]
         [StringLength(10)]
         public string IdentificationNo { get; set; }
+
         [Display(Name = "آدرس")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(500, ErrorMessage = "تعداد کاراکتر بیشتر است")]
         [StringLength(500)]
         public string Address { get; set; }
+
         public int Gender { get; set; }
     }
 }

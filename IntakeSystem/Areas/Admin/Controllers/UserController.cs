@@ -95,7 +95,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
         public ActionResult PtEdit(int id)
         {
             TblUser selectedUser = _core.User.GetById(id);
-            EditUserVm editUser = new EditUserVm();
+            EditUserInAdminVm editUser = new EditUserInAdminVm();
             editUser.UserId = selectedUser.UserId;
             editUser.Name = selectedUser.Name;
             editUser.IdentificationNo = selectedUser.IdentificationNo;
@@ -106,7 +106,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             return PartialView(editUser);
         }
         [HttpPost]
-        public ActionResult PtEdit(EditUserVm register)
+        public ActionResult PtEdit(EditUserInAdminVm register)
         {
             if (ModelState.IsValid)
             {
@@ -114,12 +114,20 @@ namespace IntakeSystem.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("TellNo", "شماره تلفن تکراریست");
                 }
-                else if (_core.User.Any(i => i.UserId != register.UserId && i.IdentificationNo == register.IdentificationNo && i.IsDeleted == false))
-                {
-                    ModelState.AddModelError("IdentificationNo", "شماره تلفن تکراریست");
-                }
                 else
                 {
+                    if (register.IdentificationNo == null)
+                    {
+                        register.IdentificationNo = "0";
+                    }
+                    if (register.IdentificationNo != "0")
+                    {
+                        if (_core.User.Any(i => i.UserId != register.UserId && i.IdentificationNo == register.IdentificationNo && i.IsDeleted == false))
+                        {
+                            ModelState.AddModelError("IdentificationNo", "کد ملی تکراریست");
+                            return JavaScript("location.reload()");
+                        }
+                    }
                     TblUser updateUser = _core.User.GetById(register.UserId);
                     updateUser.Name = register.Name;
                     updateUser.IdentificationNo = register.IdentificationNo;

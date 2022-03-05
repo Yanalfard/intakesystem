@@ -15,13 +15,16 @@
             @using (Html.BeginForm())
             {
                 @Html.Partial("_CaptchaInput")
-                @Html.HiddenFor(model=>model.Tell)
+                @Html.HiddenFor(model => model.Tell)
                 <fieldset class="uk-fieldset">
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon:download"></span>
                             @Html.EditorFor(model => model.Auth, new { htmlAttributes = new { @class = "uk-input card-with-border", placeholder = "کد دریافتی", maxlength = "6" } })
+                        </div>
+                        <div>
                             @Html.ValidationMessageFor(model => model.Auth, "", new { @class = "text-danger" })
+
                         </div>
                     </div>
 
