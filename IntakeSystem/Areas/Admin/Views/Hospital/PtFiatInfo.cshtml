@@ -1,4 +1,7 @@
-﻿<div class="modal-header">
+﻿@model DataLayer.Models.TblOrder
+@using DataLayer.Utilities;
+
+<div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
         جزئیات حسابرسی
     </h6>
@@ -10,40 +13,50 @@
     <div class="form-row ">
         <div class="form-group col-md-3">
             <label>کد نوبت اخذ شده: </label>
-            <span>4518941</span>
+            <span>@Model.OrderId</span>
         </div>
         <div class="form-group col-md-3">
             <label>نام بیمار: </label>
-            <span>رضا رضایی</span>
+            <span>@Model.TblUser.Name</span>
         </div>
         <div class="form-group col-md-3">
             <label>نام پزشک: </label>
-            <span>علی علیزاده</span>
+            <span>@Model.TblHospitalSpecialityRel.TblUser.Name</span>
         </div>
         <div class="form-group col-md-3">
             <label>نام مرکز درمانی: </label>
-            <span>بیمارستان فلان</span>
+            <span>@Model.TblHospitalSpecialityRel.TblHospital.Name </span>
         </div>
         <div class="form-group col-md-3">
             <label> درصد پزشک از قیمت: </label>
-            <span>20000</span>
+            <span>@Model.DoctorsPart</span>
         </div>
         <div class="form-group col-md-3">
             <label>درصد مرکز درمانی از قیمت: </label>
-            <span>10000</span>
+            <span>@Model.HospitalsPart</span>
         </div>
         <div class="form-group col-md-3">
             <label>زمان ثبت نوبت: </label>
-            <span>فلان زمان</span>
+            <span>@Model.DateCreated.DateToShamsi()</span>
+        </div>
+        <div class="form-group col-md-3">
+            <label>زمان مراجعه : </label>
+            <span>@Model.Time.DateToShamsi()</span>
         </div>
         <div class="form-group col-md-3">
             <label>زمان ویزیت: </label>
-            <span>فلان</span>
+            <span>@Model.Time.ToString("HH:mm")</span>
         </div>
         <div class="form-group col-md-3">
             <label>وضعیت: </label>
-            <span class="text-success">تسویه شده</span>
-            <span class="text-danger">تسویه نشده</span>
+            @if (Model.SettlementStatus == 1)
+            {
+                <span class="text-success">تسویه شده</span>
+            }
+            else
+            {
+                <span class="text-danger">تسویه نشده</span>
+            }
         </div>
     </div>
 </div>

@@ -1,4 +1,6 @@
-﻿<div class="modal-header">
+﻿@model DataLayer.Models.TblOrder
+@using DataLayer.Utilities;
+<div class="modal-header">
     <h6 class="modal-title" id="modalCenterTitle">
         جزئیات گردش حساب
     </h6>
@@ -9,43 +11,52 @@
 <div class="modal-body">
     <div class="form-row ">
         <div class="form-group col-md-3">
-            <label>کد:</label>
-            <span>1234</span>
+            <label>کد نوبت اخذ شده: </label>
+            <span>@Model.OrderId</span>
         </div>
         <div class="form-group col-md-3">
-            <label>نام کاربر:</label>
-            <span>رضا رضایی</span>
+            <label>نام بیمار: </label>
+            <span>@Model.TblUser.Name</span>
         </div>
         <div class="form-group col-md-3">
-            <label>نام پزشک:</label>
-            <span>محمد امینی</span>
+            <label>نام پزشک: </label>
+            <span>@Model.TblHospitalSpecialityRel.TblUser.Name</span>
         </div>
         <div class="form-group col-md-3">
-            <label>نام تخصص:</label>
-            <span>قلب و عروق</span>
+            <label>نام مرکز درمانی: </label>
+            <span>@Model.TblHospitalSpecialityRel.TblHospital.Name </span>
         </div>
         <div class="form-group col-md-3">
-            <label>تاریخ مراجعه:</label>
-            <span>فلان تاریخ</span>
+            <label> درصد پزشک از قیمت: </label>
+            <span>@Model.DoctorsPart</span>
         </div>
         <div class="form-group col-md-3">
-            <label>درصد برداشت پزشک:</label>
-            <span>10</span>
+            <label>درصد مرکز درمانی از قیمت: </label>
+            <span>@Model.HospitalsPart</span>
         </div>
         <div class="form-group col-md-3">
-            <label>درصد برداشت مرکز درمانی:</label>
-            <span>10</span>
+            <label>زمان ثبت نوبت: </label>
+            <span>@Model.DateCreated.DateToShamsi()</span>
         </div>
         <div class="form-group col-md-3">
-            <label>هزینه پرداختی (تومان):</label>
-            <span>50000</span>
+            <label>زمان مراجعه : </label>
+            <span>@Model.Time.DateToShamsi()</span>
         </div>
         <div class="form-group col-md-3">
-            <label>وضعیت:</label>
-            <span class="text-success">تسویه شده</span>
-            <span class="text-danger">تسویه نشده</span>
+            <label>زمان ویزیت: </label>
+            <span>@Model.Time.ToString("HH:mm")</span>
         </div>
-
+        <div class="form-group col-md-3">
+            <label>وضعیت: </label>
+            @if (Model.SettlementStatus == 1)
+            {
+                <span class="text-success">تسویه شده</span>
+            }
+            else
+            {
+                <span class="text-danger">تسویه نشده</span>
+            }
+        </div>
     </div>
 </div>
 

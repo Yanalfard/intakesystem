@@ -1,4 +1,6 @@
-﻿
+﻿@model IEnumerable<DataLayer.Models.TblOrder>
+@using DataLayer.Utilities;
+@using DataLayer.Models;
 @{
     ViewBag.Title = "گردش حساب";
     Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
@@ -9,9 +11,9 @@
         <div class="card flex-div border-0 main-shadow">
             <div class="card-header bg-white">
                 <div class="pr-1 pt-2">
-                    <div class="card-form form-row">
+                    @*<div class="card-form form-row">
                         <button id="Settle" data-toggle="modal" data-target="#modalSave" class="btn btn-success btn-sm">تسویه<span class="icon-holder uk-margin-small-right" uk-icon="checkmark-circle-outline"></span></button>
-                    </div>
+                    </div>*@
                 </div>
             </div>
             <!--list region-->
@@ -20,42 +22,47 @@
                     <table class="table fixed">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">کد</th>
-                                <th scope="col">نام کاربر</th>
-                                <th scope="col">نام پزشک</th>
-                                <th scope="col">تاریخ مراجعه</th>
-                                <th scope="col">هزینه پرداختی(تومان)</th>
-                                <th scope="col">درصد برداشت مرکز درمانی</th>
+                                <th scope="col">کد نوبت اخذ شده</th>
+                                <th scope="col">نام دگتر  </th>
+                                <th scope="col">نام بیمار  </th>
+                                <th scope="col">هزینه ویزیت </th>
+                                <th scope="col">زمان ثبت نوبت</th>
+                                <th scope="col">زمان مراجعه </th>
                                 <th scope="col">جزئیات</th>
                                 <th scope="col">وضعیت تسویه</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>زهرا رضایی</td>
-                                <td>ژاله منصوری</td>
-                                <td>
-                                    فلان تاریخ
-                                </td>
-                                <td>
-                                    200000
-                                </td>
-                                <td>
-                                    10
-                                </td>
-                                <td>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
-                                        <a id="Information" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="text-success">تسویه شده است</span>
-                                    <span data-placement="top" data-toggle="tooltip" title="" data-original-title="تسویه شده است">
-                                        <a onclick="ChangeStatus(this)" class="AskStatus"><span class="text-success" uk-icon="checkmark-circle">؟</span></a>
-                                    </span>
-                                </td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.OrderId</td>
+                                    <td>@item.TblHospitalSpecialityRel.TblUser.Name</td>
+                                    <td>@item.TblUser.Name</td>
+                                    <td>
+                                        <span class="uk-divider-vertical"></span>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="هزینه ویزیت  ">
+                                            <apan class="text-info">@item.Price.ToString("#,0") تومان</apan>
+                                        </span>
+                                    </td>
+                                    <td> @item.DateCreated.DateToShamsi()</td>
+                                    <td> @item.Time.DateToShamsi()</td>
+                                    <td>
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="جزئیات">
+                                            <a id="Information" onclick="Information(@item.OrderId)" data-toggle="modal" data-target="#modalSave" class="text-primary" uk-icon="information-circle"></a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-success">تسویه شده است</span>
+                                        @if (item.SettlementStatus == 0)
+                                        {
+                                            <span data-placement="top" data-toggle="tooltip" title="" data-original-title="تسویه شده است">
+                                                <a onclick="SettlementStatus(this,@item.OrderId)" class="AskStatus"><span class="text-success" uk-icon="checkmark-circle">؟</span></a>
+                                            </span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -156,14 +163,18 @@
             });
         });
 
-        $("#Information").click(function () {
-            $.get("/Hospital/Order/PtInfo", function (result) {
+
+        function Information(id) {
+            $.get("/Hospital/Order/PtInfo/" + id, function (result) {
                 $(".modal-content").html(result);
             });
-        });
+        }
 
-        function ChangeStatus(i) {
+        function SettlementStatus(i, id) {
             i.classList.toggle('d-none');
+            $.get("/Hospital/Order/SettlementStatus/" + id, function (result) {
+
+            });
         }
     </script>
 }

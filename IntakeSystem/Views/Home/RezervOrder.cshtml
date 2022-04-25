@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DataLayer.Models.TblOrder>
+@using DataLayer.Utilities;
+@if (Model.Any())
+{
+
+    <section class="new-intake-section">
+        <content class="my-flex-card  my-clipped my-center" dir="rtl">
+            <div class="DesktopSize uk-margin-auto-vertical">
+                <img src="~/img/formStatic/Question.svg" width="300" alt="picture" />
+            </div>
+            <div class="my-column new-intake-content">
+                <label class="uk-legend uk-text-bold uk-margin-medium-bottom uk-text-right uk-margin-right">
+                    <span>نوبت رزرو شده جدیدی دارید؟ </span>
+                </label>
+                <img class="my-center MobileSize" src="~/img/formStatic/Question.svg" width="250" alt="picture" />
+                @foreach (var item in Model)
+                {
+                    <!--each new intake section-->
+                    <div class="my-flex-card-content my-column uk-text-right  uk-margin-bottom filter-card uk-padding-small">
+                        <label>
+                            <span></span>
+                            <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                            <span>
+                                نام مرکز درمانی:
+                            </span>
+                            <span>
+                                @item.TblHospitalSpecialityRel.TblHospital.Name
+                            </span>
+                        </label>
+                        <label>
+                            <span></span>
+                            <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                            <span>
+                                نام دکتر:
+                            </span>
+                            <span>
+                                @item.TblHospitalSpecialityRel.TblUser.Name
+                            </span>
+                        </label>
+                        <label>
+                            <span></span>
+                            <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                            <span>
+                                تاریخ ثبت نوبت:
+                            </span>
+                            <span>
+                                @item.Time.DateToShamsi()
+                            </span>
+                        </label>
+                        <label>
+                            <span></span>
+                            <span class="text-success" uk-icon="icon: checkmark-circle"></span>
+                            <span>
+                                زمان ویزیت:
+                            </span>
+                            <span>
+                                @item.Time.ToString("HH:mm")
+                            </span>
+                        </label>
+                    </div>
+                    <!--end each new intake section-->
+                }
+
+            </div>
+        </content>
+        <hr />
+        @*<div class="new-message-container uk-float-right uk-margin-right">
+                <span class="uk-badge bg-danger absolute">1</span>
+                <a href="/Home/NewMessage" class="new-message uk-margin-bottom">پیام جدید <span uk-icon="mail"></span></a>
+
+            </div>*@
+    </section>
+
+}
+

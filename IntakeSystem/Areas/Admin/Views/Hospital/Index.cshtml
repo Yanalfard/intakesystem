@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach (TblHospital i in Model)
                             {
-                                <tr>
+                                <tr id="hospita_@i.HospitalId">
                                     <td>@i.Name</td>
                                     <td>@i.TblUser.Name</td>
                                     <td>@i.TblUser.TellNo</td>
@@ -57,7 +57,7 @@
                                     </td>
                                     <td>
                                         <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حسابرسی">
-                                            <a href="/Admin/Hospital/Fiat" class="text-info" uk-icon="wallet"></a>
+                                            <a href="/Admin/Hospital/Fiat/@i.HospitalId" class="text-info" uk-icon="wallet"></a>
                                         </span>
                                     </td>
                                     <td>
@@ -80,6 +80,10 @@
                                                 </a>
                                             </span>
                                         }
+
+                                        <span data-placement="top" data-toggle="tooltip" title="" data-original-title="حذف">
+                                            <a onclick="deleteHospital(@i.HospitalId)"><i class="btn fas fa-trash mr-2 text-danger">حذف</i></a>
+                                        </span>
                                     </td>
                                 </tr>
                             }
@@ -206,7 +210,20 @@
             //$("#overlay").fadeOut(300);
         }
 
-
+        function deleteHospital(id) {
+            if (confirm('آیا از حذف  مورد نظر مطمئن هستید؟')) {
+                $.post("/Admin/Hospital/Delete/" + id, function (result) {
+                    if (result == "true") {
+                        $('#hospita_' + id).addClass('text-danger');
+                        $("#hospita_" + id).hide('slow');
+                    } else {
+                        alert(" حذف نمی شود");
+                    }
+                });
+            } else {
+                // Do nothing!
+            }
+        }
 
     </script>
 }

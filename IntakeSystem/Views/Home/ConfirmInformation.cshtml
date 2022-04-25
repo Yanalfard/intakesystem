@@ -1,4 +1,4 @@
-﻿
+﻿@model DataLayer.ViewModels.InfoVisitDayViewModel
 @{
     ViewBag.Title = "تایید اطلاعات";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,42 +23,51 @@
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: person-outline"></span>
                             <span class="mytext-darkBlue uk-text-bold">نام و نام خانوادگی: </span>
-                            <span>علی رضایی</span>
+                            <span>@Model.NameUser</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="gly-rotate-270 mytext-darkBlue" uk-icon="icon: call"></span>
                             <span class="mytext-darkBlue uk-text-bold">شماره تماس: </span>
-                            <span>25962651</span>
+                            <span>@Model.TellNoUser</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: male-female"></span>
                             <span class="mytext-darkBlue uk-text-bold">جنسیت: </span>
-                            <span>مرد</span>
+                            @if (Model.GenderUser)
+                            {
+
+                                <span>مرد</span>
+                            }
+                            else
+                            {
+                                <span>زن</span>
+
+                            }
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: business"></span>
                             <span class="mytext-darkBlue uk-text-bold">نام بیمارستان: </span>
-                            <span>امام رضا</span>
+                            <span>@Model.HospitalName</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: person"></span>
                             <span class="mytext-darkBlue uk-text-bold">نام دکتر: </span>
-                            <span>رضا صادقی</span>
+                            <span>@Model.DoctorName (@Model.SpecialityName)</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: calendar-outline"></span>
                             <span class="mytext-darkBlue uk-text-bold">تاریخ ثبت نوبت: </span>
-                            <span>25 فروردین</span>
+                            <span> @Model.DayName @Model.DayVisit</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: time-outline"></span>
                             <span class="mytext-darkBlue uk-text-bold">زمان ویزیت: </span>
-                            <span>13-14</span>
+                            <span>@Model.TimeVisit</span>
                         </li>
                         <li class="uk-margin-small-top">
                             <span class="mytext-darkBlue" uk-icon="icon: card-outline"></span>
                             <span class="mytext-darkBlue uk-text-bold">مبلغ قابل پرداخت: </span>
-                            <span class="text-success">20000</span>
+                            <span class="text-success">@Model.VisitPrice.ToString("#,0") تومان</span>
                         </li>
                     </ul>
                 </div>
@@ -70,8 +79,8 @@
             </div>
         </content>
         <div class="my-row info-buttons my-center" dir="rtl">
-            <a class="confirm-darkBlue">تایید و پرداخت</a>
-            <a class="reject-orange">انصراف</a>
+            <a href="/Payment?id=@Model.HospitalSpecialId&time=@Model.VisitDateMilady" class="confirm-darkBlue">تایید و پرداخت</a>
+            <a onclick="history.back()" class="reject-orange">انصراف</a>
         </div>
     </div>
 

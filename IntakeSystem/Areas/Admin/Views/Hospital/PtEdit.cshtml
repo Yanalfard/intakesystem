@@ -82,7 +82,7 @@
                 <option value="0">انتخاب کاربر</option>
                 @foreach (var item in Model.TblUsers)
                 {
-                    <option value="@item.UserId" @(item.UserId == Model.UserId ? "selected" : "")>@item.TellNo</option>
+            <option value="@item.UserId" @(item.UserId == Model.UserId ? "selected" : "")>@item.Name @item.TellNo</option>
                 }
             </select>
             @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })

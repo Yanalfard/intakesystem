@@ -30,7 +30,7 @@ namespace IntakeSystem.Controllers
         [Route("Doctors/{id?}/{name?}")]
         public ActionResult Doctors(int? id = 0, string name = "")
         {
-            List<TblUser> selectedUser = new List<TblUser>();
+            List<TblHospitalSpecialityRel> selectedUser = new List<TblHospitalSpecialityRel>();
             ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
             ViewBag.SpecialityList = _core.Speciality.Get().ToList();
             ViewBag.id = id;
@@ -38,12 +38,12 @@ namespace IntakeSystem.Controllers
             if (id != 0)
             {
                 ViewBag.Name = name;
-                selectedUser = _core.HospitalSpecialityRel.Get(i => i.SpecialityId == id).Select(i => i.TblUser).ToList();
+                selectedUser = _core.HospitalSpecialityRel.Get(i => i.SpecialityId == id).ToList();
             }
             else
             {
                 ViewBag.Name = "پزشکان";
-                selectedUser = _core.User.Get(i => i.RoleId == 3).ToList();
+                selectedUser = _core.HospitalSpecialityRel.Get().ToList();
             }
             return View(selectedUser);
         }

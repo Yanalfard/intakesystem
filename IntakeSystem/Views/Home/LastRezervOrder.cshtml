@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DataLayer.Models.TblOrder>
+@using DataLayer.Utilities;
+@if (Model.Any())
+{
+
+    <section class="previous-intake-section my-clipped">
+        <label class="uk-legend uk-text-bold uk-margin-bottom uk-text-center">
+            <span>لیست ویزیت های قبلی </span>
+        </label>
+        <table class="uk-table uk-table-striped uk-text-right uk-border-rounded" dir="rtl">
+            <thead class="uk-border-rounded uk-text-bold">
+                <tr>
+                    <th>نام مرکز درمانی</th>
+                    <th>نام پزشک</th>
+                    <th>تاریخ ثبت نوبت</th>
+                    <th>تاریخ مراجعه </th>
+                    <th>زمان ویزیت</th>
+                    <th>مبلغ پرداختی</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.TblHospitalSpecialityRel.TblHospital.Name</td>
+                    <td>@item.TblHospitalSpecialityRel.TblUser.Name </td>
+                    <td> @item.DateCreated.DateToShamsi() </td>
+                    <td> @item.Time.DateToShamsi() </td>
+                    <td> @item.Time.ToString("HH:mm")</td>
+                    <td> @item.Price.ToString("#,0") تومان</td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+        @*<ul class="uk-pagination uk-flex-center uk-margin-top">
+                <li><a href="#"><span uk-pagination-previous></span></a></li>
+                <li class="uk-active"><span>1</span></li>
+                <li class="uk-disabled"><span>...</span></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#"><span uk-pagination-next></span></a></li>
+            </ul>*@
+    </section>
+
+
+}

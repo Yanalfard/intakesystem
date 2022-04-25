@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DataLayer.Models.TblOrder>
+@using DataLayer.Utilities;
+
+@if (Model.Any())
+{
+
+
+    <section class="previous-intake-section my-clipped">
+        <label class="uk-legend uk-text-bold uk-margin-bottom uk-text-center">
+            <span>لیست بیمارهای امروز </span>
+        </label>
+        <table class="uk-table uk-table-striped uk-text-right uk-border-rounded" dir="rtl">
+            <thead class="uk-border-rounded uk-text-bold">
+                <tr>
+                    <th>نام مرکز درمانی</th>
+                    <th>نام بیمار</th>
+                    <th>تاریخ ثبت نوبت</th>
+                    <th>تاریخ مراجعه </th>
+                    <th>زمان ویزیت</th>
+                    <th>مبلغ پرداختی</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.TblHospitalSpecialityRel.TblHospital.Name</td>
+                        <td>@item.TblUser.Name </td>
+                        <td> @item.DateCreated.DateToShamsi() </td>
+                        <td> @item.Time.DateToShamsi() </td>
+                        <td> @item.Time.ToString("HH:mm")</td>
+                        <td> @item.Price.ToString("#,0") تومان</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </section>
+
+}
+

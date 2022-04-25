@@ -14,7 +14,7 @@
             <div class="my-column my-center hospitan-in-doctor">
                 <div class="DesktopSize uk-margin-auto-vertical my-center">
                     <div class="card-with-border my-center">
-                        <img src="~/img/TestSample/hospitalSample.jpg" alt="picture" />
+                        <img src="~/Resources/Images/Hospital/Thumb/@Model.ImageUrl" alt="picture" />
                     </div>
                 </div>
                 <label class="uk-legend uk-text-bold uk-margin-top">
@@ -111,7 +111,7 @@
                                 </li>
                                 <li class="uk-margin-small-top">
                                     <span class="mytext-orange uk-margin-small-left" uk-icon="icon: card"></span>
-                                    <span>هزینه ویزیت @item.TblUser.VisitPrice تومان</span>
+                                    <span>هزینه ویزیت @item.TblUser.VisitPrice.ToString("#,0") تومان</span>
                                 </li>
                                 <li class="uk-margin-small-top">
                                     <span class="gly-rotate-270 uk-margin-small-left" uk-icon="icon: call"></span>

@@ -138,6 +138,7 @@
     <Compile Include="Security\PasswordHelper.cs" />
     <Compile Include="Utilities\CodeMelliAttribute.cs" />
     <Compile Include="Utilities\DateConvertor.cs" />
+    <Compile Include="Utilities\SplitDate.cs" />
     <Compile Include="ViewModels\AccountVm.cs" />
     <Compile Include="ViewModels\ActiveVm.cs" />
     <Compile Include="ViewModels\CaptchaResponseViewModel.cs" />

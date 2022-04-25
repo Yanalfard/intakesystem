@@ -74,6 +74,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -149,6 +150,11 @@
     <Compile Include="Areas\Hospital\Controllers\SpecialityController.cs" />
     <Compile Include="Areas\Hospital\Controllers\TicketController.cs" />
     <Compile Include="Areas\Hospital\HospitalAreaRegistration.cs" />
+    <Compile Include="Connected Services\ZarinPalTest\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -735,6 +741,30 @@
     <Content Include="Areas\Admin\Scripts\modal.js" />
     <Content Include="Areas\Admin\Scripts\popper.min.js" />
     <Content Include="Areas\Admin\Scripts\script.js" />
+    <None Include="Connected Services\ZarinPalTest\configuration91.svcinfo" />
+    <None Include="Connected Services\ZarinPalTest\configuration.svcinfo" />
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.GetUnverifiedTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.PaymentRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.PaymentRequestWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.PaymentVerificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.PaymentVerificationWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ZarinPalTest\IntakeSystem.ZarinPalTest.RefreshAuthorityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ZarinPalTest\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -882,6 +912,7 @@
     <Content Include="Content\Styles\Profile.scss" />
     <Content Include="Content\Styles\IntakeDay.scss" />
     <Content Include="Content\Styles\Information.scss" />
+    <None Include="Connected Services\ZarinPalTest\PaymentGatewayImplementationService.wsdl" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jQuery UI 1.12.0.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -1001,6 +1032,9 @@
     <Content Include="Views\Doctor\Doctors.cshtml" />
     <Content Include="Views\Home\ListSpeciality.cshtml" />
     <Content Include="Views\Home\ViewDayVisit.cshtml" />
+    <Content Include="Views\Home\LastRezervOrder.cshtml" />
+    <Content Include="Views\Home\RezervOrder.cshtml" />
+    <Content Include="Views\Home\PatientsToday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1125,6 +1159,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ZarinPalTest\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

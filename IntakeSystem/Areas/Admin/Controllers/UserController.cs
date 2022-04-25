@@ -159,8 +159,9 @@ namespace IntakeSystem.Areas.Admin.Controllers
                 if (deleteUser != null)
                 {
 
-                    deleteUser.IsDeleted = true;
-                    _core.User.Update(deleteUser);
+                    //deleteUser.IsDeleted = true;
+                    //_core.User.Update(deleteUser);
+                    _core.User.Delete(deleteUser);
                     _core.Save();
                     return "true";
                 }

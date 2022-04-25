@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -49,7 +51,7 @@ namespace IntakeSystem.Controllers
             //_core.Role.DeleteById(2);
             //_core.Role.DeleteById(5);
             //_core.Save();
-            ViewBag.CityList = _core.Location.Get(i => i.LocationParentId == null).ToList();
+            ViewBag.CityList = _core.Location.Get(i => i.LocationParentId != null).OrderBy(i=>i.LocationName).ToList();
 
             return View();
         }
@@ -68,6 +70,7 @@ namespace IntakeSystem.Controllers
             });
         }
         [HttpPost]
+        [Authorize]
         public ActionResult UserProfile(UserProfileVm user)
         {
             if (ModelState.IsValid)
@@ -93,6 +96,7 @@ namespace IntakeSystem.Controllers
             }
             return View(user);
         }
+        [Authorize]
         public ActionResult IntakeDay(int id, string name = "")
         {
             TblUser selectedUser = _core.User.GetById(id);
@@ -176,15 +180,20 @@ namespace IntakeSystem.Controllers
             }
             return dayOfWeek;
         }
+        [Authorize]
         public ActionResult ViewDayVisit(int id, string day)
         {
             VisitDayViewModel visitDayViewModel = new VisitDayViewModel();
             string showErroe = "";
             bool isValid = false;
             DateTime dateTimeMilady = day.ShamsiToMiladi(out isValid, out showErroe);
+            TblHospitalSpecialityRel selected = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id);
+            visitDayViewModel.DoctorImage = selected.TblUser.ImageUrl;
+
             if (!isValid)
             {
                 visitDayViewModel.Text = showErroe;
+                return PartialView(visitDayViewModel);
             }
             else
             {
@@ -192,10 +201,26 @@ namespace IntakeSystem.Controllers
 
                 visitDayViewModel.IsValid = true;
             }
-            TblHospitalSpecialityRel selected = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id);
+
             int data = DayOfWeek(dateTimeMilady.DayOfWeek.ToString());
 
             int hospitalSpecialId = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == id).HospitalSpecialityRelId;
+
+            string tell = User.Identity.Name.Split('|')[0];
+            int userId = _core.User.Get().SingleOrDefault(i => i.TellNo == tell).UserId;
+            var selectedOrder = _core.Order.Get(i => i.UserId == userId && i.TblHospitalSpecialityRel.DoctorId == id);
+            if (selectedOrder != null)
+            {
+                if (selectedOrder.Any(i => i.Time.ToShortDateString() == dateTimeMilady.ToShortDateString()))
+                {
+
+                    visitDayViewModel.IsValid = false;
+                    visitDayViewModel.Text = "شما قبلا برای این دکتر در این زمان ویزیت گرفته اید";
+                    return PartialView(visitDayViewModel);
+                }
+            }
+
+
             TblDay dayList = _core.HosSpecDayRel.Get(i => i.HosSpecId == hospitalSpecialId)
                 .Select(i => i.TblDay).FirstOrDefault(i => i.IsWorking
                   && i.StartShift != null && i.EndShift != null && i.DayOfWeek == data);
@@ -203,7 +228,8 @@ namespace IntakeSystem.Controllers
             {
                 visitDayViewModel.IsValid = false;
 
-                visitDayViewModel.Text = "روز انتخابی قابل رزرو نیست";
+                visitDayViewModel.Text = "ویزیت در زمان انتخاب شده مقدور نمیباشد";
+                return PartialView(visitDayViewModel);
             }
             else
             {
@@ -215,15 +241,59 @@ namespace IntakeSystem.Controllers
             visitDayViewModel.TblDay = dayList;
             visitDayViewModel.TblHospitalSpecialityRel = selected;
             visitDayViewModel.DayVisit = day;
+            visitDayViewModel.HospitalSpecialId = hospitalSpecialId;
             visitDayViewModel.SpecialityName = selected.TblSpeciality.Name;
             visitDayViewModel.DoctorName = selected.TblUser.Name;
-            visitDayViewModel.DoctorImage = selected.TblUser.ImageUrl;
+
             visitDayViewModel.DayName = DayOfName(data);
+            ////
+            if (visitDayViewModel.IsValid)
+            {
+                DateTime dt1 = new DateTime();
+                TimeSpan ts1 = new TimeSpan();
+                ts1 = (TimeSpan)dayList.StartShift;
+                dt1 = dateTimeMilady + ts1;
+                ////
+                DateTime dt2 = new DateTime();
+                TimeSpan ts2 = new TimeSpan();
+                ts2 = (TimeSpan)dayList.EndShift;
+                dt2 = dateTimeMilady + ts2;
+                visitDayViewModel.AllTimeVisit = SplitDate.SplitDateTime(dt1, dt2);
+
+
+                List<DateTime> listOrder = _core.Order.Get(i => i.IsPayed
+                && i.HospitalSpecialityRelId == hospitalSpecialId
+                && i.Time == i.Time)
+                    .Select(i => i.Time).ToList();
+                visitDayViewModel.AllTimeVisit = visitDayViewModel.AllTimeVisit
+                    .Where(i => !listOrder.Contains(i)).ToList();
+            }
             return PartialView(visitDayViewModel);
         }
-        public ActionResult ConfirmInformation()
+        [Authorize]
+        public ActionResult ConfirmInformation(int hospitalSpecialId, DateTime time)
         {
-            return View();
+            TblHospitalSpecialityRel hospitalSpecialityRel = _core.HospitalSpecialityRel.GetById(hospitalSpecialId);
+            string tell = User.Identity.Name.Split('|')[0];
+            TblUser selectedUser = _core.User.Get().SingleOrDefault(i => i.TellNo == tell);
+            int data = DayOfWeek(time.DayOfWeek.ToString());
+
+            InfoVisitDayViewModel info = new InfoVisitDayViewModel();
+            info.DayVisit = time.DateToShamsi();
+            info.TimeVisit = time.ToString("HH:mm");
+            info.VisitPrice = hospitalSpecialityRel.TblUser.VisitPrice;
+            info.DayName = DayOfName(data);
+            info.DoctorName = hospitalSpecialityRel.TblUser.Name;
+            info.GenderUser = selectedUser.Gender;
+            info.HospitalName = hospitalSpecialityRel.TblHospital.Name;
+            info.HospitalSpecialId = hospitalSpecialityRel.HospitalSpecialityRelId;
+            info.NameUser = hospitalSpecialityRel.TblUser.Name;
+            info.SpecialityName = hospitalSpecialityRel.TblSpeciality.Name;
+            info.TellNoUser = hospitalSpecialityRel.TblUser.TellNo;
+            info.VisitDateMilady = time;
+
+
+            return View(info);
         }
         public ActionResult OrderResult()
         {
@@ -248,6 +318,128 @@ namespace IntakeSystem.Controllers
         public ActionResult ListSpeciality()
         {
             return PartialView(_core.Speciality.Get(orderBy: i => i.OrderByDescending(j => j.SpecialityId)));
+        }
+
+        [Authorize]
+        public ActionResult RezervOrder()
+        {
+            string tell = User.Identity.Name.Split('|')[0];
+            int userId = _core.User.Get().SingleOrDefault(i => i.TellNo == tell).UserId;
+            List<TblOrder> list = _core.Order.Get().Where(i => i.UserId == userId && i.IsPayed
+            && i.Time.Date >= DateTime.Now.Date).ToList();
+            return PartialView(list);
+        }
+        [Authorize]
+        public ActionResult LastRezervOrder()
+        {
+            string tell = User.Identity.Name.Split('|')[0];
+            int userId = _core.User.Get().SingleOrDefault(i => i.TellNo == tell).UserId;
+            List<TblOrder> list = _core.Order.Get().Where(i => i.UserId == userId && i.IsPayed
+            && i.Time.Date < DateTime.Now.Date).ToList();
+            return PartialView(list);
+        }
+        [Authorize]
+        public ActionResult PatientsToday()
+        {
+            List<TblOrder> list = new List<TblOrder>();
+            string tell = User.Identity.Name.Split('|')[0];
+            int userId = _core.User.Get().SingleOrDefault(i => i.TellNo == tell).UserId;
+            if (_core.HospitalSpecialityRel.Any(i => i.DoctorId == userId))
+            {
+                int hospitalSpecialId = _core.HospitalSpecialityRel.Get().FirstOrDefault(i => i.DoctorId == userId).HospitalSpecialityRelId;
+                list = _core.Order.Get()
+                   .Where(i => i.HospitalSpecialityRelId == hospitalSpecialId &&
+                   i.IsPayed && i.Time.Date == DateTime.Now.Date).ToList();
+            }
+            return PartialView(list);
+        }
+        [Route("Payment")]
+        [Authorize]
+        public ActionResult Payment(int id, DateTime time)
+        {
+            TblHospitalSpecialityRel hospitalSpecialityRel = _core.HospitalSpecialityRel.GetById(id);
+            string tell = User.Identity.Name.Split('|')[0];
+            TblUser selectedUser = _core.User.Get().SingleOrDefault(i => i.TellNo == tell);
+
+            if (hospitalSpecialityRel != null && selectedUser != null)
+            {
+                TblOrder order = new TblOrder();
+                order.DateCreated = DateTime.Now;
+                order.DoctorsPart = 0;
+                order.HospitalsPart = 0;
+                order.Time = time;
+                order.Price = hospitalSpecialityRel.TblUser.VisitPrice;
+                order.IsPayed = false;
+                order.UserId = selectedUser.UserId;
+                order.HospitalSpecialityRelId = id;
+                order.SettlementStatus = 0;
+
+                _core.Order.Add(order);
+                _core.Save();
+
+                System.Net.ServicePointManager.Expect100Continue = false;
+                ZarinPalTest.PaymentGatewayImplementationServicePortTypeClient zp = new ZarinPalTest.PaymentGatewayImplementationServicePortTypeClient();
+                string Authority;
+
+                int Status = zp.PaymentRequest("YOUR-ZARINPAL-MERCHANT-CODE", (int)order.Price, "تست درگاه زرین پال در  بهبود", "mehdisahandi.com", "09357035985", ConfigurationManager.AppSettings["MyDomain"] + "/Home/Verify/" + order.OrderId, out Authority);
+
+                if (Status == 100)
+                {
+                    // Response.Redirect("https://www.zarinpal.com/pg/StartPay/" + Authority);
+                    Response.Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + Authority);
+                }
+                else
+                {
+                    ViewBag.Error = "Error : " + Status;
+                }
+
+            }
+
+            return View();
+        }
+
+        public ActionResult Verify(int id)
+        {
+            var order = _core.Order.GetById(id);
+
+
+            if (Request.QueryString["Status"] != "" && Request.QueryString["Status"] != null && Request.QueryString["Authority"] != "" && Request.QueryString["Authority"] != null)
+            {
+                if (Request.QueryString["Status"].ToString().Equals("OK"))
+                {
+                    int Amount = (int)order.Price;
+                    long RefID;
+                    System.Net.ServicePointManager.Expect100Continue = false;
+                    ZarinPalTest.PaymentGatewayImplementationServicePortTypeClient zp = new ZarinPalTest.PaymentGatewayImplementationServicePortTypeClient();
+
+                    int Status = zp.PaymentVerification("YOUR-ZARINPAL-MERCHANT-CODE", Request.QueryString["Authority"].ToString(), Amount, out RefID);
+
+                    if (Status == 100)
+                    {
+                        order.IsPayed = true;
+                        _core.Save();
+                        ViewBag.IsSuccess = true;
+                        ViewBag.RefId = RefID;
+                        // Response.Write("Success!! RefId: " + RefID);
+                        return Redirect("/Home/UserProfile");
+
+                    }
+                    else
+                    {
+                        ViewBag.Status = Status;
+                    }
+
+                }
+                else
+                {
+                    Response.Write("Error! Authority: " + Request.QueryString["Authority"].ToString() + " Status: " + Request.QueryString["Status"].ToString());
+                }
+            }
+            else
+            {
+                Response.Write("Invalid Input");
+            }
+            return View();
         }
     }
 }

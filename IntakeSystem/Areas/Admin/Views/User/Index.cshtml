@@ -81,7 +81,7 @@
 
         }
         function deleteUser(id) {
-            if (confirm('آیا از حذف کالای  مورد نظر مطمئن هستید؟')) {
+            if (confirm('آیا از حذف   مورد نظر مطمئن هستید؟')) {
                 $.post("/Admin/User/Delete/" + id, function (result) {
                     if (result == "true") {
                         $('#userId_' + id).addClass('text-danger');

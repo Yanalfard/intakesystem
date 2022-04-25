@@ -29,7 +29,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             return View(new HospitalVm()
             {
                 TblCatagory = _core.Catagory.Get().ToList(),
-                TblUsers = _core.User.Get().ToList(),
+                TblUsers = _core.User.Get(i => !i.IsDeleted && i.RoleId == 6).ToList(),
                 TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList()
             });
         }
@@ -81,18 +81,17 @@ namespace IntakeSystem.Areas.Admin.Controllers
                     addHospital.TellNo2 = hospitalVm.TellNo2;
                     _core.Hospital.Add(addHospital);
                     _core.Save();
-                    if (SelectUser().RoleId != 1)
-                    {
-                        TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
-                        selectedUser.RoleId = 6;
-                        _core.User.Update(selectedUser);
-                        _core.Save();
-                    }
+
+                    TblUser selectedUser = _core.User.GetById((int)hospitalVm.UserId);
+                    selectedUser.RoleId = 6;
+                    _core.User.Update(selectedUser);
+                    _core.Save();
+
                     return RedirectToAction("Index");
                 }
             }
             hospitalVm.TblCatagory = _core.Catagory.Get().ToList();
-            hospitalVm.TblUsers = _core.User.Get().ToList();
+            hospitalVm.TblUsers = _core.User.Get(i => !i.IsDeleted && i.RoleId == 6).ToList();
             hospitalVm.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             return View(hospitalVm);
         }
@@ -111,7 +110,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
             TblHospital selectedHospital = _core.Hospital.GetById(id);
             HospitalVm editHospital = new HospitalVm();
             editHospital.TblCatagory = _core.Catagory.Get().ToList();
-            editHospital.TblUsers = _core.User.Get().ToList();
+            editHospital.TblUsers = _core.User.Get(i => !i.IsDeleted && i.RoleId == 6).ToList();
             editHospital.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             editHospital.AboutUs = selectedHospital.AboutUs;
             editHospital.HospitalId = selectedHospital.HospitalId;
@@ -135,7 +134,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 if (_core.Hospital.Any(i => i.HospitalId != hospitalVm.HospitalId && i.AdminId == hospitalVm.UserId))
                 {
                     ModelState.AddModelError("UserId", "برای این کاربر بیمارستان ثبت شده است");
@@ -198,7 +197,7 @@ namespace IntakeSystem.Areas.Admin.Controllers
 
             }
             hospitalVm.TblCatagory = _core.Catagory.Get().ToList();
-            hospitalVm.TblUsers = _core.User.Get().ToList();
+            hospitalVm.TblUsers = _core.User.Get(i => !i.IsDeleted && i.RoleId == 6).ToList();
             hospitalVm.TblLocations = _core.Location.Get(i => i.LocationParentId == null).ToList();
             return View(hospitalVm);
         }
@@ -207,13 +206,29 @@ namespace IntakeSystem.Areas.Admin.Controllers
             TblHospital hospital = _core.Hospital.GetById(id);
             return PartialView(hospital);
         }
-        public ActionResult Fiat()
+        public ActionResult Fiat(int id, int doctorId = 0)
         {
-            return View();
+            List<int> list = _core.HospitalSpecialityRel.Get().Where(i => i.HospitalId == id).Select(i => i.HospitalSpecialityRelId).ToList();
+            List<TblOrder> listOrder = _core.Order.Get().Where(i => list.Contains(i.HospitalSpecialityRelId)).ToList();
+
+            List<TblUser> listDoctor = _core.HospitalSpecialityRel.Get()
+               .Where(i => i.HospitalId == id).Select(i => i.TblUser).ToList();
+
+            ViewBag.Id = id;
+            ViewBag.Doctor = listDoctor;
+            if (doctorId > 0)
+            {
+                listDoctor = listDoctor.Where(i => i.UserId == doctorId).ToList();
+            }
+            return View(listOrder);
         }
-        public ActionResult PtFiatInfo()
+        public ActionResult PtFiatInfo(int id)
         {
-            return PartialView();
+            List<TblUser> listDoctor = _core.HospitalSpecialityRel.Get()
+                .Where(i => i.HospitalId == id).Select(i => i.TblUser).ToList();
+
+            ViewBag.Doctor = listDoctor;
+            return PartialView(_core.Order.GetById(id));
         }
         public string ChangeStatus(int id)
         {
@@ -222,6 +237,37 @@ namespace IntakeSystem.Areas.Admin.Controllers
             _core.Hospital.Update(hospital);
             _core.Save();
             return "true";
+        }
+        public string SettlementStatus(int id)
+        {
+            TblOrder order = _core.Order.GetById(id);
+            order.SettlementStatus = 1;
+            _core.Order.Update(order);
+            _core.Save();
+            return "true";
+        }
+
+
+        public string Delete(int id)
+        {
+            try
+            {
+                TblHospital deleteUser = _core.Hospital.GetById(id);
+                if (deleteUser != null)
+                {
+
+                    _core.Hospital.Delete(deleteUser);
+                    _core.Save();
+                    return "true";
+                }
+                return "false";
+
+            }
+            catch (Exception)
+            {
+                return "false";
+            }
+
         }
     }
 }

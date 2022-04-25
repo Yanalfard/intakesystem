@@ -31,7 +31,7 @@
     <!--end doctor name in intake day section-->
     <div class="uk-text-center" uk-grid dir="rtl">
         <!--search filter section-->
-        <div class="uk-width-1-4 filter-section">
+        @*<div class="uk-width-1-4 filter-section">
             <div class="filter-card my-column">
                 <div class="filter-header uk-margin-top uk-margin-bottom">محدود کردن نتایج جستجو</div>
                 <form>
@@ -52,16 +52,13 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>*@
         <hr class="uk-divider-vertical uk-margin-remove">
 
         <div class="uk-width-expand">
             <span class="education-page-card-main-item2 mr-5">
                 <p> روزها و ساعت ویزیت</p>
-                @*@foreach (var item in Model.OnlineClassOfDays)
-        {
-            <span class="ml-5"> <strong>@item.Day</strong> (@item.EndTime الی @item.StartTime) </span>
-        }*@
+
                 @foreach (var item in listDay)
                 {
                     var dayOfWeek = "";
@@ -155,7 +152,7 @@
 
     function closeUikit() {
         modal.style.display = "none";
-
+        location.reload();
     }
     // When the user clicks the button, open the modal
     input.onchange = function (elmt) {

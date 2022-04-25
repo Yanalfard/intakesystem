@@ -10,6 +10,12 @@ namespace DataLayer.Utilities
 {
     public static class DateConvertor
     {
+        public static string DateToShamsi(this DateTime value)
+        {
+            PersianCalendar Pc = new PersianCalendar();
+
+            return " " + Pc.GetYear(value) + "/" + Pc.GetMonth(value).ToString("00") + "/" + Pc.GetDayOfMonth(value).ToString("00");
+        }
         public static bool CheckDateIsHolyday(this PersianDateTime persianDate) =>
            persianDate.IsHoliDay;
 

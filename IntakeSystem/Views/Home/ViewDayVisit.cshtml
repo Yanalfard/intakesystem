@@ -27,7 +27,7 @@
                 }
                 else
                 {
-                    <span class="uk-text-danger"> ویزیت در زمان انتخاب شده مقدور نمیباشد</span>
+                    <span class="uk-text-danger">@Model.Text</span>
                 }
 
 
@@ -36,27 +36,13 @@
         <div class="flex-container my-center" dir="rtl">
             @if (Model.IsValid)
             {
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>10-11</span>
+                foreach (var item in Model.AllTimeVisit)
+            {
+                <a href="/Home/ConfirmInformation?hospitalSpecialId=@Model.HospitalSpecialId&time=@item" class="VisitTime">
+                    <span>@item.ToString("HH:mm")</span>
                 </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>11-12</span>
-                </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>12-13</span>
-                </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>13-14</span>
-                </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>14-15</span>
-                </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>15-16</span>
-                </a>
-                <a href="/Home/ConfirmInformation" class="VisitTime">
-                    <span>16-17</span>
-                </a>
+            }
+
             }
         </div>
     </div>
